@@ -1,7 +1,5 @@
 package com.iitb.lokavidya.core.data;
 
-
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,146 +15,139 @@ import java.util.Objects;
 public class Segment implements Serializable {
 
 	public enum SegmentType {
-	    IMAGE,VIDEO,PRES
+		IMAGE, VIDEO, PRES
 	}
-	
-	//For a blank segment
 
-	public Segment(String projectURL)
-	{
-		this.id= GeneralUtils.generateRandomNumber(11).intValue();
-		slide=new Slide(projectURL);
+	// For a blank segment
+	public Segment(String projectURL) {
+		this.id = GeneralUtils.generateRandomNumber(11).intValue();
+		slide = new Slide(projectURL);
 	}
-	public Segment(String projectURL,boolean b)
-	{
-		this.id= GeneralUtils.generateRandomNumber(11).intValue();
+
+	public Segment(String projectURL, boolean b) {
+		this.id = GeneralUtils.generateRandomNumber(11).intValue();
 	}
-	//For Import from Android Project
-	public Segment(String sourceImageURL,String sourceAudioURL,String projectURL)
-	{
-		this.id= GeneralUtils.generateRandomNumber(11).intValue();
-		slide=new Slide(sourceImageURL,sourceAudioURL,projectURL);
+
+	// For Import from Android Project
+	public Segment(String sourceImageURL, String sourceAudioURL, String projectURL) {
+		this.id = GeneralUtils.generateRandomNumber(11).intValue();
+		slide = new Slide(sourceImageURL, sourceAudioURL, projectURL);
 	}
-	//For Import from Presentation/Video
-	public Segment(String sourceURL,SegmentType e,String projectURL )//
+
+	// For Import from Presentation/Video
+	public Segment(String sourceURL, SegmentType e, String projectURL)//
 	{
-		this.id= GeneralUtils.generateRandomNumber(11).intValue();
-		if(e.equals(SegmentType.IMAGE))
-		{
-			slide=new Slide(sourceURL, projectURL);
-		}
-		else if(e.equals(SegmentType.VIDEO))
-		{
-			video=new Video(sourceURL, projectURL);
-		}
-		else
-		{
-			slide=new Slide(sourceURL, projectURL);
+		this.id = GeneralUtils.generateRandomNumber(11).intValue();
+		if (e.equals(SegmentType.IMAGE)) {
+			slide = new Slide(sourceURL, projectURL);
+		} else if (e.equals(SegmentType.VIDEO)) {
+			video = new Video(sourceURL, projectURL);
+		} else {
+			slide = new Slide(sourceURL, projectURL);
 		}
 	}
 
-	
-    private Slide slide;
+	private Slide slide;
 
-    private Video video;
-    
-    private long time = 0;
+	private Video video;
 
-    private Set<LayeringObject> layeringObjects = new HashSet<LayeringObject>();
+	private long time = 0;
 
-    private Set<Reference> references = new HashSet<Reference>();
+	private Set<LayeringObject> layeringObjects = new HashSet<LayeringObject>();
 
-    private Integer id;
-    
-    public Segment(Segment s)
-    {
-    	try {
+	private Set<Reference> references = new HashSet<Reference>();
+
+	private Integer id;
+
+	public Segment(Segment s) {
+		try {
 			System.out.println("Setting segment");
 			setId(s.getId());
-			if(s.getSlide()!=null)
+			if (s.getSlide() != null)
 				setSlide(new Slide(s.getSlide()));
-			if(s.getVideo()!=null)
+			if (s.getVideo() != null)
 				setVideo(new Video(s.getVideo()));
 			System.out.println("Returning from segment");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-    }
-    
-    public Integer getId() {
-        return id;
-    }
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Slide getSlide() {
-        return slide;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setSlide(Slide slide) {
-        this.slide = slide;
-    }
-    public void setTime(long time){
-    	this.time = time;
-    }
-    public long getTime(){
-    	return this.time;
-    }
-    public Video getVideo() {
-        return video;
-    }
+	public Slide getSlide() {
+		return slide;
+	}
 
-    public void setVideo(Video video) {
-        this.video = video;
-    }
+	public void setSlide(Slide slide) {
+		this.slide = slide;
+	}
 
-    public Set<LayeringObject> getLayeringObjects() {
-        return layeringObjects;
-    }
+	public void setTime(long time) {
+		this.time = time;
+	}
 
-    public void setLayeringObjects(Set<LayeringObject> layeringObjects) {
-        this.layeringObjects = layeringObjects;
-    }
+	public long getTime() {
+		return this.time;
+	}
 
-    public Set<Reference> getReferences() {
-        return references;
-    }
+	public Video getVideo() {
+		return video;
+	}
 
-    public void setReferences(Set<Reference> references) {
-        this.references = references;
-    }
-    
-    public void clearSegment() {
-    	slide=null;
-    	video = null;
-    	layeringObjects.clear();
-    	references.clear();
-    }
+	public void setVideo(Video video) {
+		this.video = video;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Segment segment = (Segment) o;
-        return Objects.equals(id, segment.id);
-    }
+	public Set<LayeringObject> getLayeringObjects() {
+		return layeringObjects;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+	public void setLayeringObjects(Set<LayeringObject> layeringObjects) {
+		this.layeringObjects = layeringObjects;
+	}
 
-    @Override
-    public String toString() {
-        return "Segment{" +
-            "id=" + id +
-            '}';
-    }
-    
+	public Set<Reference> getReferences() {
+		return references;
+	}
+
+	public void setReferences(Set<Reference> references) {
+		this.references = references;
+	}
+
+	public void clearSegment() {
+		slide = null;
+		video = null;
+		layeringObjects.clear();
+		references.clear();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Segment segment = (Segment) o;
+		return Objects.equals(id, segment.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(id);
+	}
+
+	@Override
+	public String toString() {
+		return "Segment{" + "id=" + id + '}';
+	}
+
 }

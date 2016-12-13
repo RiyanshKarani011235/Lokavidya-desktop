@@ -84,34 +84,27 @@ public class OpenProject {
 	class ProgressDialog extends JPanel
 	implements ActionListener, 
 	PropertyChangeListener{
-		
-		 /**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
+		public Task task;
 		
-		
-		 public Task task;
-		
-		 
-		 class Task extends SwingWorker<Void, Void> {
-
+		class Task extends SwingWorker<Void, Void> {
 			@Override
 			protected Void doInBackground() throws Exception {
 				setProgress(0);
 				progressBar.setValue(0);
-				//Thread.sleep(5000);
 				String fileName = radioButton[index].getText();
 				Call.workspace.name=fileName;
 				System.out.println(fileName);
 				//Project p = new Project(fileName, path);
 				//ProjectCommunicationInstance.launchInstance(p);
+				
+				// if filename is entered
 				if(path.endsWith(fileName)) {
 					path = new File(path).getParentFile().getAbsolutePath();
 				}
-				Call.workspace.location=path;
+				Call.workspace.location = path;
 				Call.workspace.path = new File(Call.workspace.location, Call.workspace.name).getAbsolutePath();
-				File jsonFile= new File(FilenameUtils.concat(Call.workspace.path, fileName+".json"));
+				File jsonFile = new File(FilenameUtils.concat(Call.workspace.path, fileName+".json"));
 				System.out.println("Use json: "+jsonFile.getAbsolutePath());
 				Call.workspace.currentProject = ProjectService.getInstance(jsonFile.getAbsolutePath());
 				

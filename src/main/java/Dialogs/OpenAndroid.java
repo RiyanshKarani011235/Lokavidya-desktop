@@ -204,19 +204,14 @@ public class OpenAndroid {
 		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton_1, -28, SpringLayout.SOUTH, frame.getContentPane());
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textField_2.getText().equals(""))
-				{
+				if(textField_2.getText().equals("") || new File(textField_2.getText()).isDirectory() || !new File(textField_2.getText()).exists()) {
 					System.out.println("Path null");
 					JOptionPane.showMessageDialog(null, "Enter the project location", "", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
+				} else {
 					path=textField_2.getText();
 					new ProgressDialog();
 					//new ConverttoDesktop(path);
 					//System.out.println(projName);
-					
-
 				}
 			}
 		});

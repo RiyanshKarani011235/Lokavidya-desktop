@@ -24,19 +24,13 @@ public class Project implements Serializable {
 		segments = new HashMap<Integer, Segment>();
 	}
 
-
-	
-
-
 	private String projectURL;
 
 	private String projectName;
 	private Double projectSize;
 
 	private Map<Integer, Segment> segments = new HashMap<Integer, Segment>();
-
 	private Integer id;
-
 	private List<Integer> orderingSequence = new ArrayList<Integer>();
 
 	public Project(Project currentProject) {
@@ -53,18 +47,17 @@ public class Project implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public List<Segment> copyOrderingSequence()
-	{
-		List<Segment> l=new ArrayList<Segment>();
-		for(Segment s: getOrderedSegmentList())
-		{
+
+	public List<Segment> copyOrderingSequence() {
+		List<Segment> l = new ArrayList<Segment>();
+		for (Segment s : getOrderedSegmentList()) {
 			l.add(new Segment(s));
 			System.out.println("Copied one segment");
 		}
-		
+
 		return l;
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -91,7 +84,7 @@ public class Project implements Serializable {
 	public void setSegment(Segment segment) {
 
 	}
-	
+
 	public Map<Integer, Segment> getSegmentsMap() {
 		return segments;
 	}
@@ -115,66 +108,62 @@ public class Project implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Project{" + "id=" + id + ", projectSize='" + projectSize + "'"
-				+ '}';
+		return "Project{" + "id=" + id + ", projectSize='" + projectSize + "'" + '}';
 	}
 
 	public void addSegment(Segment segment) {
-		
+
 		segments.put(segment.getId(), segment);
 		if (!orderingSequence.contains(segment.getId()))
 			orderingSequence.add(segment.getId());
-		else
-		{
+		else {
 			System.out.println("Added");
 		}
-		
-		for(Integer i:orderingSequence)
-		{
-			System.out.println("ORDER:"+i);
+
+		for (Integer i : orderingSequence) {
+			System.out.println("ORDER:" + i);
 		}
-		
-		
+
 		ProjectService.persist(this);
 	}
 
 	public void deleteSegment(Segment segment) {
 		File file = null;
 		if (segment.getVideo() == null) {
-			if(segment.getSlide().getAudio()!=null)
-			{
+			if (segment.getSlide().getAudio() != null) {
 				file = new File(segment.getSlide().getAudio().getAudioURL());
-				if(file.exists()) {
+				if (file.exists()) {
 					file.delete();
 				}
 			}
 			file = new File(segment.getSlide().getImageURL());
-			if (file.exists()){
+			if (file.exists()) {
 				file.delete();
 			}
 			file = new File(segment.getSlide().getPptURL());
-			if(file.exists()) {
+			if (file.exists()) {
 				file.delete();
 			}
-			}
-		else {
+		} else {
 			file = new File(segment.getVideo().getVideoURL());
-			if(file.exists()) {
-			file.delete();
+			if (file.exists()) {
+				file.delete();
 			}
 		}
 		segments.remove(segment.getId());
 		orderingSequence.remove(segment.getId());
 		ProjectService.persist(this);
-		
+
 	}
+
 	public void softDeleteSegment(Segment segment) {
-		
+
 		segments.remove(segment.getId());
 		orderingSequence.remove(segment.getId());
 		ProjectService.persist(this);
-		
+
 	}
+
 	// Manipulate ordering sequence
 	public void swapSegment(Segment segment1, Segment segment2) {
 		int pos1 = orderingSequence.indexOf(segment1.getId());
@@ -206,57 +195,51 @@ public class Project implements Serializable {
 	public void setOrderingSequence(List<Integer> orderingSequence) {
 		this.orderingSequence = orderingSequence;
 	}
-	public void insertAt(int index1,int index2){
+
+	public void insertAt(int index1, int index2) {
 		int tempNum = orderingSequence.get(index2);
 		orderingSequence.remove(index2);
-			orderingSequence.add(index1,tempNum);
-		for(Integer i : orderingSequence)
-		{
-		//	segmentList.add(segments.get(i));
-		//	System.out.println("Inside Ordering Sequence"+i);
+		orderingSequence.add(index1, tempNum);
+		for (Integer i : orderingSequence) {
+			// segmentList.add(segments.get(i));
+			// System.out.println("Inside Ordering Sequence"+i);
 		}
 		ProjectService.persist(this);
 	}
-	
-	public  List<Segment> getOrderedSegmentList()
-	{
-		List<Segment> segmentList = new ArrayList<Segment>();		
-		System.out.println("Size of the ordering segment list"+orderingSequence.size());
-		for(Integer i : orderingSequence)
-		{
+
+	public List<Segment> getOrderedSegmentList() {
+		List<Segment> segmentList = new ArrayList<Segment>();
+		System.out.println("Size of the ordering segment list" + orderingSequence.size());
+		for (Integer i : orderingSequence) {
 			segmentList.add(segments.get(i));
-			System.out.println("Inside Ordering Sequence"+i);
+			System.out.println("Inside Ordering Sequence" + i);
 		}
 		return segmentList;
 	}
-	public void setOrderedSegmentList(List<Segment> stateList)
-	{
-		
+
+	public void setOrderedSegmentList(List<Segment> stateList) {
+
 		try {
-			for(Segment segment: getOrderedSegmentList())
+			for (Segment segment : getOrderedSegmentList())
 				softDeleteSegment(segment);
 			System.out.println(stateList.size());
-			for(Segment s:stateList)
-			{
+			for (Segment s : stateList) {
 				addSegment(new Segment(s));
 				System.out.println("Added segment to current project from state");
 			}
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	public Segment getSlideSegment(int slideNumber)
-	{
-		int index=0;
-		for(Segment s:getOrderedSegmentList())
-		{
-			if(s.getSlide()!=null)
-			{
-				if(index==slideNumber)
-				{
+
+	public Segment getSlideSegment(int slideNumber) {
+		int index = 0;
+		for (Segment s : getOrderedSegmentList()) {
+			if (s.getSlide() != null) {
+				if (index == slideNumber) {
 					return s;
 				}
 				index++;
@@ -264,32 +247,28 @@ public class Project implements Serializable {
 		}
 		return null;
 	}
-	public int indexOf(Segment x)
-	{
+
+	public int indexOf(Segment x) {
 		return getOrderedSegmentList().indexOf(x);
 	}
-	public Segment getVideo(int index)
-	{
-		int i=0;
-		for(Segment s: getOrderedSegmentList())
-		{
-			if(!(s.getSlide()!=null))
-			{
-				if(i==index)
+
+	public Segment getVideo(int index) {
+		int i = 0;
+		for (Segment s : getOrderedSegmentList()) {
+			if (!(s.getSlide() != null)) {
+				if (i == index)
 					return s;
 				i++;
 			}
 		}
 		return null;
 	}
-	public int getVideoNumber(Segment x)
-	{
-		int index=0;
-		for(Segment s: getOrderedSegmentList())
-		{
-			if(s.getVideo()!=null){
-				if(s.equals(x))
-				{
+
+	public int getVideoNumber(Segment x) {
+		int index = 0;
+		for (Segment s : getOrderedSegmentList()) {
+			if (s.getVideo() != null) {
+				if (s.equals(x)) {
 					return index;
 				}
 				index++;
@@ -297,18 +276,17 @@ public class Project implements Serializable {
 		}
 		return index;
 	}
-	public void refresh()
-	{
-		for(Segment s: getOrderedSegmentList())
-		{
-			if(s.getSlide()!=null){
+
+	public void refresh() {
+		for (Segment s : getOrderedSegmentList()) {
+			if (s.getSlide() != null) {
 				s.getSlide().refresh();
 			}
-		}	
+		}
 	}
-	public String getProjectJsonPath()
-	{
-		return new File(projectURL,(projectName+".json")).getAbsolutePath();
-		
+
+	public String getProjectJsonPath() {
+		return new File(projectURL, (projectName + ".json")).getAbsolutePath();
+
 	}
 }

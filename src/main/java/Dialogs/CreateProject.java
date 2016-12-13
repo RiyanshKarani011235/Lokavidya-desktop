@@ -101,7 +101,7 @@ public class CreateProject {
 								Call.workspace.name=textField_1.getText();
 								Call.workspace.location = path;
 								Call.workspace.path = new File(Call.workspace.location, Call.workspace.name).getAbsolutePath();
-								Call.workspace.currentProject=ProjectService.createNewProject(Call.workspace.path);
+								Call.workspace.currentProject=ProjectService.createNewProject(Call.workspace.path, false);
 								if(Call.workspace.cancelled)
 								{
 									lblNewLabel1.setText("Cancelling creation");

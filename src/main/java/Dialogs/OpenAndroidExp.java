@@ -47,6 +47,8 @@ public class OpenAndroidExp {
 	private JProgressBar progressBar;
 	private JLabel lblNewLabel1;
 	
+	File projectTmp;
+	
 	class ProgressDialog extends JPanel
 	implements ActionListener, 
 	PropertyChangeListener{
@@ -74,7 +76,7 @@ public class OpenAndroidExp {
 				setProgress(100);
 				Thread.sleep(1000);
 				frame.dispose();
-				
+				JOptionPane.showMessageDialog(null, "project has been successfully exported as : \n" + projectTmp, "", JOptionPane.INFORMATION_MESSAGE);
 				return null;
 			 
 		 }
@@ -204,14 +206,14 @@ public class OpenAndroidExp {
 					Project project = ProjectService.getInstance(Call.workspace.currentProject.getProjectURL()+File.separator+FilenameUtils.getName(Call.workspace.currentProject.getProjectURL())+".json"); 
 					//String tmpPath=System.getProperty("java.io.tmpdir");
 //					File projectTmp = new File(path,project.getProjectName());
-					File projectTmp = new File(textField_2.getText(), FilenameUtils.getName(Call.workspace.currentProject.getProjectURL()+".zip"));
+					projectTmp = new File(textField_2.getText(), FilenameUtils.getName(Call.workspace.currentProject.getProjectURL()+".zip"));
 					System.out.println("projectTmp : " + projectTmp.getAbsolutePath());
 					if(projectTmp.exists()){
 						flag = JOptionPane.showOptionDialog(null,"File Already Exists. Do you want to replace?","Warning",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,null, new String[]{"Replace","Cancel"},null);
 						System.out.println(flag);
 					}
 					if(flag==0){
-					dialog=new ProgressDialog();
+						dialog=new ProgressDialog();
 					}
 					
 				}
