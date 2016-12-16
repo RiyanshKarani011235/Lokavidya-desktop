@@ -74,10 +74,10 @@ public class SegmentService {
 		}
 	}
 	public static void addPresentation(Project project,Segment segment,String presentationURL) {
-		String presentationName=RandomStringUtils.randomAlphanumeric(10).toLowerCase();
+		String presentationName = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
 		String newFilePath="";
 		if (presentationURL.endsWith(".ppt")||(presentationURL.endsWith(".pptx"))) {
-			newFilePath =new File(project.getProjectURL(),presentationName+".odp").getAbsolutePath();
+			newFilePath = new File(project.getProjectURL(),presentationName+".odp").getAbsolutePath();
 			GeneralUtils.convertPptToOdp(presentationURL, newFilePath);
 		}
 	//	File newFile=new File(project.getProjectURL(),presentationName+".odp");

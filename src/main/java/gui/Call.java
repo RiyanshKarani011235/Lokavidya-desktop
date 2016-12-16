@@ -18,9 +18,7 @@ public class Call {
 		// TODO Auto-generated method stub
 		String osname = System.getProperty("os.version");
 		System.out.println(osname);
-		// PrintStream o = new PrintStream(new File("log.txt"));
-
-	       // System.setOut(o);
+		
 		GeneralUtils.startUp(); 
 		UIUtils.setLookAndFeel();
 	

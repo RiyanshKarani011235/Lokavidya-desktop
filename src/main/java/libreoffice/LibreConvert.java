@@ -46,9 +46,9 @@ public class LibreConvert {
             com.sun.star.lang.XMultiComponentFactory xMCF = xContext.getServiceManager();
             Object oDesktop = xMCF.createInstanceWithContext("com.sun.star.frame.Desktop", xContext);
             
-            com.sun.star.frame.XComponentLoader xCompLoader =
-                UnoRuntime.queryInterface(
-                 com.sun.star.frame.XComponentLoader.class, oDesktop);
+            com.sun.star.frame.XComponentLoader xCompLoader = UnoRuntime.queryInterface(
+            		com.sun.star.frame.XComponentLoader.class, oDesktop
+			);
             
                         //String SaveURL="file:///C:/Users/hp/Documents/trial1.pptx";
             pptPath=pptPath.replaceAll("\\\\","/");

@@ -110,6 +110,7 @@ import Dialogs.JTimer;
 //import Dialogs.Feedback;
 import Dialogs.OpenAndroid;
 import Dialogs.OpenAndroidExp;
+import Dialogs.OpenPdf;
 import Dialogs.OpenPresentation;
 import Dialogs.OpenProject;
 import Dialogs.OpenVideo;
@@ -145,7 +146,8 @@ WindowStateListener {
 	public RecordingFrame recFrame = null;
 	private JMenu mnFile, mnEdit, mnOptions, mnExport, mnImport, mnHelp;
 	private JMenuItem mntmNewMenuItem, mntmOpenMenuItem, mntmEditPres, mntmVideoFormat,
-			mntmFormat, mntmAndroidexp, mntmPresentation, mntmVideo, mntmAndroid, mntmFeedback, mntmInstallationInstructions;
+			mntmFormat, mntmAndroidexp, mntmPresentation, mntmVideo, mntmAndroid, 
+			mntmFeedback, mntmInstallationInstructions, mntmPdf;
 	public JCheckBoxMenuItem  mntmDecideRecordingArea;
 	private JPanel panel,StitchToolbarpanel,innerPanel;
 	private JTabbedPane tabbedPane;
@@ -1168,9 +1170,11 @@ WindowStateListener {
 		mntmPresentation = new JMenuItem("Presentation ...");
 		mntmVideo = new JMenuItem("Video ...");
 		mntmAndroid = new JMenuItem("Android Project ...");
+		mntmPdf = new JMenuItem("PDF ...");
 		mnImport.add(mntmPresentation);
 		mnImport.add(mntmVideo);
 		mnImport.add(mntmAndroid);
+		mnImport.add(mntmPdf);
 		menuBar.add(mnImport);
 
 		mntmPresentation.addActionListener(new ActionListener() {
@@ -1220,6 +1224,12 @@ WindowStateListener {
 				OpenAndroid.main(null);
 			//	setPaths();
 
+			}
+		});
+
+		mntmPdf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				OpenPdf.main(null);
 			}
 		});
 

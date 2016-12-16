@@ -26,10 +26,14 @@ import java.util.concurrent.TimeoutException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.util.ImageIOUtil;
 import org.apache.poi.hslf.usermodel.HSLFSlide;
 import org.apache.poi.hslf.usermodel.HSLFSlideShow;
 import org.apache.poi.hslf.usermodel.SlideShow;
@@ -49,6 +53,7 @@ import com.iitb.lokavidya.core.data.Slide;
 import com.iitb.lokavidya.core.utils.FFMPEGWrapper;
 import com.iitb.lokavidya.core.utils.GeneralUtils;
 
+import Dialogs.OpenPdf;
 import Dialogs.OpenPresentation;
 
 public class ProjectService {
@@ -89,18 +94,19 @@ public class ProjectService {
 		return project;
 
 	}
-	
+
 	public static Project createNewProject(String projectURL, boolean checkForHash) {
-		if(checkForHash == false) {
+		if (checkForHash == false) {
 			checkHash = false;
 		}
 		return createNewProject(projectURL);
 	}
-	
+
 	public static boolean isFileExist(String fileURL) {
-		if(fileURL != null && (!new File(fileURL).exists() || new File(fileURL).isDirectory())) {
+		if (fileURL != null && (!new File(fileURL).exists() || new File(fileURL).isDirectory())) {
 			return false;
-		} return true;
+		}
+		return true;
 	}
 
 	public static Project getInstance(String pathToProjectJson) {
@@ -108,7 +114,7 @@ public class ProjectService {
 		Project project = null;
 
 		System.out.println("checking sanctity of JSON file");
-		
+
 		// Try generating GSON object from JSON file
 		Gson gson = new Gson();
 		try {
@@ -116,7 +122,8 @@ public class ProjectService {
 			project = gson.fromJson(bufferedReader, new TypeToken<Project>() {
 			}.getType());
 		} catch (Exception e) {
-			// if there is an error, return null and the project import will be unsuccessfull
+			// if there is an error, return null and the project import will be
+			// unsuccessfull
 			e.printStackTrace();
 			return null;
 		}
@@ -127,12 +134,14 @@ public class ProjectService {
 			FileInputStream fis = new FileInputStream(pathToProjectJson);
 			String md5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(fis);
 			fis.close();
-			System.out.println("md5File path : " + FilenameUtils.concat(project.getProjectURL(), project.getProjectName() + ".hash"));
-			
+			System.out.println("md5File path : "
+					+ FilenameUtils.concat(project.getProjectURL(), project.getProjectName() + ".hash"));
+
 			File md5File = new File(FilenameUtils.concat(project.getProjectURL(), project.getProjectName() + ".hash"));
 			String md5ReadString = FileUtils.readFileToString(md5File, "UTF-8");
 			if (!md5.equals(md5ReadString)) {
-				// if the JSON is corrupt, return null and the project import will be unsuccessfull
+				// if the JSON is corrupt, return null and the project import
+				// will be unsuccessfull
 				System.out.println("Corrupt JSON");
 				return null;
 			}
@@ -140,48 +149,49 @@ public class ProjectService {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		// check if all files as defined in the JSON file exist in the project
-		// if any file is missing, return null and the project import will be unsuccessfull
-		for(Segment segment : project.getOrderedSegmentList()) {
-			if(segment.getSlide() != null) {
+		// if any file is missing, return null and the project import will be
+		// unsuccessfull
+		for (Segment segment : project.getOrderedSegmentList()) {
+			if (segment.getSlide() != null) {
 				// has slide
 				Audio audio = segment.getSlide().getAudio();
 				String audioURL = null;
 				String imageURL = segment.getSlide().getImageURL();
 				String presentationURL = segment.getSlide().getPptURL();
-				
+
 				if (audio != null) {
 					audioURL = audio.getAudioURL();
 				}
-			
+
 				// checking audio file
-				if(!isFileExist(audioURL)) {
+				if (!isFileExist(audioURL)) {
 					return null;
 				}
 
 				// checking image file
-				if(!isFileExist(imageURL)) {
+				if (!isFileExist(imageURL)) {
 					return null;
 				}
-				
+
 				// checking presentation file
-				if(!isFileExist(presentationURL)) {
+				if (!isFileExist(presentationURL)) {
 					return null;
 				}
-				
-			} else if(segment.getVideo() != null) {
+
+			} else if (segment.getVideo() != null) {
 				// has video
 				String videoURL = segment.getVideo().getVideoURL();
 				// checking for video file
-				if(!isFileExist(videoURL)) {
+				if (!isFileExist(videoURL)) {
 					return null;
 				}
 			} else {
 				// blank slide
 			}
 		}
-		
+
 		File jsonFile = new File(pathToProjectJson);
 		File projectFolder = jsonFile.getParentFile();
 		String oldprojectPath = project.getProjectURL();
@@ -192,18 +202,19 @@ public class ProjectService {
 			for (int i = 0; i < segmentList.size(); i++) {
 				if (segmentList.get(i).getSlide() != null) {
 					segmentList.get(i).getSlide().setImageURL(segmentList.get(i).getSlide().getImageURL()
-						.replace(oldprojectPath, projectFolder.getAbsolutePath()));
+							.replace(oldprojectPath, projectFolder.getAbsolutePath()));
 					segmentList.get(i).getSlide().setPptURL(segmentList.get(i).getSlide().getPptURL()
-						.replace(oldprojectPath, projectFolder.getAbsolutePath()));
+							.replace(oldprojectPath, projectFolder.getAbsolutePath()));
 					if (segmentList.get(i).getSlide().getAudio() != null) {
 						segmentList.get(i).getSlide().getAudio().setAudioURL(segmentList.get(i).getSlide().getAudio()
-							.getAudioURL().replace(oldprojectPath, projectFolder.getAbsolutePath()));
+								.getAudioURL().replace(oldprojectPath, projectFolder.getAbsolutePath()));
 						FFMPEGWrapper ffmpegwrapper = new FFMPEGWrapper();
 						long duration = ffmpegwrapper
-							.getDuration(segmentList.get(i).getSlide().getAudio().getAudioURL());
+								.getDuration(segmentList.get(i).getSlide().getAudio().getAudioURL());
 						segmentList.get(i).setTime(duration);
 					}
-				} if (segmentList.get(i).getVideo() != null) {
+				}
+				if (segmentList.get(i).getVideo() != null) {
 					segmentList.get(i).getVideo().setVideoURL(segmentList.get(i).getVideo().getVideoURL()
 							.replace(oldprojectPath, projectFolder.getAbsolutePath()));
 					FFMPEGWrapper ffmpegwrapper = new FFMPEGWrapper();
@@ -601,8 +612,6 @@ public class ProjectService {
 					new_time = System.currentTimeMillis();
 					bw.write("\nTime taken for persistance is: " + (new_time - current_time));
 					current_time = new_time;
-					// pop UI
-
 				}
 				value = (int) (50 + (double) (i + 1) * (divider));
 				window.setprogressvalue(value);
@@ -624,7 +633,6 @@ public class ProjectService {
 				value = (int) (70 + (double) (i + 1) * (divider));
 				window.setprogressvalue(value);
 				i++;
-
 			}
 
 			new_time = System.currentTimeMillis();
@@ -641,6 +649,102 @@ public class ProjectService {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static void importPdf(String pdfUrl, Project project, OpenPdf window) {
+		BufferedWriter bw = null;
+		// String tempPath = System.getProperty("java.io.tmpdir");
+		try {
+			bw = new BufferedWriter(new FileWriter("timelog.txt", true));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String tempPath = project.getProjectURL();
+		File file = new File(pdfUrl);
+		try {
+			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
+			int size = 0;
+			
+			// create tmpImages directory
+		    File tmpImagesDirectory = new File("resources", "tmpImages");
+		    try {
+		    	tmpImagesDirectory.mkdir();
+		    } catch (SecurityException e) {
+		    	// could not create the tmpImages Directory
+		    }
+		    
+		    ArrayList<String> outputFilenamesList = new ArrayList<String>();
+		    
+		    // check if directory is created
+		    if(tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory()) {
+		    	// convert PDF to individual images
+				PDDocument document;
+				document = PDDocument.loadNonSeq(new File(pdfUrl), null);
+				List<PDPage> pdPages = document.getDocumentCatalog().getAllPages();
+				int page = 0;
+				for (PDPage pdPage : pdPages) { 
+				    ++page;
+				    BufferedImage bim = pdPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
+				    String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(), new File(pdfUrl).getName() + "-" + page + ".jpg").getAbsolutePath();
+				    ImageIOUtil.writeImage(bim, outputFileName, 300);
+				    outputFilenamesList.add(outputFileName);
+				}
+				document.close();
+		    } else {
+		    	// could not create tmpImages directory
+		    	JOptionPane.showMessageDialog(
+	    			null,
+	    			"Could not access the directory : " + tmpImagesDirectory.getAbsolutePath() + "\n" + 
+			    			"make sure that you have read and write access to this directory", 
+			    	"", 
+			    	JOptionPane.INFORMATION_MESSAGE
+				);
+		    }
+		    
+		    ArrayList<Segment> newSegments = new ArrayList<Segment>();
+		    for(String outputFilename : outputFilenamesList) {
+		    	Segment segment = new Segment(project.getProjectURL(), false);
+		    	Slide slide = new Slide(outputFilename, project.getProjectURL(), false);
+		    	new_time = System.currentTimeMillis();
+		    	bw.write("\nTime taken for image creation is: " + (new_time - current_time));
+		    	current_time = new_time;
+		    	segment.setSlide(slide);
+		    	newSegments.add(segment);
+		    	project.addSegment(segment);
+		    	ProjectService.persist(project);
+		    	new_time = System.currentTimeMillis();
+				bw.write("\nTime taken for persistance is: " + (new_time - current_time));
+				current_time = new_time;
+		    }
+
+//		    GeneralUtils.stopOfficeInstance();
+//			String pdfName = FilenameUtils.getBaseName(pdfUrl);
+//			int i = 0;
+//			for (Segment s : newSegments) {
+//				String pptPath = new File(tempPath,
+//						pdfName + "." + i + ".ppt").getAbsolutePath();
+//
+//				System.out.println("pptPath : " + pptPath);
+//				SegmentService.addPresentation(project, s, pptPath);
+////				value = (int) (70 + (double) (i + 1) * (divider));
+////				window.setprogressvalue(value);
+//				i++;
+//			}
+
+			new_time = System.currentTimeMillis();
+			bw.write("\nTime taken for updating segments: " + (new_time - current_time));
+			current_time = new_time;
+			bw.write("Total time: " + (current_time - first_time));
+			bw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static Future<String> createPresentations(String presentationURL, String tempPath, File file,

@@ -44,27 +44,25 @@ public class DirectoryChooser extends JPanel {
 		if (type.equals("ppt")) {
 			FileNameExtensionFilter pptFilter = new FileNameExtensionFilter("ppt files (*.ppt, *.pptx)", "ppt","pptx");
 			chooser.setFileFilter(pptFilter);
-
 			chooser.setAcceptAllFileFilterUsed(false);
 		    chooser.setDialogTitle("Choose presentation");
-
-		}
-		else if (type.equals("mp4")) {
+		} else if (type.equals("mp4")) {
 			FileNameExtensionFilter pptFilter = new FileNameExtensionFilter("mp4 files (*.mp4)", "mp4");
 			chooser.setFileFilter(pptFilter);
 			chooser.setAcceptAllFileFilterUsed(false);
 		    chooser.setDialogTitle("Choose video");
-			
-			
-		}
-		else if (type.equals("zip")){
+		} else if (type.equals("zip")){
 			FileNameExtensionFilter zipFilter = new FileNameExtensionFilter("zip files (*.zip)", "zip");
 			//chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			chooser.setFileFilter(zipFilter);
 			chooser.setAcceptAllFileFilterUsed(true);
 		    chooser.setDialogTitle("Choose video");
-		}
-		else {
+		} else if(type.equals("pdf")) {
+			FileNameExtensionFilter pdfFilter = new FileNameExtensionFilter("pdf files (*.pdf)", "pdf");
+			chooser.setFileFilter(pdfFilter);
+			chooser.setAcceptAllFileFilterUsed(false);
+			chooser.setDialogTitle("choose PDF");
+		} else {
 		    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		    chooser.setDialogTitle("Choose folder");
 		}
