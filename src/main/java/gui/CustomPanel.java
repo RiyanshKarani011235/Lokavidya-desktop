@@ -45,8 +45,7 @@ import com.iitb.lokavidya.core.data.Segment;
 
 import gui.Workspace.JCustomPanel;
 
-public class CustomPanel extends JPanel implements MouseListener,Transferable, DragSourceListener, DragGestureListener,DropTargetListener,Autoscroll 
-{
+public class CustomPanel extends JPanel implements MouseListener,Transferable, DragSourceListener, DragGestureListener,DropTargetListener,Autoscroll {
     boolean isHighlighted;
     public static int highlightCount;
     public static  int slideCount;
@@ -68,8 +67,7 @@ public class CustomPanel extends JPanel implements MouseListener,Transferable, D
     }
     
     
-    CustomPanel(final Segment segment)
-    {
+    CustomPanel(final Segment segment) {
     	System.out.println(slideCount);
     	this.setBackground(new Color(245,245,245));
     	springLayout = new SpringLayout();
@@ -297,6 +295,7 @@ public class CustomPanel extends JPanel implements MouseListener,Transferable, D
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 	// AutoScroll methods.
     public void autoscroll(Point location)
