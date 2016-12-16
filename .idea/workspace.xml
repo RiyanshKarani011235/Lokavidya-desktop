@@ -1,70 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bffz4ktty8.flv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mnlvdylov4.flv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$19$1.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Dialogs/DirectoryChooser$1.class" afterPath="$PROJECT_DIR$/target/classes/Dialogs/DirectoryChooser$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Dialogs/DirectoryChooser.class" afterPath="$PROJECT_DIR$/target/classes/Dialogs/DirectoryChooser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService$1.class" afterPath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService$2.class" afterPath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService$3.class" afterPath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService$4.class" afterPath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService.class" afterPath="$PROJECT_DIR$/target/classes/com/iitb/lokavidya/core/operations/ProjectService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Call.class" afterPath="$PROJECT_DIR$/target/classes/gui/Call.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$1.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$10.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$11.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$12.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$13.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$13.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$14.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$14.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$15.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$15.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$16.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$16.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$17.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$17.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$18.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$18.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$19.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$19.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$2.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$20.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$20.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$21.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$21.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$22.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$22.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$23.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$23.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$24.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$24.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$25.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$25.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$26.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$26.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$27.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$27.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$28.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$28.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$29.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$29.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$3.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$30.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$30.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$31.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$31.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$32.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$32.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$33.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$33.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$34.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$34.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$35.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$35.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$36.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$36.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$37.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$37.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$38.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$38.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$4.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$5.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$6.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$7.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$8.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$9.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$JCustomPanel.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$JCustomPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$ProgressDialog$Task.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$ProgressDialog$Task.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace$ProgressDialog.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace$ProgressDialog.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/gui/Workspace.class" afterPath="$PROJECT_DIR$/target/classes/gui/Workspace.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/libreoffice/LibreConvert.class" afterPath="$PROJECT_DIR$/target/classes/libreoffice/LibreConvert.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Dialogs/DirectoryChooser.java" afterPath="$PROJECT_DIR$/src/main/java/Dialogs/DirectoryChooser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/SegmentService.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/SegmentService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gui/Call.java" afterPath="$PROJECT_DIR$/src/main/java/gui/Call.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" afterPath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/libreoffice/LibreConvert.java" afterPath="$PROJECT_DIR$/src/main/java/libreoffice/LibreConvert.java" />
-    </list>
+    <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="" />
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/classes/" />
@@ -95,7 +32,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="600">
@@ -115,31 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateZip.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/CreateZip.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="34" column="65" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExtractZip.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/ExtractZip.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CustomPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/gui/CustomPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1665">
-              <caret line="164" column="4" selection-start-line="164" selection-start-column="4" selection-end-line="164" selection-end-column="4" />
+            <state relative-caret-position="1785">
+              <caret line="162" column="4" selection-start-line="162" selection-start-column="4" selection-end-line="162" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -170,6 +87,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="278">
               <caret line="326" column="42" selection-start-line="326" selection-start-column="42" selection-end-line="326" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FFMPEGWrapper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="430" column="58" selection-start-line="430" selection-start-column="19" selection-end-line="430" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Video.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Video.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -454,6 +391,44 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Lokavidya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Lokavidya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lokavidya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FFMPEGWrapper.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -959,12 +934,12 @@
       <workItem from="1481182859289" duration="1572000" />
       <workItem from="1481274115495" duration="557000" />
       <workItem from="1481526833468" duration="3681000" />
-      <workItem from="1481789824702" duration="3415000" />
+      <workItem from="1481789824702" duration="3688000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12029000" />
+    <option name="totallyTimeSpent" value="12302000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
@@ -1021,14 +996,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/Workspace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18675">
-          <caret line="1245" column="43" selection-start-line="1245" selection-start-column="43" selection-end-line="1245" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gui/Workspace.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18675">
@@ -1292,20 +1259,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6465">
-          <caret line="442" column="8" selection-start-line="442" selection-start-column="8" selection-end-line="442" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/UIUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
           <caret line="50" column="57" selection-start-line="50" selection-start-column="57" selection-end-line="50" selection-end-column="57" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1336,8 +1295,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gui/CustomPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1665">
-          <caret line="164" column="4" selection-start-line="164" selection-start-column="4" selection-end-line="164" selection-end-column="4" />
+        <state relative-caret-position="1785">
+          <caret line="162" column="4" selection-start-line="162" selection-start-column="4" selection-end-line="162" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1402,6 +1361,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="95" column="25" selection-start-line="95" selection-start-column="25" selection-end-line="95" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Video.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="430" column="58" selection-start-line="430" selection-start-column="19" selection-end-line="430" selection-end-column="59" />
           <folding />
         </state>
       </provider>
