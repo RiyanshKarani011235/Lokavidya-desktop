@@ -1,0 +1,6 @@
+
+Time taken for image creation is: 5505
+Time taken for persistance is: 16
+Time taken for image creation is: 1
+Time taken for persistance is: 11
+Time taken for updating segments: 0Total time: 5533

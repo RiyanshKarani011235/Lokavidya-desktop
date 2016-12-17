@@ -77,7 +77,7 @@ public class FFMPEGWrapper {
 
 		pathExecutable = new File(new File(new File("lib").getAbsolutePath(), "ffmpeg").getAbsolutePath(), "bin").getAbsolutePath();
 		pathExecutableffprobe = pathExecutable;
-		encoding = "libxvid";
+		encoding = "libx264";
 		
 		String osPathString;
 
