@@ -461,6 +461,7 @@ public class FFMPEGWrapper {
 			file.delete();
 		
 		// combine audio and video
+		// convert resolution to required size
 		String resolution=
 				"[in]scale=iw*min("+
 				Integer.toString(Call.workspace.videoWidth)+"/iw\\,"+

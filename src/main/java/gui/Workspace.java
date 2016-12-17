@@ -67,6 +67,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -1026,11 +1027,13 @@ WindowStateListener {
 			}
 			playing=false;
 			ProjectOperations.stopAudioRecording(currentProject);
+
+			ProjectService.persist(currentProject);
+			Call.workspace.removeTimeline();
+			Call.workspace.populateTimeline();
+			WorkspaceUIHelper.disableStop();
 		}
-		ProjectService.persist(currentProject);
-		Call.workspace.removeTimeline();
-		Call.workspace.populateTimeline();
-		WorkspaceUIHelper.disableStop();
+
 	}
 	
 	public void discardRecording() {
