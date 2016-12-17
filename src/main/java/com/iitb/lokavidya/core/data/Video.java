@@ -34,9 +34,8 @@ public class Video implements Serializable {
 		// TODO: video name should be Time based, not generated randomly
 		this.id= GeneralUtils.generateRandomNumber(11).intValue();
 		String videoName = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
-		ffmpegWrapper.standardizeResolutionMaintainAspectRatio(videoURL, projectURL, videoName);
 		this.videoURL = new File(projectURL,videoName+"."+FilenameUtils.getExtension(videoURL)).getAbsolutePath();
-		ffmpegWrapper.processVideo(this.videoURL);
+		ffmpegWrapper.standardiseResolutionMaintainAspectRatioAndProcessVideo(videoURL, this.videoURL);
 	}
 	
 	public Video (String projectURL) {

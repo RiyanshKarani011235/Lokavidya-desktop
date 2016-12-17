@@ -145,68 +145,14 @@ public class FFMPEGWrapper {
 		File video = new File(videoPath);
 		if (video.exists())
 			video.delete();
-//		String resolution="scale="+Integer.toString(Call.workspace.videoWidth)+":"+Integer.toString(Call.workspace.videoHeight);
-//		String resolution = "scale='if(gt(a,4/3)," + Call.workspace.videoWidth + ",-1)':'if(gt(a,4/3),-1," + Call.workspace.videoHeight + ")'";
-		String resolution = "scale=-1:" + Call.workspace.videoHeight + ",pad=" + Call.workspace.getWidth() + ":ih:(ow-iw)/2";
 		
+		String resolution = "scale=-1:" + Call.workspace.videoHeight + ",pad=" + Call.workspace.getWidth() + ":ih:(ow-iw)/2";
 		String[] command = new String[] {
 				pathExecutable, "-loop", "1", "-i", imgPath,"-i",audioPath,"-c:v", encoding, "-c:a",
 						"aac", "-strict","experimental","-pix_fmt", "yuv420p", "-vf", resolution, "-b:a", "192k","-shortest",videoPath };
 				
 		return	GeneralUtils.runProcess(command);
 	}	
-	
-	public boolean stitchImageAndAudio1(String imgPath, String audioPath,
-			String videoPath, String tempPath) throws IOException,
-			InterruptedException {
-		/*
-		 * Check if final or temp exists delete if it does.
-		 */
-		System.out.println("stitching audio");
-		File temp = new File(tempPath);
-		File video = new File(videoPath);
-		if (temp.exists())
-			temp.delete();
-		if (video.exists())
-			video.delete();
-		String cmd = " " + pathExecutable;// +" -help";
-		String cmdext = " -loop 1 -i " + imgPath
-				+ " -c:v " + encoding + " -t 2 -pix_fmt yuv420p -vf scale=320:240 "
-				+ tempPath;
-		cmd += cmdext;
-		System.out.println("The cmd for image stitching is: " + cmd);
-
-		String resolution="scale="+Integer.toString(Call.workspace.videoWidth)+":"+Integer.toString(Call.workspace.videoHeight);
-		String[] command = new String[] {
-		pathExecutable, "-loop", "1", "-i", imgPath, "-c:v", encoding, "-t",
-				"2", "-pix_fmt", "yuv420p", "-vf", resolution, tempPath };
-		
-		GeneralUtils.runProcess(command);
-		cmd =" "+pathExecutable;//+" -help";
-		cmdext=" -i "+audioPath+" -i "+tempPath+" -c:a copy -vcodec copy -strict -2 "+videoPath;
-		cmd +=cmdext;
-		String [] commandAudio = new String [] {
-				pathExecutable,
-				"-i",
-				audioPath,
-				"-i",
-				tempPath,
-				"-c:a", 
-				"copy",
-				"-vcodec",
-				"copy",
-				"-strict",
-				"-2",
-				videoPath
-		};
-		File file = new File(videoPath);
-		if(file.exists())
-			file.delete();
-
-		System.out.println("audio stitiching in progress");
-		System.out.println("The cmd for audio stitching is: " + cmd);
-		return GeneralUtils.runProcess(commandAudio);
-	}
 
 	public boolean stitchVideo(List<String> videoPaths, String listfilePath,
 			String finalPath) throws IOException, InterruptedException {
@@ -435,32 +381,30 @@ public class FFMPEGWrapper {
 		return true;
 	}
 
-	public boolean standardizeResolutionMaintainAspectRatio(String videoURL,
-			String projectURL, String videoName) {
+	public boolean standardizeResolutionMaintainAspectRatio(String videoURL,String projectURL, String videoName) {
 
 		System.out.println("resizing... ");
 		System.out.println("video path: " + videoURL);
-		String outputPath = new File(projectURL, videoName + "."           //whwhwhwwhhwh 
-				+ FilenameUtils.getExtension(videoURL)).getAbsolutePath(); //323232332232
+		String outputPath = new File(projectURL, videoName + "."
+				+ FilenameUtils.getExtension(videoURL)).getAbsolutePath();
 		
-		String resolution="[in]scale=iw*min("+Integer.toString(Call.workspace.videoWidth)+"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+"/ih):ih*min("+Integer.toString(Call.workspace.videoWidth)+"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+"/ih)[scaled]; [scaled]pad="+Integer.toString(Call.workspace.videoWidth)+":"+Integer.toString(Call.workspace.videoHeight)+":("+Integer.toString(Call.workspace.videoWidth)+"-iw*min("+Integer.toString(Call.workspace.videoWidth)+"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+"/ih))/2:("+Integer.toString(Call.workspace.videoHeight)+"-ih*min("+Integer.toString(Call.workspace.videoWidth)+"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+"/ih))/2[padded]; [padded]setsar=1:1[out]";
-
-		// changed codec from libx263 to libxvid - ironstein - 23-11-16
-		
-//		String[] command = new String[] {
-//				pathExecutable,
-//				"-y",
-//				"-i",
-//				videoURL,
-//				"-vf",
-//				resolution,
-//				"-c:v", "libx264", "-c:a", "copy", outputPath };
-//
-//		String newcmd = pathExecutable
-//				+ " -y -i "
-//				+ videoURL
-//				+ " -vf '[in]scale=iw*min(320/iw\\,240/ih):ih*min(320/iw\\,240/ih)[scaled]; [scaled]pad=320:240:(320-iw*min(320/iw\\,240/ih))/2:(240-ih*min(320/iw\\,240/ih))/2[padded]; [padded]setsar=1:1[out]' -c:v libx264 -c:a copy "
-//				+ outputPath;
+		String resolution=
+				"[in]scale=iw*min("+
+				Integer.toString(Call.workspace.videoWidth)+"/iw\\,"+
+				Integer.toString(Call.workspace.videoHeight)+
+				"/ih):ih*min("+Integer.toString(Call.workspace.videoWidth)+
+				"/iw\\,"+
+				Integer.toString(Call.workspace.videoHeight)+
+				"/ih)[scaled]; [scaled]pad="+
+				Integer.toString(Call.workspace.videoWidth)+
+				":"+Integer.toString(Call.workspace.videoHeight)+
+				":("+Integer.toString(Call.workspace.videoWidth)+
+				"-iw*min("+Integer.toString(Call.workspace.videoWidth)+
+				"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+
+				"/ih))/2:("+Integer.toString(Call.workspace.videoHeight)+
+				"-ih*min("+Integer.toString(Call.workspace.videoWidth)+
+				"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+
+				"/ih))/2[padded]; [padded]setsar=1:1[out]";
 		
 		String[] command = new String[] {
 				pathExecutable,
@@ -476,15 +420,87 @@ public class FFMPEGWrapper {
 				outputPath 
 		};
 
-		String newcmd = pathExecutable
-				+ " -y -i "
-				+ videoURL
-				+ " -vf '[in]scale=iw*min(320/iw\\,240/ih):ih*min(320/iw\\,240/ih)[scaled]; [scaled]pad=320:240:(320-iw*min(320/iw\\,240/ih))/2:(240-ih*min(320/iw\\,240/ih))/2[padded]; [padded]setsar=1:1[out]' -c:v libxvid -c:a copy "
-				+ outputPath;
+		// print the command
+		for(int i=0; i<command.length; i++) {
+			System.out.print(command[i] + " ");
+		} System.out.println();
 		
-		System.out.println("newcmd: " + newcmd);
 		return GeneralUtils.runProcess(command);
 
+	}
+	
+	public boolean standardiseResolutionMaintainAspectRatioAndProcessVideo(String videoURL,String outputVideoURL) {
+		
+		// extract audio from the input video file
+		String tmpPath = System.getProperty("java.io.tmpdir");
+		System.out.println("Video Path: " + videoURL);
+		String tempAudioOutput = new File(tmpPath, "tempAudio.mp3")
+				.getAbsolutePath();
+		System.out.println("Temp output: " + tempAudioOutput);
+
+		File file = new File(tempAudioOutput);
+		if (file.exists())
+			file.delete();
+
+		String[] commandAudio = new String[] { pathExecutable, "-i", videoURL, tempAudioOutput };
+		GeneralUtils.runProcess(commandAudio);
+		
+		// extract video from the input video file
+		String tempVideoOutput = new File(tmpPath, "tempVideo.mp4")
+				.getAbsolutePath();
+		file = new File(tempVideoOutput);
+		if (file.exists())
+			file.delete();
+		String[] commandVideo = new String[] { pathExecutable, "-i", videoURL,
+				"-vcodec", "copy", "-an", tempVideoOutput };
+		GeneralUtils.runProcess(commandVideo);
+		
+		// delete existing video
+		file = new File(videoURL);
+		if (file.exists())
+			file.delete();
+		
+		// combine audio and video
+		String resolution=
+				"[in]scale=iw*min("+
+				Integer.toString(Call.workspace.videoWidth)+"/iw\\,"+
+				Integer.toString(Call.workspace.videoHeight)+
+				"/ih):ih*min("+Integer.toString(Call.workspace.videoWidth)+
+				"/iw\\,"+
+				Integer.toString(Call.workspace.videoHeight)+
+				"/ih)[scaled]; [scaled]pad="+
+				Integer.toString(Call.workspace.videoWidth)+
+				":"+Integer.toString(Call.workspace.videoHeight)+
+				":("+Integer.toString(Call.workspace.videoWidth)+
+				"-iw*min("+Integer.toString(Call.workspace.videoWidth)+
+				"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+
+				"/ih))/2:("+Integer.toString(Call.workspace.videoHeight)+
+				"-ih*min("+Integer.toString(Call.workspace.videoWidth)+
+				"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+
+				"/ih))/2[padded]; [padded]setsar=1:1[out]";
+		
+		String[] commandVideoCombine = new String[] { 
+			pathExecutable, 
+			"-i",
+			tempAudioOutput, 
+			"-i", 
+			tempVideoOutput, 
+			"-vf", 
+			resolution, 
+			"-ar",
+			"44100",
+			"-c:v", 
+			encoding, 
+			"-strict", 
+			"-2", 
+			outputVideoURL 
+		};
+		
+		System.out.println("Video Combine part command: "
+				+ commandVideoCombine);
+		GeneralUtils.runProcess(commandVideoCombine);
+		return true;
+		
 	}
 
 	public boolean standardizeFps(List<String> videoPaths) {

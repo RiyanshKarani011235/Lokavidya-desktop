@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Segment.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Segment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Video.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Video.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java" />
     </list>
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
@@ -60,9 +62,12 @@
       <file leaf-file-name="ProjectService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="140" column="8" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="234">
+              <caret line="720" column="28" selection-start-line="720" selection-start-column="26" selection-end-line="720" selection-end-column="28" />
+              <folding>
+                <element signature="e#22568#22577#0" expanded="true" />
+                <element signature="e#26754#26763#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -87,11 +92,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FFMPEGWrapper.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FFMPEGWrapper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-399">
-              <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+            <state relative-caret-position="489">
+              <caret line="73" column="18" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -100,18 +105,18 @@
       <file leaf-file-name="Video.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Video.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="28" column="14" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+            <state relative-caret-position="180">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectOperations.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ProjectOperations.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-36">
-              <caret line="232" column="130" selection-start-line="232" selection-start-column="130" selection-end-line="232" selection-end-column="130" />
+            <state relative-caret-position="246">
+              <caret line="281" column="16" selection-start-line="281" selection-start-column="16" selection-end-line="281" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -146,7 +151,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/State.java" />
         <option value="$PROJECT_DIR$/src/main/java/Xuggler/DecodeAndSaveAudioVideo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenProject.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenVideo.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/WorkspaceUIHelper.java" />
@@ -158,6 +162,7 @@
         <option value="$PROJECT_DIR$/src/main/java/gui/Workspace.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" />
       </list>
     </option>
   </component>
@@ -940,12 +945,12 @@
       <workItem from="1481182859289" duration="1572000" />
       <workItem from="1481274115495" duration="557000" />
       <workItem from="1481526833468" duration="3681000" />
-      <workItem from="1481789824702" duration="4496000" />
+      <workItem from="1481789824702" duration="5324000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13110000" />
+    <option name="totallyTimeSpent" value="13938000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
@@ -1317,14 +1322,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="140" column="8" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/bootstrapconnector.jar!/ooo/connector/BootstrapSocketConnector.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1361,8 +1358,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Video.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="28" column="14" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+        <state relative-caret-position="180">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1375,18 +1372,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-36">
-          <caret line="232" column="130" selection-start-line="232" selection-start-column="130" selection-end-line="232" selection-end-column="130" />
+        <state relative-caret-position="489">
+          <caret line="73" column="18" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-399">
-          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+        <state relative-caret-position="234">
+          <caret line="720" column="28" selection-start-line="720" selection-start-column="26" selection-end-line="720" selection-end-column="28" />
+          <folding>
+            <element signature="e#22568#22577#0" expanded="true" />
+            <element signature="e#26754#26763#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="281" column="16" selection-start-line="281" selection-start-column="16" selection-end-line="281" selection-end-column="16" />
           <folding />
         </state>
       </provider>
