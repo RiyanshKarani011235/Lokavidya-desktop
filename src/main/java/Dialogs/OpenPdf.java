@@ -231,7 +231,7 @@ public class OpenPdf {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(new File(textField_2.getText()).isDirectory() || textField_2.getText() == "" || !textField_2.getText().endsWith(".pdf")) {
-					JOptionPane.showMessageDialog(null, "Enter the video location", "", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Enter the pdf location", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "The imported video will be appended to the end of the proejct");
 					dialog=new ProgressDialog();

@@ -209,7 +209,7 @@ public class OpenVideo {
 		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton_1, -28, SpringLayout.SOUTH, frame.getContentPane());
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(new File(textField_2.getText()).isDirectory() || textField_2.getText() == "" || !textField_2.getText().endsWith(".mp4")) {
+				if(new File(textField_2.getText()).isDirectory() || textField_2.getText() == "" || !(textField_2.getText().endsWith(".mp4")||textField_2.getText().endsWith(".MP4"))) {
 					JOptionPane.showMessageDialog(null, "Enter the video location", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "The imported video will be appended to the end of the proejct");
