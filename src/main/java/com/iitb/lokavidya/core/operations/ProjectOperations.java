@@ -233,50 +233,31 @@ public class ProjectOperations {
 					File tempVideo = new File(project.getProjectURL(), RandomStringUtils.randomAlphanumeric(10).toLowerCase()+".flv");
 					System.out.println("tempVideo : Saving at : " + tempVideo.getAbsolutePath());
 					DecodeAndSaveAudioVideo.stitch(originalTempVideo.getAbsolutePath(),s.getSlide().getTempAudioURL(),tempVideo.getAbsolutePath());
-
-					// converting flv to mp4
+			
+					// converting flv file to mp4 file
+					// new implementation - ironstein - 23-11-16
+//					globalVideo = new Video(project.getProjectURL());
+//					System.out.println("globalVideo : url : " + globalVideo.getVideoURL());
+//					DecodeAndSaveAudioVideo.convertFormat(tempVideo.getAbsolutePath(),globalVideo.getVideoURL());
+					
+					// converting tempVideo, and saving it to globalVideo.getVideoURL() path
+					// ffmpeg -i inputVideo.flv -c:v libxvid -c:a aac -strict experimental outputVideo.mp4
 					globalVideo = new Video(project.getProjectURL());
 					System.out.println("converting " + tempVideo.getAbsolutePath() + " to " + globalVideo.getVideoURL());
 					FFMPEGWrapper wrapper = new FFMPEGWrapper();
-
-					// use libxvid encoding for windows and mac
-					String encodingToUse = "libxvid";
-					if(System.getProperty("os.name").toLowerCase().contains("mac")) {
-						encodingToUse = "libx264";
-					}
-					
 					String[] command = new String[] {
 							wrapper.pathExecutable, 
 							"-i", 
 							tempVideo.getAbsolutePath(),
 							"-c:v",
-							encodingToUse,
+							wrapper.encoding,
 							"-c:a",
 							"aac",
 							"-strict",
 							"experimental",
 							globalVideo.getVideoURL()
-							
 					};
 					GeneralUtils.runProcess(command);
-
-					// change the codec of the mp4 video to libx264
-					if(encodingToUse.equals("libxvid")) {
-							command = new String[] {
-								wrapper.pathExecutable, 
-								"-i", 
-								globalVideo.getVideoURL(),
-								"-c:v",
-								wrapper.encoding,
-								"-c:a",
-								"aac",
-								"-strict",
-								"experimental",
-								globalVideo.getVideoURL()
-								
-						};
-						GeneralUtils.runProcess(command);
-					}
 					
 					Video screenVideo = new Video(globalVideo.getVideoURL(), project.getProjectURL());
 //				
