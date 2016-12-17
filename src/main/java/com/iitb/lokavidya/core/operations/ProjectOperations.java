@@ -265,7 +265,7 @@ public class ProjectOperations {
 							command = new String[] {
 								wrapper.pathExecutable, 
 								"-i", 
-								tempVideo.getAbsolutePath(),
+								globalVideo.getVideoURL(),
 								"-c:v",
 								wrapper.encoding,
 								"-c:a",
