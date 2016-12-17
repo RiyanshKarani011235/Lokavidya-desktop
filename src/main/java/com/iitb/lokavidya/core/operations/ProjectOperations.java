@@ -245,18 +245,36 @@ public class ProjectOperations {
 					globalVideo = new Video(project.getProjectURL());
 					System.out.println("converting " + tempVideo.getAbsolutePath() + " to " + globalVideo.getVideoURL());
 					FFMPEGWrapper wrapper = new FFMPEGWrapper();
-					String[] command = new String[] {
+					
+					String[] command;
+					if(System.getProperty("os.name").toLowerCase().contains("mac")) {
+						command = new String[] {
 							wrapper.pathExecutable, 
 							"-i", 
 							tempVideo.getAbsolutePath(),
 							"-c:v",
-							wrapper.encoding,
+							"libx264",
 							"-c:a",
 							"aac",
 							"-strict",
 							"experimental",
 							globalVideo.getVideoURL()
-					};
+						};
+					} else {
+						command = new String[] {
+							wrapper.pathExecutable, 
+							"-i", 
+							tempVideo.getAbsolutePath(),
+							"-c:v",
+							"libxvid",
+							"-c:a",
+							"aac",
+							"-strict",
+							"experimental",
+							globalVideo.getVideoURL()
+						};
+					}
+					
 					GeneralUtils.runProcess(command);
 					
 					Video screenVideo = new Video(globalVideo.getVideoURL(), project.getProjectURL());
