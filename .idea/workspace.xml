@@ -96,7 +96,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="378">
-              <caret line="430" column="58" selection-start-line="430" selection-start-column="19" selection-end-line="430" selection-end-column="59" />
+              <caret line="437" column="58" selection-start-line="437" selection-start-column="19" selection-end-line="437" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -141,7 +141,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/State.java" />
         <option value="$PROJECT_DIR$/src/main/java/Xuggler/DecodeAndSaveAudioVideo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenProject.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenVideo.java" />
@@ -153,6 +152,7 @@
         <option value="$PROJECT_DIR$/src/main/java/libreoffice/LibreConvert.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/Workspace.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java" />
       </list>
     </option>
   </component>
@@ -934,12 +934,12 @@
       <workItem from="1481182859289" duration="1572000" />
       <workItem from="1481274115495" duration="557000" />
       <workItem from="1481526833468" duration="3681000" />
-      <workItem from="1481789824702" duration="3688000" />
+      <workItem from="1481789824702" duration="3897000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12302000" />
+    <option name="totallyTimeSpent" value="12511000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
@@ -1376,7 +1376,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
-          <caret line="430" column="58" selection-start-line="430" selection-start-column="19" selection-end-line="430" selection-end-column="59" />
+          <caret line="437" column="58" selection-start-line="437" selection-start-column="19" selection-end-line="437" selection-end-column="59" />
           <folding />
         </state>
       </provider>

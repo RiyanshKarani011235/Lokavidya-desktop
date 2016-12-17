@@ -147,18 +147,6 @@ public class FFMPEGWrapper {
 			video.delete();
 //		String resolution="scale="+Integer.toString(Call.workspace.videoWidth)+":"+Integer.toString(Call.workspace.videoHeight);
 //		String resolution = "scale='if(gt(a,4/3)," + Call.workspace.videoWidth + ",-1)':'if(gt(a,4/3),-1," + Call.workspace.videoHeight + ")'";
-		
-		BufferedImage bimg = ImageIO.read(new File(imgPath));
-		int imgWidth = bimg.getWidth();
-		int imgHeight = bimg.getHeight();
-		
-//		String resolution = "";
-//		if(imgHeight > imgWidth) {
-//			resolution = "scale=-1:600,pad=800:ih:(ow-iw)/2";
-//		} else {
-//			resolution = "scale=800:-1,pad=iw:(oh-ih)/2:600";
-//		}
-		
 		String resolution = "scale=-1:" + Call.workspace.videoHeight + ",pad=" + Call.workspace.getWidth() + ":ih:(ow-iw)/2";
 		
 		String[] command = new String[] {

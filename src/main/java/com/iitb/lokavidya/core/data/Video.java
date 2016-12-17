@@ -37,7 +37,6 @@ public class Video implements Serializable {
 		ffmpegWrapper.standardizeResolutionMaintainAspectRatio(videoURL, projectURL, videoName);
 		this.videoURL = new File(projectURL,videoName+"."+FilenameUtils.getExtension(videoURL)).getAbsolutePath();
 		ffmpegWrapper.processVideo(this.videoURL);
-
 	}
 	
 	public Video (String projectURL) {

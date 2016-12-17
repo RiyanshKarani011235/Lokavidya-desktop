@@ -888,23 +888,18 @@ WindowStateListener {
 		});
         
         
-        if(slide.getAudio()!=null)
-        {
+        if(slide.getAudio()!=null) {
         	System.out.println("Could find slide audio "+slide.getAudio().getAudioURL());
         	l4.setIcon(createImageIcon("resources/mic.png"));
         	l4.setText("Has Audio");
         	b5.setEnabled(true);
         	b6.setEnabled(true);
-        }
-        else if(segment.getVideo()!=null)
-        {
+        } else if(segment.getVideo()!=null) {
         	l4.setIcon(createImageIcon("resources/slidevideo.png"));
         	l4.setText("Has Video");
         	b5.setEnabled(true);
         	b6.setEnabled(true);
-        }
-    	else
-    	{	
+        } else {
     		System.out.println("Couldn't find slide audio");
         	l4.setIcon(createImageIcon("resources/mic_off.png"));
         	l4.setText("No audio");
@@ -913,13 +908,17 @@ WindowStateListener {
         	
         	//l3.setFont(font);
     	}
-        
+ 
         piece.add(l1);
         piece.add(l2);
-        piece.add(b3);
         piece.add(l4);
         piece.add(b5);
         piece.add(b6);
+ 
+        // if PDF imported, then there is no presentation for that slide
+        if(!(segment.getSlide().getPptURL() == null)) {
+        	piece.add(b3);
+        }
         //piece.setName(slidename);
     	
         
