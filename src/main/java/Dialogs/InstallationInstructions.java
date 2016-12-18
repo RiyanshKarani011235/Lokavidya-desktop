@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,18 +27,25 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicHTML;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.View;
 
 import com.iitb.lokavidya.core.utils.GeneralUtils;
 
 import Dialogs.OpenProject.ProgressDialog;
+import com.iitb.lokavidya.core.utils.UserPreferences;
 import gui.Call;
+
+import static org.apache.poi.hslf.record.OEPlaceholderAtom.Object;
 
 public class InstallationInstructions {
 	
@@ -45,12 +53,26 @@ public class InstallationInstructions {
 	String pathDef;
 	JPanel contentPane;
 	
+	UserPreferences u;
+	
 	public InstallationInstructions() {
-		init();
+		u = new UserPreferences();
+		if(u.getDisplayInstruction("readInstructions").equals("n")) {
+			init();
+		}
+	}
+	
+	public InstallationInstructions(boolean checkUserPreferences) {
+		u = new UserPreferences();
+		if(!checkUserPreferences) {
+			init();
+		} else if(u.getDisplayInstruction("readInstructions").equals("n")) {
+			init();
+		}
+		
 	}
 	
 	public void init() {
-		
 		String osPathString;
 		String osname = System.getProperty("os.name");
 
@@ -61,94 +83,66 @@ public class InstallationInstructions {
 		} else {
 			osPathString = "linux";
 		}
-		
+
 		String installationFilePath = new File("resources", "install_" + osPathString + ".txt").getAbsolutePath();
 		System.out.println("installationFile path : " + installationFilePath);
-		
+
 		String instructions = "";
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(installationFilePath));
 			StringBuilder sb = new StringBuilder();
-		    String line = reader.readLine();
+			String line = reader.readLine();
 
-		    while (line != null) {
-		        sb.append(line);
-		        sb.append(System.lineSeparator());
-		        line = reader.readLine();
-		    }
-		    instructions = sb.toString();
+			while (line != null) {
+				sb.append(line);
+				sb.append(System.lineSeparator());
+				line = reader.readLine();
+			}
+			instructions = sb.toString();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String[] instructionsList = instructions.split("\n");
-
-		JFrame frame = new JFrame();
 		
-        // build JTextArea
-        JTextArea textArea = new JTextArea("INSTALLATION INSTRUCTIONS : \n\n");
-        for(int i=0; i<instructionsList.length; i++) {
-    	    textArea.append(instructionsList[i] + "\n\n");
-    	    textArea.setWrapStyleWord(true);
-    	    textArea.setLineWrap(true);
-    	    textArea.setOpaque(false);
-    	    textArea.setEditable(false);
-    	    textArea.setFocusable(false);
-    	    textArea.setBackground(UIManager.getColor("Label.background"));
-    	    textArea.setFont(UIManager.getFont("Label.font"));
-    	    textArea.setBorder(UIManager.getBorder("Label.border"));
+		JTextPane jtp = new JTextPane();
+		Document doc = jtp.getDocument();
+		for(int i=0; i<instructionsList.length; i++) {
+			try {
+				doc.insertString(doc.getLength(), instructionsList[i] + "\n", new SimpleAttributeSet());
+			} catch (BadLocationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-        
-        textArea.append("for viewing installation instructions anytime, click help>installation instructions\n\n");
-        
-        // add padding to textArea
-        Border paddingBorder = BorderFactory.createEmptyBorder(10,10,10,10);
-        textArea.setBorder(paddingBorder);
-        textArea.setPreferredSize(new Dimension(400, 400));
-        
-        // top JPanel for text
-        JPanel top = new JPanel();
-        top.add(textArea, BorderLayout.CENTER);
-        top.setPreferredSize(new Dimension(400, 400));
-        
-        // okButton
-        JButton okButton = new JButton("OK");
-        okButton.setSize(new Dimension(40, 40));
-        okButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		try {
-					FileOutputStream out = new FileOutputStream(new File("lib", "installationRead.txt").getAbsolutePath());
-					byte[] data = {};
-					out.write(data);
-					out.close();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-        		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        		frame.dispose();
-        	}
-        });
-        
-        // bottom JPanel for button
-        JPanel bottom = new JPanel();
-        bottom.add(okButton);
-        
-        // add frame and calculate size
-        frame.setBackground( new Color(0,0,0));
-        frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE);
-        frame.add(top, BorderLayout.NORTH);
-        frame.add(bottom, BorderLayout.SOUTH);
-        frame.setLocationRelativeTo(null);
-        frame.pack();
-        frame.setResizable(false);
-        
-        // center the frame
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation(dim.width/2 - frame.getSize().width/2, dim.height/2 - frame.getSize().height/2);
-        
-        // make frame visible
-        frame.setVisible(true);		
+		
+		// set fixed size
+		jtp.setSize(new Dimension(800, 10));
+	    jtp.setPreferredSize(new Dimension(800, jtp.getPreferredSize().height));
+	    jtp.setBorder(
+    		javax.swing.BorderFactory.createCompoundBorder(
+    			javax.swing.BorderFactory.createTitledBorder(
+	    	         null, null,
+	    	         javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+	    	         javax.swing.border.TitledBorder.DEFAULT_POSITION,
+	    	         new java.awt.Font("Verdana", 1, 11)
+	    	      ),
+	    	      javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3)
+	    	)
+    	);
+	    JCheckBox checkbox = new JCheckBox("Don't show again");
+		Object[] parameters = {jtp, checkbox};
+
+		String message = "The pdf will be appended to the end of the project.";
+		JOptionPane.showMessageDialog(null, parameters);
+
+		// check if checkbox clicked
+		if(checkbox.isSelected()) {
+			// selected, disable this message in the future
+			u.updateDisplayInstruction("readInstructions", "y");
+		} else {
+			// not selected
+		}
 	}
 	
 	public static void main(String[] args) {

@@ -27,9 +27,7 @@ public class Call {
 		//workspace.setAlwaysOnTop(true);
 		Hotkey h=new Hotkey();
 		
-		if(!new File("lib", "installationRead.txt").exists()) {
-			new InstallationInstructions();
-		}
+		new InstallationInstructions();
 	}
 
 }

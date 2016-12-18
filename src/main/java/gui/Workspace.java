@@ -1301,7 +1301,7 @@ WindowStateListener {
 		
 		mntmInstallationInstructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new InstallationInstructions();
+				new InstallationInstructions(false);
 			}
 		});
 		
