@@ -23,8 +23,6 @@ import com.iitb.lokavidya.core.utils.GeneralUtils;
 import com.iitb.lokavidya.core.utils.SoundCapture;
 import com.sun.star.setup.CopyFileAction;
 
-import Dialogs.SaveRecordingVideo;
-
 public class ProjectOperations {
 	static SoundCapture currentSound = null;
 	static VideoCapture currentMuteVideo=null;
@@ -299,7 +297,7 @@ public class ProjectOperations {
 					}
 					
 					Video screenVideo = new Video(globalVideo.getVideoURL(), project.getProjectURL());
-//				
+
 					// get the duration of the output video
 					SegmentService.addVideo(project, s ,screenVideo);
 					FFMPEGWrapper ffmpegwrapper = new FFMPEGWrapper();
