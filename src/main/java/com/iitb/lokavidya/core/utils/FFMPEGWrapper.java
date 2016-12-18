@@ -146,7 +146,24 @@ public class FFMPEGWrapper {
 		if (video.exists())
 			video.delete();
 		
-		String resolution = "scale=-1:" + Call.workspace.videoHeight + ",pad=" + Call.workspace.getWidth() + ":ih:(ow-iw)/2";
+//		String resolution = "scale=-1:" + Call.workspace.videoHeight + ",pad=" + Call.workspace.getWidth() + ":ih:(ow-iw)/2";
+		String resolution=
+				"[in]scale=iw*min("+
+				Integer.toString(Call.workspace.videoWidth)+"/iw\\,"+
+				Integer.toString(Call.workspace.videoHeight)+
+				"/ih):ih*min("+Integer.toString(Call.workspace.videoWidth)+
+				"/iw\\,"+
+				Integer.toString(Call.workspace.videoHeight)+
+				"/ih)[scaled]; [scaled]pad="+
+				Integer.toString(Call.workspace.videoWidth)+
+				":"+Integer.toString(Call.workspace.videoHeight)+
+				":("+Integer.toString(Call.workspace.videoWidth)+
+				"-iw*min("+Integer.toString(Call.workspace.videoWidth)+
+				"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+
+				"/ih))/2:("+Integer.toString(Call.workspace.videoHeight)+
+				"-ih*min("+Integer.toString(Call.workspace.videoWidth)+
+				"/iw\\,"+Integer.toString(Call.workspace.videoHeight)+
+				"/ih))/2[padded]; [padded]setsar=1:1[out]";
 		String[] command = new String[] {
 				pathExecutable, "-loop", "1", "-i", imgPath,"-i",audioPath,"-c:v", encoding, "-c:a",
 						"aac", "-strict","experimental","-pix_fmt", "yuv420p", "-vf", resolution, "-b:a", "192k","-shortest",videoPath };
@@ -171,6 +188,7 @@ public class FFMPEGWrapper {
 		// (assuming all videos have been encoded with libx264 encoding)
 		// ffmpeg -i output1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts inter1.ts
 		// ffmpeg -i output2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts inter2.ts
+		// ...
 		ArrayList<String> interFilesList = new ArrayList<String>();
 		for(int i=0; i<videoPaths.size(); i++) {
 			String interFile = new File(path, "inter" + i + ".ts").getAbsolutePath();
