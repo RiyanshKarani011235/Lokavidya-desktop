@@ -219,9 +219,6 @@ public class ProjectOperations {
 
 	public static void stopSlideRecording(Project project) {
 		
-//		System.out.println("stopSlideRecording called");
-//		SaveRecordingVideo.run(project);
-		
 		List<Segment> slist = project.getOrderedSegmentList();
 		for(Segment s:slist){
 			if(s.getSlide()!=null) {
@@ -237,12 +234,6 @@ public class ProjectOperations {
 					File tempVideo = new File(project.getProjectURL(), RandomStringUtils.randomAlphanumeric(10).toLowerCase()+".flv");
 					System.out.println("tempVideo : Saving at : " + tempVideo.getAbsolutePath());
 					DecodeAndSaveAudioVideo.stitch(originalTempVideo.getAbsolutePath(),s.getSlide().getTempAudioURL(),tempVideo.getAbsolutePath());
-			
-					// converting flv file to mp4 file
-					// new implementation - ironstein - 23-11-16
-//					globalVideo = new Video(project.getProjectURL());
-//					System.out.println("globalVideo : url : " + globalVideo.getVideoURL());
-//					DecodeAndSaveAudioVideo.convertFormat(tempVideo.getAbsolutePath(),globalVideo.getVideoURL());
 					
 					// converting tempVideo, and saving it to globalVideo.getVideoURL() path
 					// ffmpeg -i inputVideo.flv -c:v libxvid -c:a aac -strict experimental outputVideo.mp4
@@ -256,6 +247,7 @@ public class ProjectOperations {
 							wrapper.pathExecutable, 
 							"-i", 
 							tempVideo.getAbsolutePath(),
+							"-y",
 							"-c:v",
 							"libx264",
 							"-c:a",
@@ -269,6 +261,7 @@ public class ProjectOperations {
 							wrapper.pathExecutable, 
 							"-i", 
 							tempVideo.getAbsolutePath(),
+							"-y",
 							"-c:v",
 							"libxvid",
 							"-c:a",
@@ -280,11 +273,13 @@ public class ProjectOperations {
 					}
 					GeneralUtils.runProcess(command);
 					
+					// convert globalVideo encoding to libx264
 					if(!System.getProperty("os.name").toLowerCase().contains("mac")) {
 						command = new String[] {
 								wrapper.pathExecutable, 
 								"-i", 
 								globalVideo.getVideoURL(),
+								"-y",
 								"-c:v",
 								"libx264",
 								"-c:a",
@@ -310,9 +305,11 @@ public class ProjectOperations {
 				
 					s.getSlide().setTempAudioToNull();
 					s.getSlide().setTempMuteVideoToNull();
+					System.out.println("StopSlideRecording : slide");
 				}
 			}
 		}
+		System.out.println("StopSlideRecording : final");
 		Call.workspace.endOperation();
 	}
 }

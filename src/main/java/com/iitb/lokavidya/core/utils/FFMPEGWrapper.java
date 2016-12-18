@@ -162,52 +162,23 @@ public class FFMPEGWrapper {
 			System.out.println(videoPaths.get(i));
 		}
 		
-		String path = "";
-		// re-encode the videos to libx264 codec
-		// ffmpeg -i input1.mp4 -c:v libx264 -preset slow -crf 22 -c:a copy output1.mp4
-		// ffmpeg -i input2.mp4 -c:v libx264 -preset slow -crf 22 -c:a copy output2.mp4
-		ArrayList<String> libx264_filenames = new ArrayList<String>();
-		for(int i=0; i<videoPaths.size(); i++) {
-			String videoPath = videoPaths.get(i);
-			String videoFileName = FilenameUtils.getBaseName(videoPath);
-			String extension = FilenameUtils.getExtension(videoPath);
-			
-			path = videoPath.substring(0, videoPath.length() - videoFileName.length() - extension.length() - 1);
-			String libx264_fileName = new File(path, videoFileName + "_264.mp4").getAbsolutePath();
-			
-			String[] command = new String[] {
-				pathExecutable,
-				"-y",
-				"-i",
-				videoPath,
-				"-c:v",
-				"libx264",
-				"-preset",
-				"slow",
-				"-crf",
-				"22",
-				"-c:a",
-				"copy",
-				libx264_fileName
-			};
-			for(int j=0; j<command.length; j++) {
-				System.out.print(command[j] + " ");
-			}
-			GeneralUtils.runProcess(command);
-			libx264_filenames.add(libx264_fileName);
-		}
+		String videoPath = videoPaths.get(0);
+		String videoFileName = FilenameUtils.removeExtension(new File(videoPath).getName());
+		String extension = FilenameUtils.getExtension(videoPath);
+		String path = videoPath.substring(0, videoPath.length() - videoFileName.length() - extension.length() - 1);
 		
 		// convert the libx264 encoded videos to intermediate mpg videos
+		// (assuming all videos have been encoded with libx264 encoding)
 		// ffmpeg -i output1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts inter1.ts
 		// ffmpeg -i output2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts inter2.ts
 		ArrayList<String> interFilesList = new ArrayList<String>();
-		for(int i=0; i<libx264_filenames.size(); i++) {
+		for(int i=0; i<videoPaths.size(); i++) {
 			String interFile = new File(path, "inter" + i + ".ts").getAbsolutePath();
 			String[] command = new String[] {
 					pathExecutable,
 					"-y",
 					"-i",
-					libx264_filenames.get(i),
+					videoPaths.get(i),
 					"-c",
 					"copy",
 					"-bsf:v",
@@ -273,48 +244,11 @@ public class FFMPEGWrapper {
 		GeneralUtils.runProcess(command);
 		
 		// delete intermediate files
-		for(int i=0; i<libx264_filenames.size(); i++) {
-			new File(libx264_filenames.get(i)).delete();
-		}
-		
 		for(int i=0; i<interFilesList.size(); i++) {
 			new File(interFilesList.get(i)).delete();
 		}
 		
-		// Writing files to order.
-//		System.out.println(listfilePath);
-//		System.out.println(finalPath);
-//		File file = new File(listfilePath);
-//		if (file.exists())
-//			file.delete();
-//		File orderVideoFile = new File(listfilePath);
-//		try {
-//			FileOutputStream out = new FileOutputStream(orderVideoFile);
-//			for (int i = 0; i < videoPaths.size(); i++) {
-//				String data = "file '" + videoPaths.get(i) + "'\n\r";
-//				out.write(data.getBytes());
-//				System.out.println(data);
-//			}
-//			out.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//		
-//		String[] command = new String[] { pathExecutable, "-f", "concat","-safe","0",
-//				"-i", orderVideoFile.getAbsolutePath(), "-codec", "copy",
-//				finalPath };
-//		file = new File(finalPath);
-//		System.out.println(orderVideoFile.getAbsolutePath());
-//		if (file.exists())
-//			file.delete();
-//		String cmd = pathExecutable;// +" -help";
-//		String cmdext = " -f concat -i " + orderVideoFile.getAbsolutePath()
-//				+ " -codec copy  " + finalPath + "";
-//		cmd += cmdext;
-//		GeneralUtils.runProcess(command);
 		System.out.println("stitch done.. ");
-
 		return true;
 
 	}

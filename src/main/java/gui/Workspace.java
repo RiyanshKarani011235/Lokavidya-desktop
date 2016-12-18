@@ -1027,12 +1027,12 @@ WindowStateListener {
 			}
 			playing=false;
 			ProjectOperations.stopAudioRecording(currentProject);
-
-			ProjectService.persist(currentProject);
-			Call.workspace.removeTimeline();
-			Call.workspace.populateTimeline();
-			WorkspaceUIHelper.disableStop();
 		}
+
+		ProjectService.persist(currentProject);
+		Call.workspace.removeTimeline();
+		Call.workspace.populateTimeline();
+		WorkspaceUIHelper.disableStop();
 
 	}
 	
