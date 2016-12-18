@@ -21,7 +21,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SwingWorker;
-
+import javax.swing.WindowConstants;
 
 import org.apache.commons.io.FileUtils;
 
@@ -170,6 +170,7 @@ public class CreateProject {
 		
 		ProgressDialog() {
 
+			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 			innerPanel.setVisible(true);
 	        System.out.println("Progress dialog created");
 	        task = new Task();
@@ -275,14 +276,12 @@ public void directoryChooser()
 				{
 
 					File f=new File(textField_2.getText(),textField_1.getText());
-					if(f.exists())
-					{
+					if(f.exists()) {
 						String str=textField_1.getText()+" already exisits at this location.";
 						JOptionPane.showMessageDialog(null, str, "", JOptionPane.INFORMATION_MESSAGE);
-					}
-					else
+					} else {
 						dialog = new ProgressDialog();
-					
+					}
 				System.out.println("Ended CreateProject");	
 				
 				
@@ -330,8 +329,7 @@ public void directoryChooser()
 				    	Call.workspace.cancelled=true;
 				    }
 				});
-		// disalbe cancel button - ironstein - 22-11-16
-//				frame.getContentPane().add(btnNewButton_3);
-		
+		// disable cancel button - ironstein - 22-11-16
+//		frame.getContentPane().add(btnNewButton_3);
 	}
 }

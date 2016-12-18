@@ -21,6 +21,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -101,7 +102,7 @@ public class OpenAndroidExp {
 
 		 }
 		ProgressDialog() {
-
+			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 			innerPanel.setVisible(true);
 	        System.out.println("Progress dialog created");
 	        task = new Task();

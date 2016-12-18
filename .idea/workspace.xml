@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/s8xsh7vehj.flv" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" afterPath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" />
-    </list>
+    <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="" />
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/classes/" />
@@ -34,37 +29,17 @@
               <caret line="1035" column="0" selection-start-line="1035" selection-start-column="0" selection-end-line="1035" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7476#7477#0" expanded="false" />
-                <element signature="e#14110#14111#0" expanded="false" />
-                <element signature="e#14162#14163#0" expanded="false" />
-                <element signature="e#14202#14203#0" expanded="false" />
-                <element signature="e#14245#14246#0" expanded="false" />
-                <element signature="e#35721#35722#0" expanded="false" />
-                <element signature="e#35746#35747#0" expanded="false" />
-                <element signature="e#36168#36169#0" expanded="false" />
-                <element signature="e#36202#36203#0" expanded="false" />
-                <element signature="e#36545#36546#0" expanded="false" />
-                <element signature="e#36579#36580#0" expanded="false" />
-                <element signature="e#38572#38573#0" expanded="false" />
-                <element signature="e#38601#38602#0" expanded="false" />
-                <element signature="e#67982#67983#0" expanded="false" />
-                <element signature="e#68011#68012#0" expanded="false" />
-                <element signature="e#68068#68069#0" expanded="false" />
-                <element signature="e#68097#68098#0" expanded="false" />
-                <element signature="e#68502#68503#0" expanded="false" />
-                <element signature="e#68529#68530#0" expanded="false" />
-                <element signature="e#73103#73116#0" expanded="false" />
-                <marker date="1482040298000" expanded="false" signature="7444:7449" ph=" { " />
-                <marker date="1482040298000" expanded="false" signature="38801:38808" ph=" { " />
-                <marker date="1482040298000" expanded="false" signature="38831:38836" ph=" }" />
-                <marker date="1482040298000" expanded="false" signature="40420:40427" ph=" { " />
-                <marker date="1482040298000" expanded="false" signature="40458:40463" ph=" }" />
-                <marker date="1482040298000" expanded="false" signature="46630:46636" ph=" { " />
-                <marker date="1482040298000" expanded="false" signature="46655:46660" ph=" }" />
-                <marker date="1482040298000" expanded="false" signature="47995:48002" ph=" { " />
-                <marker date="1482040298000" expanded="false" signature="48021:48026" ph=" }" />
-                <marker date="1482040298000" expanded="false" signature="59490:59497" ph=" { " />
-                <marker date="1482040298000" expanded="false" signature="59536:59541" ph=" }" />
+                <marker date="1482045611000" expanded="false" signature="7444:7449" ph=" { " />
+                <marker date="1482045611000" expanded="false" signature="38801:38808" ph=" { " />
+                <marker date="1482045611000" expanded="false" signature="38831:38836" ph=" }" />
+                <marker date="1482045611000" expanded="false" signature="40420:40427" ph=" { " />
+                <marker date="1482045611000" expanded="false" signature="40458:40463" ph=" }" />
+                <marker date="1482045611000" expanded="false" signature="46630:46636" ph=" { " />
+                <marker date="1482045611000" expanded="false" signature="46655:46660" ph=" }" />
+                <marker date="1482045611000" expanded="false" signature="47995:48002" ph=" { " />
+                <marker date="1482045611000" expanded="false" signature="48021:48026" ph=" }" />
+                <marker date="1482045611000" expanded="false" signature="59490:59497" ph=" { " />
+                <marker date="1482045611000" expanded="false" signature="59536:59541" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -87,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="465">
-              <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+              <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -1002,12 +977,12 @@
       <workItem from="1481274115495" duration="557000" />
       <workItem from="1481526833468" duration="3681000" />
       <workItem from="1481789824702" duration="7755000" />
-      <workItem from="1482039230848" duration="1794000" />
+      <workItem from="1482039230848" duration="1942000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18163000" />
+    <option name="totallyTimeSpent" value="18311000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
@@ -1370,7 +1345,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
-          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1461,37 +1436,17 @@
           <caret line="1035" column="0" selection-start-line="1035" selection-start-column="0" selection-end-line="1035" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7476#7477#0" expanded="false" />
-            <element signature="e#14110#14111#0" expanded="false" />
-            <element signature="e#14162#14163#0" expanded="false" />
-            <element signature="e#14202#14203#0" expanded="false" />
-            <element signature="e#14245#14246#0" expanded="false" />
-            <element signature="e#35721#35722#0" expanded="false" />
-            <element signature="e#35746#35747#0" expanded="false" />
-            <element signature="e#36168#36169#0" expanded="false" />
-            <element signature="e#36202#36203#0" expanded="false" />
-            <element signature="e#36545#36546#0" expanded="false" />
-            <element signature="e#36579#36580#0" expanded="false" />
-            <element signature="e#38572#38573#0" expanded="false" />
-            <element signature="e#38601#38602#0" expanded="false" />
-            <element signature="e#67982#67983#0" expanded="false" />
-            <element signature="e#68011#68012#0" expanded="false" />
-            <element signature="e#68068#68069#0" expanded="false" />
-            <element signature="e#68097#68098#0" expanded="false" />
-            <element signature="e#68502#68503#0" expanded="false" />
-            <element signature="e#68529#68530#0" expanded="false" />
-            <element signature="e#73103#73116#0" expanded="false" />
-            <marker date="1482040298000" expanded="false" signature="7444:7449" ph=" { " />
-            <marker date="1482040298000" expanded="false" signature="38801:38808" ph=" { " />
-            <marker date="1482040298000" expanded="false" signature="38831:38836" ph=" }" />
-            <marker date="1482040298000" expanded="false" signature="40420:40427" ph=" { " />
-            <marker date="1482040298000" expanded="false" signature="40458:40463" ph=" }" />
-            <marker date="1482040298000" expanded="false" signature="46630:46636" ph=" { " />
-            <marker date="1482040298000" expanded="false" signature="46655:46660" ph=" }" />
-            <marker date="1482040298000" expanded="false" signature="47995:48002" ph=" { " />
-            <marker date="1482040298000" expanded="false" signature="48021:48026" ph=" }" />
-            <marker date="1482040298000" expanded="false" signature="59490:59497" ph=" { " />
-            <marker date="1482040298000" expanded="false" signature="59536:59541" ph=" }" />
+            <marker date="1482045611000" expanded="false" signature="7444:7449" ph=" { " />
+            <marker date="1482045611000" expanded="false" signature="38801:38808" ph=" { " />
+            <marker date="1482045611000" expanded="false" signature="38831:38836" ph=" }" />
+            <marker date="1482045611000" expanded="false" signature="40420:40427" ph=" { " />
+            <marker date="1482045611000" expanded="false" signature="40458:40463" ph=" }" />
+            <marker date="1482045611000" expanded="false" signature="46630:46636" ph=" { " />
+            <marker date="1482045611000" expanded="false" signature="46655:46660" ph=" }" />
+            <marker date="1482045611000" expanded="false" signature="47995:48002" ph=" { " />
+            <marker date="1482045611000" expanded="false" signature="48021:48026" ph=" }" />
+            <marker date="1482045611000" expanded="false" signature="59490:59497" ph=" { " />
+            <marker date="1482045611000" expanded="false" signature="59536:59541" ph=" }" />
           </folding>
         </state>
       </provider>

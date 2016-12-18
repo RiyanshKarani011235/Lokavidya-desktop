@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -99,26 +101,39 @@ public class OpenVideo {
 			
 		}
 
-		 }
-		ProgressDialog() {
-
-			innerPanel.setVisible(true);
-	        System.out.println("Progress dialog created");
-	        task = new Task();
-	        task.addPropertyChangeListener(this);
-	        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-	        task.execute();
+	}
+	ProgressDialog() {
+		
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		JCheckBox checkbox = new JCheckBox("Don't show again");
+		String message = "The video will be appended to the end of the project";
+		Object[] parameters = {message, checkbox};
+		JOptionPane.showMessageDialog(null, parameters);
+		
+		// check if checkbox was selected
+		if(checkbox.isSelected()) {
+			// selected, don't show this dialog again
+		} else {
+			// not selected
 		}
-		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		
+		innerPanel.setVisible(true);
+        System.out.println("Progress dialog created");
+        task = new Task();
+        task.addPropertyChangeListener(this);
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        task.execute();
+	}
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 	public static void copyFile( File from, File to ){
 		 //  Files.delete(to.toPath());
@@ -212,7 +227,6 @@ public class OpenVideo {
 				if(new File(textField_2.getText()).isDirectory() || textField_2.getText() == "" || !(textField_2.getText().endsWith(".mp4")||textField_2.getText().endsWith(".MP4"))) {
 					JOptionPane.showMessageDialog(null, "Enter the video location", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "The imported video will be appended to the end of the proejct");
 					dialog=new ProgressDialog();
 				}
 			}

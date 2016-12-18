@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.sql.Timestamp;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 
 import Dialogs.CreateProject.ProgressDialog.Task;
 
@@ -122,22 +124,25 @@ public class OpenPresentation {
 	
 	ProgressDialog() {
 
-
-		innerPanel.setVisible(true);
-
-        System.out.println("Progress dialog created");
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(this, "The presentation you are importing will be\nappended to the end of the project.\nAre you sure you want to continue?", "Confirm import", dialogButton);
-        if(dialogResult == 0) {
-          System.out.println("Yes option");
-          task = new Task();
-          task.addPropertyChangeListener(this);
-          frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-          task.execute();
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        JCheckBox checkbox = new JCheckBox("Don't show again");
+		String message = "The presentation will be appended to the end of the project.";
+		Object[] parameters = {message, checkbox};
+        JOptionPane.showMessageDialog(this, parameters);
+        
+        // check if checkbox clicked
+        if(checkbox.isSelected()) {
+        	// selected, disable this message in the future
         } else {
-          System.out.println("No Option");
-          frame.dispose();
-        } 
+        	// not selected
+        }
+        
+        innerPanel.setVisible(true);
+        System.out.println("Yes option");
+        task = new Task();
+        task.addPropertyChangeListener(this);
+        frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        task.execute();
 	}
 }
 	

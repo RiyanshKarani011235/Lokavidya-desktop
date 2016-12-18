@@ -37,6 +37,7 @@ import javax.swing.SpringLayout;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -168,6 +169,7 @@ public class OpenProject {
 
 		 }
 		ProgressDialog() {
+			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 			innerPanel.setVisible(true);
 	        System.out.println("Progress dialog created");
 	        task = new Task();

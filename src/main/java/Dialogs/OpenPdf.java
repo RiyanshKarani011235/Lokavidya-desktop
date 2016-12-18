@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 
 import com.iitb.lokavidya.core.data.Segment;
 import com.iitb.lokavidya.core.data.Segment.SegmentType;
@@ -122,7 +124,19 @@ public class OpenPdf {
 
 		 }
 		ProgressDialog() {
-
+			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+			JCheckBox checkbox = new JCheckBox("Don't show again");
+			String message = "The pdf will be appended to the end of the project.";
+			Object[] parameters = {message, checkbox};
+	        JOptionPane.showMessageDialog(this, parameters);
+	        
+	        // check if checkbox clicked
+	        if(checkbox.isSelected()) {
+	        	// selected, disable this message in the future
+	        } else {
+	        	// not selected
+	        }
+			
 			innerPanel.setVisible(true);
 	        System.out.println("Progress dialog created");
 	        task = new Task();
@@ -233,7 +247,6 @@ public class OpenPdf {
 				if(new File(textField_2.getText()).isDirectory() || textField_2.getText() == "" || !textField_2.getText().endsWith(".pdf")) {
 					JOptionPane.showMessageDialog(null, "Enter the pdf location", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "The imported video will be appended to the end of the proejct");
 					dialog=new ProgressDialog();
 				}
 			}
@@ -241,7 +254,6 @@ public class OpenPdf {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		frame.getContentPane().add(btnNewButton_1);
-		
 	}
 
 }

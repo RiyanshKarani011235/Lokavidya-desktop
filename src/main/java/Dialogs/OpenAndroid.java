@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 
 import com.iitb.lokavidya.core.operations.ProjectService;
 import com.iitb.lokavidya.core.utils.GeneralUtils;
@@ -131,9 +133,20 @@ public class OpenAndroid {
 			
 		}
 		ProgressDialog() {
-
-			innerPanel.setVisible(true);
+			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+			JCheckBox checkbox = new JCheckBox("Don't show again");
+			String message = "The project will be appended to the end of the project.";
+			Object[] parameters = {message, checkbox};
+	        JOptionPane.showMessageDialog(this, parameters);
+	        
+	        // check if checkbox clicked
+	        if(checkbox.isSelected()) {
+	        	// selected, disable this message in the future
+	        } else {
+	        	// not selected
+	        }
 			
+			innerPanel.setVisible(true);
 	        System.out.println("Progress dialog created");
 	        task = new Task();
 	        task.addPropertyChangeListener(this);
@@ -230,7 +243,6 @@ public class OpenAndroid {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		// disable cancel button - ironstein - 22-11-16
 //		frame.getContentPane().add(btnCancel);
-		
 	}
 
 }
