@@ -441,9 +441,14 @@ public class GeneralUtils {
 		Runtime run = Runtime.getRuntime();
 		Process pr;
 		try {
+			// print command
 			System.out.println("running process");
+			System.out.print(" ************* runProcess : running command : ");
+			for (String s : command) {
+				System.out.print(s + " ");
+			} System.out.println("\n***************************************************");
+			
 			pr = run.exec(command);
-			System.out.println("pasdfasdf-----------------------------------------");
 			StreamGobbler errorGobbler = new StreamGobbler(pr.getErrorStream(),
 					"ERROR");
 			StreamGobbler outputGobbler = new StreamGobbler(

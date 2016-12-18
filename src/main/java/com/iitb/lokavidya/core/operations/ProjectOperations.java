@@ -218,6 +218,7 @@ public class ProjectOperations {
 	}
 
 	public static void stopSlideRecording(Project project) {
+		
 		List<Segment> slist = project.getOrderedSegmentList();
 		for(Segment s:slist){
 			if(s.getSlide()!=null) {
@@ -233,53 +234,65 @@ public class ProjectOperations {
 					File tempVideo = new File(project.getProjectURL(), RandomStringUtils.randomAlphanumeric(10).toLowerCase()+".flv");
 					System.out.println("tempVideo : Saving at : " + tempVideo.getAbsolutePath());
 					DecodeAndSaveAudioVideo.stitch(originalTempVideo.getAbsolutePath(),s.getSlide().getTempAudioURL(),tempVideo.getAbsolutePath());
-
-					// converting flv to mp4
+					
+					// converting tempVideo, and saving it to globalVideo.getVideoURL() path
+					// ffmpeg -i inputVideo.flv -c:v libxvid -c:a aac -strict experimental outputVideo.mp4
 					globalVideo = new Video(project.getProjectURL());
 					System.out.println("converting " + tempVideo.getAbsolutePath() + " to " + globalVideo.getVideoURL());
 					FFMPEGWrapper wrapper = new FFMPEGWrapper();
-
-					// use libxvid encoding for windows and mac
-					String encodingToUse = "libxvid";
-					if(System.getProperty("os.name").toLowerCase().contains("mac")) {
-						encodingToUse = "libx264";
-					}
 					
-					String[] command = new String[] {
+					String[] command;
+					if(System.getProperty("os.name").toLowerCase().contains("mac")) {
+						command = new String[] {
 							wrapper.pathExecutable, 
 							"-i", 
 							tempVideo.getAbsolutePath(),
+							"-y",
 							"-c:v",
-							encodingToUse,
+							"libx264",
 							"-c:a",
 							"aac",
 							"-strict",
 							"experimental",
 							globalVideo.getVideoURL()
-							
-					};
+						};
+					} else {
+						command = new String[] {
+							wrapper.pathExecutable, 
+							"-i", 
+							tempVideo.getAbsolutePath(),
+							"-y",
+							"-c:v",
+							"libxvid",
+							"-c:a",
+							"aac",
+							"-strict",
+							"experimental",
+							globalVideo.getVideoURL()
+						};
+					}
 					GeneralUtils.runProcess(command);
-
-					// change the codec of the mp4 video to libx264
-					if(encodingToUse.equals("libxvid")) {
-							command = new String[] {
+					
+					// convert globalVideo encoding to libx264
+					if(!System.getProperty("os.name").toLowerCase().contains("mac")) {
+						command = new String[] {
 								wrapper.pathExecutable, 
 								"-i", 
-								tempVideo.getAbsolutePath(),
+								globalVideo.getVideoURL(),
+								"-y",
 								"-c:v",
-								wrapper.encoding,
+								"libx264",
 								"-c:a",
 								"aac",
 								"-strict",
 								"experimental",
 								globalVideo.getVideoURL()
-								
-						};
+							};
 						GeneralUtils.runProcess(command);
 					}
 					
 					Video screenVideo = new Video(globalVideo.getVideoURL(), project.getProjectURL());
-//				
+
 					// get the duration of the output video
 					SegmentService.addVideo(project, s ,screenVideo);
 					FFMPEGWrapper ffmpegwrapper = new FFMPEGWrapper();
@@ -292,9 +305,11 @@ public class ProjectOperations {
 				
 					s.getSlide().setTempAudioToNull();
 					s.getSlide().setTempMuteVideoToNull();
+					System.out.println("StopSlideRecording : slide");
 				}
 			}
 		}
+		System.out.println("StopSlideRecording : final");
 		Call.workspace.endOperation();
 	}
 }
