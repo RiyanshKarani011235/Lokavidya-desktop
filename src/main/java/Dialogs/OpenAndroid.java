@@ -26,6 +26,7 @@ import javax.swing.WindowConstants;
 
 import com.iitb.lokavidya.core.operations.ProjectService;
 import com.iitb.lokavidya.core.utils.GeneralUtils;
+import com.iitb.lokavidya.core.utils.UserPreferences;
 
 import gui.Call;
 
@@ -133,18 +134,23 @@ public class OpenAndroid {
 			
 		}
 		ProgressDialog() {
+			
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-			JCheckBox checkbox = new JCheckBox("Don't show again");
-			String message = "The project will be appended to the end of the project.";
-			Object[] parameters = {message, checkbox};
-	        JOptionPane.showMessageDialog(this, parameters);
-	        
-	        // check if checkbox clicked
-	        if(checkbox.isSelected()) {
-	        	// selected, disable this message in the future
-	        } else {
-	        	// not selected
-	        }
+			UserPreferences u = new UserPreferences();
+			if (u.getDisplayInstruction("openAndroidProject").equals("n")) {
+				JCheckBox checkbox = new JCheckBox("Don't show again");
+				String message = "The project will be appended to the end of the project.";
+				Object[] parameters = {message, checkbox};
+		        JOptionPane.showMessageDialog(this, parameters);
+		        
+		        // check if checkbox clicked
+		        if(checkbox.isSelected()) {
+		        	// selected, disable this message in the future
+		        	u.updateDisplayInstruction("openAndroidProject", "y");
+		        } else {
+		        	// not selected
+		        }
+			}
 			
 			innerPanel.setVisible(true);
 	        System.out.println("Progress dialog created");

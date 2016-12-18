@@ -1,0 +1,25 @@
+
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil_0.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/img_1.jpg
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil_1.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/img_2.jpg
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil.0.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/comrljietc.odp
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil.1.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/n8elxbkq26.odp
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil_0.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/img_1.jpg
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil_1.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/img_2.jpg
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil.0.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/wxkc7b1yyc.odp
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil.1.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/ewne5qu2sy.odp
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil_0.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/img_1.jpg
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil_1.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/img_2.jpg
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil.0.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/qkljx2thk5.odp
+Acquired mutex lock for /Users/ironstein/Documents/demo101/tamil.1.pptx
+Released mutex lock for /Users/ironstein/Documents/demo101/yqkjlo4q4n.odp

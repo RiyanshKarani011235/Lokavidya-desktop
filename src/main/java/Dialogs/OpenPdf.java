@@ -28,6 +28,7 @@ import com.iitb.lokavidya.core.data.Segment;
 import com.iitb.lokavidya.core.data.Segment.SegmentType;
 import com.iitb.lokavidya.core.operations.ProjectService;
 import com.iitb.lokavidya.core.utils.GeneralUtils;
+import com.iitb.lokavidya.core.utils.UserPreferences;
 
 import Dialogs.OpenVideo.ProgressDialog;
 import Dialogs.OpenVideo.ProgressDialog.Task;
@@ -124,18 +125,24 @@ public class OpenPdf {
 
 		 }
 		ProgressDialog() {
+			
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-			JCheckBox checkbox = new JCheckBox("Don't show again");
-			String message = "The pdf will be appended to the end of the project.";
-			Object[] parameters = {message, checkbox};
-	        JOptionPane.showMessageDialog(this, parameters);
-	        
-	        // check if checkbox clicked
-	        if(checkbox.isSelected()) {
-	        	// selected, disable this message in the future
-	        } else {
-	        	// not selected
-	        }
+			UserPreferences u = new UserPreferences();
+			if (u.getDisplayInstruction("openPdf").equals("n")) {
+				frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+				JCheckBox checkbox = new JCheckBox("Don't show again");
+				String message = "The pdf will be appended to the end of the project.";
+				Object[] parameters = {message, checkbox};
+		        JOptionPane.showMessageDialog(this, parameters);
+		        
+		        // check if checkbox clicked
+		        if(checkbox.isSelected()) {
+		        	// selected, disable this message in the future
+		        	u.updateDisplayInstruction("openPdf", "y");
+		        } else {
+		        	// not selected
+		        }
+			}
 			
 			innerPanel.setVisible(true);
 	        System.out.println("Progress dialog created");

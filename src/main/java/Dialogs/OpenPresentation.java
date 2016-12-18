@@ -34,6 +34,7 @@ import Dialogs.CreateProject.ProgressDialog.Task;
 import com.iitb.lokavidya.core.data.Segment;
 import com.iitb.lokavidya.core.operations.ProjectService;
 import com.iitb.lokavidya.core.utils.GeneralUtils;
+import com.iitb.lokavidya.core.utils.UserPreferences;
 
 
 
@@ -125,17 +126,22 @@ public class OpenPresentation {
 	ProgressDialog() {
 
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        JCheckBox checkbox = new JCheckBox("Don't show again");
-		String message = "The presentation will be appended to the end of the project.";
-		Object[] parameters = {message, checkbox};
-        JOptionPane.showMessageDialog(this, parameters);
-        
-        // check if checkbox clicked
-        if(checkbox.isSelected()) {
-        	// selected, disable this message in the future
-        } else {
-        	// not selected
-        }
+		UserPreferences u = new UserPreferences();
+		if (u.getDisplayInstruction("openPresentation").equals("n")) {
+			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+			JCheckBox checkbox = new JCheckBox("Don't show again");
+			String message = "The presentation will be appended to the end of the project.";
+			Object[] parameters = {message, checkbox};
+	        JOptionPane.showMessageDialog(this, parameters);
+	        
+	        // check if checkbox clicked
+	        if(checkbox.isSelected()) {
+	        	// selected, disable this message in the future
+	        	u.updateDisplayInstruction("openPresentation", "y");
+	        } else {
+	        	// not selected
+	        }
+		}
         
         innerPanel.setVisible(true);
         System.out.println("Yes option");
