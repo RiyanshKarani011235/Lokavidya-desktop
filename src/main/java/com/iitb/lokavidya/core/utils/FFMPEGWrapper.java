@@ -383,6 +383,8 @@ public class FFMPEGWrapper {
 	
 	public boolean standardiseResolutionMaintainAspectRatioAndProcessVideo(String videoURL,String outputVideoURL) {
 		
+		boolean cont = true;
+		
 		// extract audio from the input video file
 		String tmpPath = System.getProperty("java.io.tmpdir");
 		System.out.println("Video Path: " + videoURL);
@@ -395,7 +397,12 @@ public class FFMPEGWrapper {
 			file.delete();
 
 		String[] commandAudio = new String[] { pathExecutable, "-i", videoURL, tempAudioOutput };
-		GeneralUtils.runProcess(commandAudio);
+		
+		// check if process completed successfully
+		cont = GeneralUtils.runProcess(commandAudio);
+		if(!cont) {
+			return false;
+		}
 		
 		// extract video from the input video file
 		String tempVideoOutput = new File(tmpPath, "tempVideo.mp4")
@@ -405,12 +412,12 @@ public class FFMPEGWrapper {
 			file.delete();
 		String[] commandVideo = new String[] { pathExecutable, "-i", videoURL,
 				"-vcodec", "copy", "-an", tempVideoOutput };
-		GeneralUtils.runProcess(commandVideo);
 		
-		// delete existing video
-		file = new File(videoURL);
-		if (file.exists())
-			file.delete();
+		// check if process completed successfully
+		cont = GeneralUtils.runProcess(commandVideo);
+		if(!cont) {
+			return false;
+		}
 		
 		// combine audio and video
 		// convert resolution to required size
@@ -451,9 +458,8 @@ public class FFMPEGWrapper {
 		
 		System.out.println("Video Combine part command: "
 				+ commandVideoCombine);
-		GeneralUtils.runProcess(commandVideoCombine);
-		return true;
 		
+		return GeneralUtils.runProcess(commandVideoCombine);		
 	}
 
 	public boolean standardizeFps(List<String> videoPaths) {

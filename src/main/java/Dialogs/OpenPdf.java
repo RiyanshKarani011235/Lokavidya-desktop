@@ -259,7 +259,6 @@ public class OpenPdf {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
 		frame.getContentPane().add(btnNewButton_1);
 	}
 

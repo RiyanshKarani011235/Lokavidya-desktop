@@ -26,6 +26,8 @@ import com.iitb.lokavidya.core.utils.GeneralUtils;
 
 public class Video implements Serializable {
 
+	public boolean videoValid = false;
+	
 	public Video(String videoURL,String projectURL) {
 		
 		//check constraints TODO
@@ -35,7 +37,7 @@ public class Video implements Serializable {
 		this.id= GeneralUtils.generateRandomNumber(11).intValue();
 		String videoName = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
 		this.videoURL = new File(projectURL,videoName+"."+FilenameUtils.getExtension(videoURL)).getAbsolutePath();
-		ffmpegWrapper.standardiseResolutionMaintainAspectRatioAndProcessVideo(videoURL, this.videoURL);
+		videoValid = ffmpegWrapper.standardiseResolutionMaintainAspectRatioAndProcessVideo(videoURL, this.videoURL);
 	}
 	
 	public Video (String projectURL) {
