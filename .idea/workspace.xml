@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" afterPath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Dialogs/OpenVideo.java" afterPath="$PROJECT_DIR$/src/main/java/Dialogs/OpenVideo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Xuggler/CaptureScreenToFile.java" afterPath="$PROJECT_DIR$/src/main/java/Xuggler/CaptureScreenToFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Xuggler/VideoCapture.java" afterPath="$PROJECT_DIR$/src/main/java/Xuggler/VideoCapture.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Video.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Video.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java" />
     </list>
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1000,12 +993,12 @@
       <workItem from="1481526833468" duration="3681000" />
       <workItem from="1481789824702" duration="7755000" />
       <workItem from="1482039230848" duration="2639000" />
-      <workItem from="1482129731392" duration="3243000" />
+      <workItem from="1482129731392" duration="3259000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22251000" />
+    <option name="totallyTimeSpent" value="22267000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="0" />
