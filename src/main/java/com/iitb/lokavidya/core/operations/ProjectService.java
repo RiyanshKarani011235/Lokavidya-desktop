@@ -262,11 +262,16 @@ public class ProjectService {
 	}
 
 	public static void main(String[] args) {
-		GeneralUtils.convertImageToPresentation("/home/frg/Documents/eighteen/ecezznvr5a.png",
-				"/home/frg/Desktop/abc.odp");
 
-		// System.out.println(System.getProperty("java.io.tmpdir"));
-		Project test = ProjectService.getInstance("/home/frg/Documents/seven/seven.json");
+		System.out.println(FilenameUtils.getExtension(new File("ab;asdflkj#@..#..2!@#$%^&*()?><:';/.,][{|}c",
+				"d;#;;;;...sd.efab;asdflkj#@..#..2!@#$%^&*()?><:';/.,][{|}.zip").getAbsolutePath()));
+
+		// GeneralUtils.convertImageToPresentation("/home/frg/Documents/eighteen/ecezznvr5a.png",
+		// "/home/frg/Desktop/abc.odp");
+		//
+		// // System.out.println(System.getProperty("java.io.tmpdir"));
+		// Project test =
+		// ProjectService.getInstance("/home/frg/Documents/seven/seven.json");
 
 		//
 		//
@@ -446,7 +451,6 @@ public class ProjectService {
 		if (file.exists())
 			file.delete();
 
-		// Convert all JPG files to PNG files - ironstein - 22-11-16
 		String imagesFolderPath = new File(new File(androidProjectPath,
 				Paths.get(new File(projectPath).getAbsolutePath()).getFileName().toString()), "images")
 						.getAbsolutePath();
@@ -477,22 +481,36 @@ public class ProjectService {
 		GeneralUtils.createZip(projectTmp.getAbsolutePath(), androidProjectPath);
 	}
 
-	public static void importAndroidProject(String projectjsonpath, String zipPath) {
+	public static boolean importAndroidProject(String projectjsonpath, String zipPath) {
 
-		if (!new File(zipPath).exists() || !FilenameUtils.getName(zipPath).endsWith(".zip")) {
-			JOptionPane.showMessageDialog(null,
-					"invalid project path : " + zipPath + "\nandroid project should be a valid zip file");
-			return;
-		} else {
-			System.out.println("zip file : " + zipPath);
-		}
 		Project project = getInstance(projectjsonpath);
 		String tmpPath = System.getProperty("java.io.tmpdir");
+		System.out.println("extracting zip");
 		GeneralUtils.extractZip(zipPath, tmpPath);
+		System.out.println("extracting zip complete");
 		String projTmpDir = FilenameUtils.getBaseName(zipPath);
 		File projectTmp = new File(tmpPath, projTmpDir);
 		File projectTmpImage = new File(projectTmp.getAbsolutePath(), "images");
 		File projectTmpAudio = new File(projectTmp.getAbsolutePath(), "audio");
+
+		// check if the zip file consists of a valid project
+
+		// check if the audio and image folders exist
+		if ((!projectTmpImage.exists()) || (!projectTmpAudio.exists())) {
+			return false;
+		}
+		
+		System.out.println("projectTmpAudio.length() : " + projectTmpAudio.length());
+
+		// checking the number of files in both the folders is the same, and not zero
+		if ((!(projectTmpAudio.listFiles().length == projectTmpAudio.listFiles().length))
+				|| (projectTmpAudio.listFiles().length == 0)) {
+			return false;
+		}
+
+		List<File> audioFilesList = Arrays.asList(projectTmpAudio.listFiles());
+
+		// comparator for comparing two files
 		Comparator<File> fc = new Comparator<File>() {
 			public int compare(File o1, File o2) {
 				int i1, i2;
@@ -511,42 +529,36 @@ public class ProjectService {
 					return -1;
 			}
 		};
+		
+		// sort the filenames in increasing order
+		Collections.sort(audioFilesList, fc);
 
-		if (projectTmpAudio.listFiles().length == projectTmpAudio.listFiles().length) {
-			int i = 0;
-			String audioExtension = FilenameUtils.getExtension(projectTmpAudio.listFiles()[0].getAbsolutePath());
-			String imageExtension = FilenameUtils.getExtension(projectTmpImage.listFiles()[0].getAbsolutePath());
-			List<File> audioFilesList = Arrays.asList(projectTmpAudio.listFiles());
-			Collections.sort(audioFilesList, fc);
-			for (File f : audioFilesList) {
-				String name = FilenameUtils.getBaseName(f.getAbsolutePath()).split("\\.")[0];
-				String index = FilenameUtils.getBaseName(f.getAbsolutePath()).split("\\.")[1];
+		// check the names of the files should be same in both the folders
+		for (File f : audioFilesList) {
+			String name = FilenameUtils.getBaseName(f.getAbsolutePath()).split("\\.")[0];
+			String index = FilenameUtils.getBaseName(f.getAbsolutePath()).split("\\.")[1];
 
-				// changed on 20-10-16 by ironstein
-				// use both jpg and png files to create a new project
+			File imageFilePng = new File(projectTmpImage, name + "." + index + ".png");
+			File imageFileJpg = new File(projectTmpImage, name + "." + index + ".jpg");
+			if (imageFilePng.exists()) {
+				Segment segment = new Segment(imageFilePng.getAbsolutePath(), f.getAbsolutePath(),
+						project.getProjectURL());
+				System.out.println("URL of the presentation:" + segment.getSlide().getPptURL());
+				project.addSegment(segment);
 
-				File imageFilePng = new File(projectTmpImage, name + "." + index + ".png");
-				File imageFileJpg = new File(projectTmpImage, name + "." + index + ".jpg");
-				if (imageFilePng.exists()) {
-					Segment segment = new Segment(imageFilePng.getAbsolutePath(), f.getAbsolutePath(),
-							project.getProjectURL());
-					System.out.println("URL of the presentation:" + segment.getSlide().getPptURL());
-					project.addSegment(segment);
-
-				} else if (imageFileJpg.exists()) {
-					Segment segment = new Segment(imageFileJpg.getAbsolutePath(), f.getAbsolutePath(),
-							project.getProjectURL());
-					System.out.println("URL of the presentation:" + segment.getSlide().getPptURL());
-					project.addSegment(segment);
-				}
-				if (Call.workspace.cancelled)
-					break;
+			} else if (imageFileJpg.exists()) {
+				Segment segment = new Segment(imageFileJpg.getAbsolutePath(), f.getAbsolutePath(),
+						project.getProjectURL());
+				System.out.println("URL of the presentation:" + segment.getSlide().getPptURL());
+				project.addSegment(segment);
+			} else {
+				return false;
 			}
 		}
+
 		GeneralUtils.stopOfficeInstance();
-		if (Call.workspace.cancelled)
-			return;
 		ProjectService.persist(project);
+		return true;
 	}
 
 	public static void importPresentation(String presentationURL, Project project, OpenPresentation window) {
@@ -665,72 +677,70 @@ public class ProjectService {
 		try {
 			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
 			int size = 0;
-			
+
 			// create tmpImages directory
-		    File tmpImagesDirectory = new File("resources", "tmpImages");
-		    try {
-		    	tmpImagesDirectory.mkdir();
-		    } catch (SecurityException e) {
-		    	// could not create the tmpImages Directory
-		    }
-		    
-		    ArrayList<String> outputFilenamesList = new ArrayList<String>();
-		    
-		    // check if directory is created
-		    if(tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory()) {
-		    	// convert PDF to individual images
+			File tmpImagesDirectory = new File("resources", "tmpImages");
+			try {
+				tmpImagesDirectory.mkdir();
+			} catch (SecurityException e) {
+				// could not create the tmpImages Directory
+			}
+
+			ArrayList<String> outputFilenamesList = new ArrayList<String>();
+
+			// check if directory is created
+			if (tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory()) {
+				// convert PDF to individual images
 				PDDocument document;
 				document = PDDocument.loadNonSeq(new File(pdfUrl), null);
 				List<PDPage> pdPages = document.getDocumentCatalog().getAllPages();
 				int page = 0;
-				for (PDPage pdPage : pdPages) { 
-				    ++page;
-				    BufferedImage bim = pdPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
-				    String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(), new File(pdfUrl).getName() + "-" + page + ".jpg").getAbsolutePath();
-				    ImageIOUtil.writeImage(bim, outputFileName, 300);
-				    outputFilenamesList.add(outputFileName);
+				for (PDPage pdPage : pdPages) {
+					++page;
+					BufferedImage bim = pdPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
+					String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(),
+							new File(pdfUrl).getName() + "-" + page + ".jpg").getAbsolutePath();
+					ImageIOUtil.writeImage(bim, outputFileName, 300);
+					outputFilenamesList.add(outputFileName);
 				}
 				document.close();
-		    } else {
-		    	// could not create tmpImages directory
-		    	JOptionPane.showMessageDialog(
-	    			null,
-	    			"Could not access the directory : " + tmpImagesDirectory.getAbsolutePath() + "\n" + 
-			    			"make sure that you have read and write access to this directory", 
-			    	"", 
-			    	JOptionPane.INFORMATION_MESSAGE
-				);
-		    }
-		    
-		    ArrayList<Segment> newSegments = new ArrayList<Segment>();
-		    for(String outputFilename : outputFilenamesList) {
-		    	Segment segment = new Segment(project.getProjectURL(), false);
-		    	Slide slide = new Slide(outputFilename, project.getProjectURL(), false);
-		    	new_time = System.currentTimeMillis();
-		    	bw.write("\nTime taken for image creation is: " + (new_time - current_time));
-		    	current_time = new_time;
-		    	segment.setSlide(slide);
-		    	newSegments.add(segment);
-		    	project.addSegment(segment);
-		    	ProjectService.persist(project);
-		    	new_time = System.currentTimeMillis();
+			} else {
+				// could not create tmpImages directory
+				JOptionPane.showMessageDialog(null,
+						"Could not access the directory : " + tmpImagesDirectory.getAbsolutePath() + "\n"
+								+ "make sure that you have read and write access to this directory",
+						"", JOptionPane.INFORMATION_MESSAGE);
+			}
+
+			ArrayList<Segment> newSegments = new ArrayList<Segment>();
+			for (String outputFilename : outputFilenamesList) {
+				Segment segment = new Segment(project.getProjectURL(), false);
+				Slide slide = new Slide(outputFilename, project.getProjectURL(), false);
+				new_time = System.currentTimeMillis();
+				bw.write("\nTime taken for image creation is: " + (new_time - current_time));
+				current_time = new_time;
+				segment.setSlide(slide);
+				newSegments.add(segment);
+				project.addSegment(segment);
+				ProjectService.persist(project);
+				new_time = System.currentTimeMillis();
 				bw.write("\nTime taken for persistance is: " + (new_time - current_time));
 				current_time = new_time;
-		    }
+			}
 
-//		    GeneralUtils.stopOfficeInstance();
-//			String pdfName = FilenameUtils.getBaseName(pdfUrl);
-//			int i = 0;
-//			for (Segment s : newSegments) {
-//				String pptPath = new File(tempPath,
-//						pdfName + "." + i + ".ppt").getAbsolutePath();
-//
-//				System.out.println("pptPath : " + pptPath);
-//				SegmentService.addPresentation(project, s, pptPath);
-////				value = (int) (70 + (double) (i + 1) * (divider));
-////				window.setprogressvalue(value);
-//				i++;
-//			}
+			// GeneralUtils.stopOfficeInstance();
+			// String pdfName = FilenameUtils.getBaseName(pdfUrl);
+			// int i = 0;
+			// for (Segment s : newSegments) {
+			// String pptPath = new File(tempPath,
+			// pdfName + "." + i + ".ppt").getAbsolutePath();
+			//
+			// System.out.println("pptPath : " + pptPath);
+			// SegmentService.addPresentation(project, s, pptPath);
+			//// value = (int) (70 + (double) (i + 1) * (divider));
+			//// window.setprogressvalue(value);
+			// i++;
+			// }
 
 			new_time = System.currentTimeMillis();
 			bw.write("\nTime taken for updating segments: " + (new_time - current_time));

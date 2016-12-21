@@ -11,7 +11,6 @@ import java.util.List;
 import org.apache.commons.lang.RandomStringUtils;
 
 import Xuggler.DecodeAndSaveAudioVideo;
-import Xuggler.VidCapture;
 import Xuggler.VideoCapture;
 
 import com.iitb.lokavidya.core.data.Audio;

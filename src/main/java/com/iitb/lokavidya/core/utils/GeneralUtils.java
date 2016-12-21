@@ -114,11 +114,11 @@ public class GeneralUtils {
 			}
 		}
 	}
-	public static void stopOfficeInstance()
-	{
+	public static void stopOfficeInstance() {
+		String openOfficePath=GeneralUtils.findOooPath();
 		if(System.getProperty("os.name").contains("Windows"))
 		{
-			String[] command={"taskkill","/F","/IM","soffice.bin"};
+			String[] command={"taskkill","/F","/IM", openOfficePath};
 			GeneralUtils.runProcess(command);
 		}
 	}

@@ -424,13 +424,15 @@ WindowStateListener {
 		clean();
 		populateProject();
 		GeneralUtils.stopOfficeInstance();
+		System.out.println("office instance stopped");
 	}
 	
 	public void populateProject() {
-		System.out.println("Calling populate");
+		System.out.println("Populating Expolorer");
 		populateExplorer();
+		System.out.println("Populating Timeline");
 		populateTimeline();
-
+		System.out.println("Done Populating Project");
 	}
 
 	public void populateExplorer() {

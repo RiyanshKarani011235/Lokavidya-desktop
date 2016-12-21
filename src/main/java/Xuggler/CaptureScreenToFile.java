@@ -96,13 +96,15 @@ public class CaptureScreenToFile {
 
 		outContainer = IContainer.make();
 
-		int retval = outContainer.open(outFile, IContainer.Type.WRITE, null);
-		if (retval < 0)
+		int retVal = outContainer.open(outFile, IContainer.Type.WRITE, null);
+		if (retVal < 0) {
 			throw new RuntimeException("could not open output file");
+		}
 
 		ICodec codec = ICodec.guessEncodingCodec(null, null, outFile, null, ICodec.Type.CODEC_TYPE_VIDEO);
-		if (codec == null)
+		if (codec == null) {
 			throw new RuntimeException("could not guess a codec");
+		}
 
 		outStream = outContainer.addNewStream(codec);
 		outStreamCoder = outStream.getStreamCoder();
@@ -128,11 +130,11 @@ public class CaptureScreenToFile {
 		outStreamCoder.setFrameRate(frameRate);
 		outStreamCoder.setTimeBase(IRational.make(frameRate.getDenominator(), frameRate.getNumerator()));
 
-		retval = outStreamCoder.open(null, null);
-		if (retval < 0)
+		retVal = outStreamCoder.open(null, null);
+		if (retVal < 0)
 			throw new RuntimeException("could not open input decoder");
-		retval = outContainer.writeHeader();
-		if (retval < 0)
+		retVal = outContainer.writeHeader();
+		if (retVal < 0)
 			throw new RuntimeException("could not write file header");
 	}
 
