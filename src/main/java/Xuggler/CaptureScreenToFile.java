@@ -253,12 +253,8 @@ public class CaptureScreenToFile {
 			int newShotHeight;
 			int newShotWidth;
 			
-			System.out.println("hShot : " + hShot);
-			System.out.println("wShot : " + wShot);
-			
 			if((hShot > hVideo) || (wShot > wVideo)) {
 				// scale the image down
-				System.out.println("Scaling down");
 				if((hShot > hVideo) && (wShot <= wVideo)) {
 					// scale down the height
 					newShotHeight = hVideo;
@@ -271,12 +267,10 @@ public class CaptureScreenToFile {
 					// scale down both
 					if((int) Math.ceil(hVideo * wShot / hShot) > wVideo) {
 						// the shot width should be the same as window width
-						System.out.println("00000 1 00000");
 						newShotWidth = wVideo;
 						newShotHeight = (int) Math.ceil(wVideo * hShot / wShot);
 					} else {
 						// the shot height should be the same as window height
-						System.out.println("00000 2 00000");
 						newShotHeight = hVideo;
 						newShotWidth = (int) Math.ceil(hVideo * wShot / hShot);
 					}
@@ -285,34 +279,15 @@ public class CaptureScreenToFile {
 				// scale the image up
 				if(((int) Math.ceil(hVideo * wShot / hShot)) > wVideo) {
 					// scale height to the maximum
-					System.out.println("scaling up image height to maximum");
 					newShotHeight = hVideo;
 					newShotWidth = (int) Math.ceil(hVideo * wShot / hShot);
 				} else {
 					// scale width to maximum
-					System.out.println("Scaling up image width to maximum");
 					newShotWidth = wVideo;
 					newShotHeight = (int) Math.ceil(wVideo * hShot / wShot);
 				}
 			}
 			
-			System.out.println("scaled image width : " + newShotWidth);
-			System.out.println("Scaled image height : " + newShotHeight);
-
-
-//			int h, neww, w, newh;
-//			h = rawShot.getHeight();
-//			w = rawShot.getWidth();
-//			newh = Call.workspace.videoHeight;
-//			do {
-//				neww = (int) Math.ceil(w * newh / h);
-//				if (neww > Call.workspace.videoWidth) {
-//					newh -= 5;
-//				} else {
-//					System.out.println("Encoded image");
-//					break;
-//				}
-//			} while (newh > 0);
 			Image scaledShot = rawShot.getScaledInstance(newShotWidth, newShotHeight, Image.SCALE_SMOOTH);
 
 			videoShot = new BufferedImage(Call.workspace.videoWidth, Call.workspace.videoHeight,

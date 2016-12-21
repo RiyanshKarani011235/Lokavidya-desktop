@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/jxacfgwgel.flv" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Xuggler/CaptureScreenToFile.java" afterPath="$PROJECT_DIR$/src/main/java/Xuggler/CaptureScreenToFile.java" />
     </list>
@@ -109,8 +110,8 @@
       <file leaf-file-name="CaptureScreenToFile.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Xuggler/CaptureScreenToFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="320" column="54" selection-start-line="320" selection-start-column="54" selection-end-line="320" selection-end-column="54" />
+            <state relative-caret-position="225">
+              <caret line="303" column="12" selection-start-line="303" selection-start-column="12" selection-end-line="303" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2011#2012#0" expanded="true" />
@@ -1003,12 +1004,12 @@
       <workItem from="1481526833468" duration="3681000" />
       <workItem from="1481789824702" duration="7755000" />
       <workItem from="1482039230848" duration="2639000" />
-      <workItem from="1482129731392" duration="11306000" />
+      <workItem from="1482129731392" duration="11492000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30314000" />
+    <option name="totallyTimeSpent" value="30500000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="0" />
@@ -1514,8 +1515,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Xuggler/CaptureScreenToFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="320" column="54" selection-start-line="320" selection-start-column="54" selection-end-line="320" selection-end-column="54" />
+        <state relative-caret-position="225">
+          <caret line="303" column="12" selection-start-line="303" selection-start-column="12" selection-end-line="303" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2011#2012#0" expanded="true" />
