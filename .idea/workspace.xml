@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java" afterPath="$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" />
     </list>
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="81">
-              <caret line="218" column="34" selection-start-line="218" selection-start-column="34" selection-end-line="218" selection-end-column="34" />
+              <caret line="220" column="34" selection-start-line="220" selection-start-column="34" selection-end-line="220" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -127,9 +128,14 @@
       <file leaf-file-name="CreateProject.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="219" column="41" selection-start-line="219" selection-start-column="41" selection-end-line="219" selection-end-column="41" />
-              <folding />
+            <state relative-caret-position="-87">
+              <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+              <folding>
+                <element signature="e#5050#5051#0" expanded="true" />
+                <element signature="e#5069#5070#0" expanded="true" />
+                <element signature="e#10465#10466#0" expanded="true" />
+                <element signature="e#10507#10508#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -171,7 +177,6 @@
         <option value="$PROJECT_DIR$/src/main/java/Xuggler/DecodeAndSaveAudioVideo.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenProject.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenVideo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java" />
         <option value="$PROJECT_DIR$/lib/bootstrapconnector.jar!/ooo/connector/BootstrapSocketConnector.class" />
         <option value="$PROJECT_DIR$/src/main/java/libreoffice/LibreConvert.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java" />
@@ -189,6 +194,7 @@
         <option value="$PROJECT_DIR$/src/main/java/Xuggler/CaptureScreenToFile.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/StopSlideRecording.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Segment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java" />
       </list>
     </option>
   </component>
@@ -1010,16 +1016,16 @@
       <workItem from="1481526833468" duration="3681000" />
       <workItem from="1481789824702" duration="7755000" />
       <workItem from="1482039230848" duration="2639000" />
-      <workItem from="1482129731392" duration="14019000" />
+      <workItem from="1482129731392" duration="14411000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33027000" />
+    <option name="totallyTimeSpent" value="33419000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1034,7 +1040,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.275" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32737276" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32737276" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1432,7 +1438,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
-          <caret line="218" column="34" selection-start-line="218" selection-start-column="34" selection-end-line="218" selection-end-column="34" />
+          <caret line="220" column="34" selection-start-line="220" selection-start-column="34" selection-end-line="220" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1494,9 +1500,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="219" column="41" selection-start-line="219" selection-start-column="41" selection-end-line="219" selection-end-column="41" />
-          <folding />
+        <state relative-caret-position="-87">
+          <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+          <folding>
+            <element signature="e#5050#5051#0" expanded="true" />
+            <element signature="e#5069#5070#0" expanded="true" />
+            <element signature="e#10465#10466#0" expanded="true" />
+            <element signature="e#10507#10508#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

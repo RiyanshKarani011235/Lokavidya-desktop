@@ -252,7 +252,6 @@ public class CreateProject {
 					JOptionPane.showMessageDialog(null, "Enter the project location", "",
 							JOptionPane.INFORMATION_MESSAGE);
 				} else {
-
 					File f = new File(textField_2.getText(), textField_1.getText());
 					if (f.exists()) {
 						String str = textField_1.getText() + " already exisits at this location.";

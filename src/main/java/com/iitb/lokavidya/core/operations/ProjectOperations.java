@@ -239,6 +239,7 @@ public class ProjectOperations {
 					globalVideo = new Video(project.getProjectURL());
 					System.out.println("converting " + tempVideo.getAbsolutePath() + " to " + globalVideo.getVideoURL());
 					FFMPEGWrapper wrapper = new FFMPEGWrapper();
+					String tmpVideoPath = new File(System.getProperty("java.io.tmpdir"), "tempVideoBeforeSaving.mp4").getAbsolutePath();
 					
 					String[] command;
 					if(System.getProperty("os.name").toLowerCase().contains("mac")) {
@@ -267,7 +268,7 @@ public class ProjectOperations {
 							"aac",
 							"-strict",
 							"experimental",
-							globalVideo.getVideoURL()
+							tmpVideoPath
 						};
 					}
 					GeneralUtils.runProcess(command);
@@ -277,18 +278,22 @@ public class ProjectOperations {
 						command = new String[] {
 								wrapper.pathExecutable, 
 								"-i", 
-								globalVideo.getVideoURL(),
+								tmpVideoPath,
 								"-y",
 								"-c:v",
 								"libx264",
+								"-preset",
+								"slow",
+								"-crf",
+								"22",
 								"-c:a",
-								"aac",
-								"-strict",
-								"experimental",
+								"copy",
 								globalVideo.getVideoURL()
 							};
 						GeneralUtils.runProcess(command);
 					}
+					
+					new File(tmpVideoPath).delete();
 					
 					Video screenVideo = new Video(globalVideo.getVideoURL(), project.getProjectURL());
 
