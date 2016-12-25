@@ -173,34 +173,10 @@ public class GeneralUtils {
 	public static boolean convertImageToPresentation(String imgPath,String pptPath)
 	{
 		System.out.println("Converting Image To Presentation");
-		File file = new File("errorlog.txt");
 		String params[]={"java","-jar","resources/createppt.jar",pptPath,imgPath};
-        runJar(params);
+		runProcess(params);
         System.out.println("Complete");
         return true;
-	}
-
-
-	private static void runJar(String[] params) {
-		File file = new File("errorlog.txt");
-		ProcessBuilder pb = new ProcessBuilder( params);
-        pb.redirectOutput(file);
-        Process process;
-		try {
-			process = pb.start();
-			InputStream stderr=process.getInputStream();
-	        InputStreamReader isr = new InputStreamReader(stderr);
-	        BufferedReader br = new BufferedReader(isr);
-	        String line = null;
-	        while ((line = br.readLine()) != null) {
-			     System.out.println(line);
-			     process.waitFor();
-			      System.out.println("Waiting ...");
-			   }
-		} catch (java.io.IOException | InterruptedException e2) {
-			
-			e2.printStackTrace();
-		}
 	}
 	
 	public static File search(File dir, String file) {

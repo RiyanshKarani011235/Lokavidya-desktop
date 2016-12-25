@@ -242,58 +242,74 @@ public class ProjectOperations {
 					String tmpVideoPath = new File(System.getProperty("java.io.tmpdir"), "tempVideoBeforeSaving.mp4").getAbsolutePath();
 					
 					String[] command;
-					if(System.getProperty("os.name").toLowerCase().contains("mac")) {
-						command = new String[] {
-							wrapper.pathExecutable, 
-							"-i", 
-							tempVideo.getAbsolutePath(),
-							"-y",
-							"-c:v",
-							"libx264",
-							"-c:a",
-							"aac",
-							"-strict",
-							"experimental",
-							globalVideo.getVideoURL()
-						};
-					} else {
-						command = new String[] {
-							wrapper.pathExecutable, 
-							"-i", 
-							tempVideo.getAbsolutePath(),
-							"-y",
-							"-c:v",
-							"libxvid",
-							"-c:a",
-							"aac",
-							"-strict",
-							"experimental",
-							tmpVideoPath
-						};
-					}
+					
+					command = new String[] {
+						wrapper.pathExecutable, 
+						"-i", 
+						tempVideo.getAbsolutePath(),
+						"-y",
+						"-c:v",
+						wrapper.encoding,
+						"-c:a",
+						"aac",
+						"-strict",
+						"experimental",
+						globalVideo.getVideoURL()
+					};
 					GeneralUtils.runProcess(command);
+							
+//					if(System.getProperty("os.name").toLowerCase().contains("mac")) {
+//						command = new String[] {
+//							wrapper.pathExecutable, 
+//							"-i", 
+//							tempVideo.getAbsolutePath(),
+//							"-y",
+//							"-c:v",
+//							"libx264",
+//							"-c:a",
+//							"aac",
+//							"-strict",
+//							"experimental",
+//							globalVideo.getVideoURL()
+//						};
+//					} else {
+//						command = new String[] {
+//							wrapper.pathExecutable, 
+//							"-i", 
+//							tempVideo.getAbsolutePath(),
+//							"-y",
+//							"-c:v",
+//							"libxvid",
+//							"-c:a",
+//							"aac",
+//							"-strict",
+//							"experimental",
+//							globalVideo.getVideoURL()
+//						};
+//					}
+//					GeneralUtils.runProcess(command);
+//					
+//					// convert globalVideo encoding to libx264
+//					if(!System.getProperty("os.name").toLowerCase().contains("mac")) {
+//						command = new String[] {
+//								wrapper.pathExecutable, 
+//								"-i", 
+//								tmpVideoPath,
+//								"-y",
+//								"-c:v",
+//								"libx264",
+//								"-preset",
+//								"slow",
+//								"-crf",
+//								"22",
+//								"-c:a",
+//								"copy",
+//								globalVideo.getVideoURL()
+//							};
+//						GeneralUtils.runProcess(command);
+//					}
 					
-					// convert globalVideo encoding to libx264
-					if(!System.getProperty("os.name").toLowerCase().contains("mac")) {
-						command = new String[] {
-								wrapper.pathExecutable, 
-								"-i", 
-								tmpVideoPath,
-								"-y",
-								"-c:v",
-								"libx264",
-								"-preset",
-								"slow",
-								"-crf",
-								"22",
-								"-c:a",
-								"copy",
-								globalVideo.getVideoURL()
-							};
-						GeneralUtils.runProcess(command);
-					}
-					
-					new File(tmpVideoPath).delete();
+//					new File(tmpVideoPath).delete();
 					
 					Video screenVideo = new Video(globalVideo.getVideoURL(), project.getProjectURL());
 

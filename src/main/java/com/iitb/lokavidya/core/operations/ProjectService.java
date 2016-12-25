@@ -163,20 +163,22 @@ public class ProjectService {
 
 				if (audio != null) {
 					audioURL = audio.getAudioURL();
-				}
-
-				// checking audio file
-				if (!isFileExist(audioURL)) {
-					return null;
+					// checking audio file
+					if (!isFileExist(audioURL)) {
+						System.out.println("audio file not found : " + audioURL);
+						return null;
+					}
 				}
 
 				// checking image file
 				if (!isFileExist(imageURL)) {
+					System.out.println("image file not found : " + imageURL);
 					return null;
 				}
 
 				// checking presentation file
 				if (!isFileExist(presentationURL)) {
+					System.out.println("presentation not found : " + presentationURL);
 					return null;
 				}
 

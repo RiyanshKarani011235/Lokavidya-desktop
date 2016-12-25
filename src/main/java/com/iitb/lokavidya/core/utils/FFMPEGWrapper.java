@@ -76,7 +76,7 @@ public class FFMPEGWrapper {
 		pathExecutable = new File(new File(new File("lib").getAbsolutePath(), "ffmpeg").getAbsolutePath(), "bin")
 				.getAbsolutePath();
 		pathExecutableffprobe = pathExecutable;
-		encoding = "libx264";
+		encoding = "libxvid";
 
 		String osPathString;
 
@@ -164,94 +164,222 @@ public class FFMPEGWrapper {
 
 	public boolean stitchVideo(List<String> videoPaths, String listfilePath, String finalPath)
 			throws IOException, InterruptedException {
-
-		boolean cont = true;
 		
 		System.out.println("its starting");
-		for (int i = 0; i < videoPaths.size(); i++) {
+		for(int i=0; i<videoPaths.size(); i++) {
 			System.out.println(videoPaths.get(i));
 		}
-
-		String videoPath = videoPaths.get(0);
-		String videoFileName = FilenameUtils.removeExtension(new File(videoPath).getName());
-		String extension = FilenameUtils.getExtension(videoPath);
-		String path = videoPath.substring(0, videoPath.length() - videoFileName.length() - extension.length() - 1);
-
-		// convert the libx264 encoded videos to intermediate mpg videos
-		// (assuming all videos have been encoded with libx264 encoding)
-		// ffmpeg -i output1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts
-		// inter1.ts
-		// ffmpeg -i output2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts
-		// inter2.ts
-		// ...
-		ArrayList<String> interFilesList = new ArrayList<String>();
-		for (int i = 0; i < videoPaths.size(); i++) {
-			String interFile = new File(path, "inter" + i + ".ts").getAbsolutePath();
-			String[] command = new String[] { pathExecutable, "-y", "-i", videoPaths.get(i), "-c", "copy", "-bsf:v",
-					"h264_mp4toannexb", "-f", "mpegts", interFile };
-			for (int j = 0; j < command.length; j++) {
+		
+		String path = "";
+		// re-encode the videos to libx264 codec
+		// ffmpeg -i input1.mp4 -c:v libx264 -preset slow -crf 22 -c:a copy output1.mp4
+		// ffmpeg -i input2.mp4 -c:v libx264 -preset slow -crf 22 -c:a copy output2.mp4
+		ArrayList<String> libx264_filenames = new ArrayList<String>();
+		for(int i=0; i<videoPaths.size(); i++) {
+			String videoPath = videoPaths.get(i);
+			String videoFileName = FilenameUtils.getBaseName(videoPath);
+			String extension = FilenameUtils.getExtension(videoPath);
+			
+			path = videoPath.substring(0, videoPath.length() - videoFileName.length() - extension.length() - 1);
+			String libx264_fileName = new File(path, videoFileName + "_264.mp4").getAbsolutePath();
+			
+			String[] command = new String[] {
+				pathExecutable,
+				"-y",
+				"-i",
+				videoPath,
+				"-c:v",
+				"libx264",
+				"-preset",
+				"slow",
+				"-crf",
+				"22",
+				"-c:a",
+				"copy",
+				libx264_fileName
+			};
+			for(int j=0; j<command.length; j++) {
 				System.out.print(command[j] + " ");
 			}
-			cont = GeneralUtils.runProcess(command);
-			if(!cont) {
-				return false;
+			GeneralUtils.runProcess(command);
+			libx264_filenames.add(libx264_fileName);
+		}
+		
+		// convert the libx264 encoded videos to intermediate mpg videos
+		// ffmpeg -i output1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts inter1.ts
+		// ffmpeg -i output2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts inter2.ts
+		ArrayList<String> interFilesList = new ArrayList<String>();
+		for(int i=0; i<libx264_filenames.size(); i++) {
+			String interFile = new File(path, "inter" + i + ".ts").getAbsolutePath();
+			String[] command = new String[] {
+					pathExecutable,
+					"-y",
+					"-i",
+					libx264_filenames.get(i),
+					"-c",
+					"copy",
+					"-bsf:v",
+					"h264_mp4toannexb",
+					"-f",
+					"mpegts",
+					interFile
+			};
+			for(int j=0; j<command.length; j++) {
+				System.out.print(command[j] + " ");
 			}
+			GeneralUtils.runProcess(command);
 			interFilesList.add(interFile);
 		}
 		
-		if(!cont) {
-			return false;
-		}
-
 		// concatenate the two videos to generate output video
-		// ffmpeg -i "concat:inter1.ts|inter2.ts" -c copy -bsf:a aac_adtstoasc
-		// output.mp4
-
+		// ffmpeg -i "concat:inter1.ts|inter2.ts" -c copy -bsf:a aac_adtstoasc output.mp4		
+		
 		String osName = System.getProperty("os.name");
 		String concatFilesString;
-		if (osName.contains("Windows")) {
+		if(osName.contains("Windows")) {
 			concatFilesString = "\"concat:";
-			for (int i = 0; i < interFilesList.size(); i++) {
+			for(int i=0; i<interFilesList.size(); i++) {
 				concatFilesString += interFilesList.get(i) + "|";
 			}
-
+			
 			String osname = System.getProperty("os.name");
-			if (osname.contains("Windows")) {
-
+			if(osname .contains("Windows")) {
+				
 			}
-			concatFilesString = concatFilesString.substring(0, concatFilesString.length() - 1);
+			concatFilesString = concatFilesString.substring(0, concatFilesString.length()-1);
 			concatFilesString += "\"";
 		} else {
 			concatFilesString = "concat:";
-			for (int i = 0; i < interFilesList.size(); i++) {
+			for(int i=0; i<interFilesList.size(); i++) {
 				concatFilesString += interFilesList.get(i) + "|";
 			}
-
+			
 			String osname = System.getProperty("os.name");
-			if (osname.contains("Windows")) {
-
+			if(osname .contains("Windows")) {
+				
 			}
-			concatFilesString = concatFilesString.substring(0, concatFilesString.length() - 1);
+			concatFilesString = concatFilesString.substring(0, concatFilesString.length()-1);
 			concatFilesString += "";
 		}
-
-		String[] command = new String[] { pathExecutable, "-y", "-i", concatFilesString, "-c:v", encoding, "-bsf:a",
-				"aac_adtstoasc", "-qscale", "1", finalPath };
-		for (int j = 0; j < command.length; j++) {
+		
+		String[] command = new String[] {
+				pathExecutable,
+				"-y",
+				"-i",
+				concatFilesString,
+				"-c:v",
+				encoding,
+				"-bsf:a",
+				"aac_adtstoasc",
+				"-qscale",
+				"1",
+				finalPath
+		};
+		for(int j=0; j<command.length; j++) {
 			System.out.print(command[j] + " ");
 		}
-		cont = GeneralUtils.runProcess(command);
-		if(!cont) {
-			return false;
-		}
-
+		GeneralUtils.runProcess(command);
+		
 		// delete intermediate files
-		for (int i = 0; i < interFilesList.size(); i++) {
+		for(int i=0; i<libx264_filenames.size(); i++) {
+			new File(libx264_filenames.get(i)).delete();
+		}
+		
+		for(int i=0; i<interFilesList.size(); i++) {
 			new File(interFilesList.get(i)).delete();
 		}
 
 		System.out.println("stitch done.. ");
+
 		return true;
+
+//		boolean cont = true;
+//		
+//		System.out.println("its starting");
+//		for (int i = 0; i < videoPaths.size(); i++) {
+//			System.out.println(videoPaths.get(i));
+//		}
+//
+//		String videoPath = videoPaths.get(0);
+//		String videoFileName = FilenameUtils.removeExtension(new File(videoPath).getName());
+//		String extension = FilenameUtils.getExtension(videoPath);
+//		String path = videoPath.substring(0, videoPath.length() - videoFileName.length() - extension.length() - 1);
+//
+//		// convert the libx264 encoded videos to intermediate mpg videos
+//		// (assuming all videos have been encoded with libx264 encoding)
+//		// ffmpeg -i output1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts
+//		// inter1.ts
+//		// ffmpeg -i output2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts
+//		// inter2.ts
+//		// ...
+//		ArrayList<String> interFilesList = new ArrayList<String>();
+//		for (int i = 0; i < videoPaths.size(); i++) {
+//			String interFile = new File(path, "inter" + i + ".ts").getAbsolutePath();
+//			String[] command = new String[] { pathExecutable, "-y", "-i", videoPaths.get(i), "-c", "copy", "-bsf:v",
+//					"h264_mp4toannexb", "-f", "mpegts", interFile };
+//			for (int j = 0; j < command.length; j++) {
+//				System.out.print(command[j] + " ");
+//			}
+//			cont = GeneralUtils.runProcess(command);
+//			if(!cont) {
+//				return false;
+//			}
+//			interFilesList.add(interFile);
+//		}
+//		
+//		if(!cont) {
+//			return false;
+//		}
+//
+//		// concatenate the two videos to generate output video
+//		// ffmpeg -i "concat:inter1.ts|inter2.ts" -c copy -bsf:a aac_adtstoasc
+//		// output.mp4
+//
+//		String osName = System.getProperty("os.name");
+//		String concatFilesString;
+//		if (osName.contains("Windows")) {
+//			concatFilesString = "\"concat:";
+//			for (int i = 0; i < interFilesList.size(); i++) {
+//				concatFilesString += interFilesList.get(i) + "|";
+//			}
+//
+//			String osname = System.getProperty("os.name");
+//			if (osname.contains("Windows")) {
+//
+//			}
+//			concatFilesString = concatFilesString.substring(0, concatFilesString.length() - 1);
+//			concatFilesString += "\"";
+//		} else {
+//			concatFilesString = "concat:";
+//			for (int i = 0; i < interFilesList.size(); i++) {
+//				concatFilesString += interFilesList.get(i) + "|";
+//			}
+//
+//			String osname = System.getProperty("os.name");
+//			if (osname.contains("Windows")) {
+//
+//			}
+//			concatFilesString = concatFilesString.substring(0, concatFilesString.length() - 1);
+//			concatFilesString += "";
+//		}
+//
+//		String[] command = new String[] { pathExecutable, "-y", "-i", concatFilesString, "-c:v", encoding, "-bsf:a",
+//				"aac_adtstoasc", "-qscale", "1", finalPath };
+//		for (int j = 0; j < command.length; j++) {
+//			System.out.print(command[j] + " ");
+//		}
+//		cont = GeneralUtils.runProcess(command);
+//		if(!cont) {
+//			return false;
+//		}
+//
+//		// delete intermediate files
+//		for (int i = 0; i < interFilesList.size(); i++) {
+//			new File(interFilesList.get(i)).delete();
+//		}
+//
+//		System.out.println("stitch done.. ");
+//		return true;
 
 	}
 

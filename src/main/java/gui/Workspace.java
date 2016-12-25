@@ -229,12 +229,15 @@ WindowStateListener {
 	public void endOperation()
 	{
 		ProjectService.persist(currentProject);
+		System.out.println("endOperation : persist done");
 		currentState.setChangedState(currentProject.copyOrderingSequence());
+		System.out.println("endOperation : setChangedState done");
 		executedActions.push(currentState);
 		currentState=null;
 		redoActions.clear();
 		if(!mntmUndo.isEnabled())
 			mntmUndo.setEnabled(true);
+		System.out.println("endOperation done");
 	}
 	public void cancelOperation()
 	{
@@ -396,8 +399,12 @@ WindowStateListener {
 	}
 
 	public void populateExplorerSlides() {
+		System.out.println("current Project : " + currentProject);
 		currentProject = ProjectService.getInstance(currentProject.getProjectJsonPath());
+		System.out.println("before");
+		System.out.println("current Project : " + currentProject);
 		List<Segment> slist = currentProject.getOrderedSegmentList();
+		System.out.println("after");
 		System.out.println("Retrieved ordered explorer slide list");
 		int displayIndex=0;
 		for(Segment s:slist)
@@ -436,8 +443,11 @@ WindowStateListener {
 	}
 
 	public void populateExplorer() {
+		System.out.println("populating explorer slides");
 		populateExplorerSlides();
+		System.out.println("populating explorer videos");
 		populateExplorerVideos();
+		System.out.println("populating explorer output");
 		populateExplorerOutput();
 	}
 
@@ -1285,7 +1295,7 @@ WindowStateListener {
 		mntmFormat = new JMenuItem("Video Format");
 		mnExport.add(mntmFormat);
 
-		mntmAndroidexp = new JMenuItem("Android App");
+		mntmAndroidexp = new JMenuItem("Android Project");
 		mnExport.add(mntmAndroidexp);
 		mntmAndroidexp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

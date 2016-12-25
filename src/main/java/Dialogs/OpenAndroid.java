@@ -94,23 +94,27 @@ public class OpenAndroid {
 				setProgress(10);
 				System.out.println("progress bar set to 10");
 
-				if (!ProjectService.importAndroidProject(Call.workspace.currentProject.getProjectJsonPath(), path)) {
+				boolean importedSuccessfully = ProjectService.importAndroidProject(Call.workspace.currentProject.getProjectJsonPath(), path);
+				if (!importedSuccessfully) {
 					// could not import project, because the project is corrupt, or empty
 					Call.workspace.endOperation();
 					setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 					frame.dispose();
 					JOptionPane.showMessageDialog(null, "Sorry, the project you were trying to import\ncould not be imported because it is either\n corrupt or empty");
-					return null;
 				} else {
+					System.out.println("imported successfully");
 					setProgress(80);
 					Call.workspace.repopulateProject();
+					System.out.println("repopulating project done");
 					setProgress(100);
 					Thread.sleep(1000);
 					Call.workspace.endOperation();
 					setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					System.out.println("before calling");
 					frame.dispose();
-					return null;
+					System.out.println("after calling");
 				}
+				return null;
 			}
 		}
 

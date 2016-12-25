@@ -208,12 +208,15 @@ public class Project implements Serializable {
 	}
 
 	public List<Segment> getOrderedSegmentList() {
+		System.out.println("getOrderedSegmentList : called");
 		List<Segment> segmentList = new ArrayList<Segment>();
 		System.out.println("Size of the ordering segment list" + orderingSequence.size());
 		for (Integer i : orderingSequence) {
 			segmentList.add(segments.get(i));
 			System.out.println("Inside Ordering Sequence" + i);
 		}
+		System.out.println("exited for loop, returning");
+		System.out.println(segmentList);
 		return segmentList;
 	}
 
