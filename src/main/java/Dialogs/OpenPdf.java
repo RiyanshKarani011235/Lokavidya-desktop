@@ -78,6 +78,7 @@ public class OpenPdf {
 			 	ArrayList<String> outputFilenamesList = ProjectService.importPdfGenerateImages(path, Call.workspace.currentProject, OpenPdf.this);
 	
 			 	if(Call.workspace.cancelled) {
+			 		lblNewLabel1.setText("Cancelling import");
 			 		frame.setCursor(Cursor
 							.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			 		JOptionPane.showMessageDialog(null,

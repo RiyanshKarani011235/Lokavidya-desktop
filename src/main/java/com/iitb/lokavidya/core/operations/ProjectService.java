@@ -563,45 +563,60 @@ public class ProjectService {
 		return true;
 	}
 
-	public static void importPresentation(String presentationURL, Project project, OpenPresentation window) {
-		BufferedWriter bw = null;
-		// String tempPath = System.getProperty("java.io.tmpdir");
-		try {
-			bw = new BufferedWriter(new FileWriter("timelog.txt", true));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		String tempPath = project.getProjectURL();
+	public static int importPresentationGenerateImages(String presentationURL, Project project, OpenPresentation window) {
+		// returns -1 if anything went wrong, else returns the size of the presentation
+		
 		File file = new File(presentationURL);
 		try {
-			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
-
 			int size = 0;
-			System.out.println("Calling Create presentation");
-			Future<String> res = createPresentations(presentationURL, tempPath, file, window);
-			System.out.println("Exiting Create presentation");
 			if (presentationURL.endsWith(".pptx")) {
+				
+				// generate images
+				if(!new PptxToImages(presentationURL, project.getProjectURL()).run()) {
+					return -1;
+				}
+				
 				XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(file));
-
-				new PptxToImages(presentationURL, project.getProjectURL());
 				List<XSLFSlide> slides = ppt.getSlides();
 				size = slides.size();
 				window.setprogressvalue(50);
 			} else if (presentationURL.endsWith(".ppt")) {
-				System.out.println("Entering for ppt");
 				FileInputStream out = new FileInputStream(file);
+				
+				// generate images
+				if(!new PptToImages(presentationURL, project.getProjectURL()).run()) {
+					out.close();
+					return -1;
+				}
+				
 				HSLFSlideShow ppt = new HSLFSlideShow(out);
-				System.out.println("Created ppt instance");
-				new PptToImages(presentationURL, project.getProjectURL());
-				System.out.println("Converted to Images");
 				List<HSLFSlide> slides = ppt.getSlides();
 				size = slides.size();
-				System.out.println("Size of slide is: " + size);
 				window.setprogressvalue(50);
 			}
 			// System.out.println("It created ppt");
-
+			return size;
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} return -1;
+	}
+	
+	public static void importPresentationAddPresentationsToProject(String presentationURL, Project project, OpenPresentation window, int size) {
+		
+		BufferedWriter bw = null;
+		// String tempPath = System.getProperty("java.io.tmpdir");
+		try {
+			bw = new BufferedWriter(new FileWriter("timelog.txt", true));
+			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
+			String tempPath = project.getProjectURL();
+			File file = new File(presentationURL);
+			Future<String> res = createPresentations(presentationURL, tempPath, file, window);
+			
 			// int size=slides.size();
 			List<Segment> newSegments = new ArrayList<Segment>();
 			double divider = (double) 20 / (double) size;
@@ -654,15 +669,16 @@ public class ProjectService {
 			current_time = new_time;
 			bw.write("Total time: " + (current_time - first_time));
 			bw.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
+		} catch (ExecutionException e2) {
+			e2.printStackTrace();
+		} catch (InterruptedException e3) {
+			e3.printStackTrace();
 		}
-
+		
+		
 	}
 
 	public static ArrayList<String> importPdfGenerateImages(String pdfUrl, Project project, OpenPdf window) {
