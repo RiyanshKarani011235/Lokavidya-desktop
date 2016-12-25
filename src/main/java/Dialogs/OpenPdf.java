@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
@@ -57,6 +59,7 @@ public class OpenPdf {
 		
 		
 		 public Task task;
+		 public boolean isTaskCancellable = true;
 		
 		 
 		 class Task extends SwingWorker<Void, Void> {
@@ -73,6 +76,7 @@ public class OpenPdf {
 				 	int displayIndex=Call.workspace.presentationInnerPanel.getComponentCount();
 				 	
 				 	ProjectService.importPdf(path, Call.workspace.currentProject, OpenPdf.this);
+				 	isTaskCancellable = false;
 				 	System.out.println("Returning here");
 				 	setProgress(75);
 				 	
@@ -125,6 +129,30 @@ public class OpenPdf {
 
 		 }
 		ProgressDialog() {
+			
+			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+			frame.addWindowListener(new WindowAdapter() {
+
+			    @Override
+			    public void windowClosing(WindowEvent e) {
+			    	if(isTaskCancellable) {
+			    		int confirm = JOptionPane.showOptionDialog(
+			    			null, "Are You Sure to cancel the import?", 
+				            "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+				            JOptionPane.QUESTION_MESSAGE, null, null, null);
+					        if (confirm == 0) {
+					        	if (task != null) {
+					        		System.out.println("cancelling task");
+					        		task.cancel(true);
+					        		Call.workspace.endOperation();
+									frame.dispose();
+					        	}
+					        }
+			    	} else {
+		        		JOptionPane.showMessageDialog(null, "Import cannot be cancelled at this time");
+		        	}
+			    }
+			});
 			
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 			UserPreferences u = new UserPreferences();
