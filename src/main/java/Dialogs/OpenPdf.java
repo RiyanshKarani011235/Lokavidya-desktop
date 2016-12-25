@@ -78,10 +78,13 @@ public class OpenPdf {
 			 	ArrayList<String> outputFilenamesList = ProjectService.importPdfGenerateImages(path, Call.workspace.currentProject, OpenPdf.this);
 	
 			 	if(Call.workspace.cancelled) {
+			 		frame.setCursor(Cursor
+							.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			 		JOptionPane.showMessageDialog(null,
 							"Import Cancelled",
 							"", 
 							JOptionPane.INFORMATION_MESSAGE);
+			 		frame.dispose();
 			 		return null;
 			 	}
 			 	
@@ -97,30 +100,21 @@ public class OpenPdf {
 			 	isTaskCancellable = false;
 			 	setProgress(50);
 			 	ProjectService.importPdfAddImagesToProject(Call.workspace.currentProject, OpenPdf.this, outputFilenamesList);
-			 	System.out.println("Returning here");
-			 	setProgress(75);
 			 	
-			 	if (!Call.workspace.cancelled) {
-					Call.workspace.repopulateProject();
+			 	setProgress(75);
+				Call.workspace.repopulateProject();
+				setProgress(80);
+				Call.workspace.revalidate();
+				setProgress(85);
+				Call.workspace.repaint();
+				setProgress(90);
+				Call.workspace.endOperation();
+				setProgress(100);
+				Thread.sleep(1000);
+				frame.setCursor(Cursor
+						.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				frame.dispose();
 					
-					Call.workspace.revalidate();
-					Call.workspace.repaint();
-					Call.workspace.endOperation();
-					setProgress(100);
-					Thread.sleep(1000);
-					frame.setCursor(Cursor
-							.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-					frame.dispose();
-					
-				} else {
-			 		lblNewLabel1.setText("Cancelling import");
-			 		Call.workspace.cancelOperation();
-			 		setProgress(50);
-			 		Thread.sleep(1000);
-					frame.setCursor(Cursor
-							.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-					frame.dispose();
-			 	}
 				return null;
 			}
 		 
