@@ -699,6 +699,7 @@ public class ProjectService {
 				
 				// check if import is cancelled
 				if(Call.workspace.cancelled) {
+					document.close();
 					System.out.println("cancelled");
 					return null;
 				}
