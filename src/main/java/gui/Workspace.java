@@ -440,6 +440,7 @@ WindowStateListener {
 		System.out.println("Populating Timeline");
 		populateTimeline();
 		System.out.println("Done Populating Project");
+		this.setTitle(this.path);
 	}
 
 	public void populateExplorer() {
