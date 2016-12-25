@@ -665,55 +665,63 @@ public class ProjectService {
 
 	}
 
-	public static void importPdf(String pdfUrl, Project project, OpenPdf window) {
-		BufferedWriter bw = null;
-		// String tempPath = System.getProperty("java.io.tmpdir");
+	public static ArrayList<String> importPdfGenerateImages(String pdfUrl, Project project, OpenPdf window) {
+		
 		try {
-			bw = new BufferedWriter(new FileWriter("timelog.txt", true));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		String tempPath = project.getProjectURL();
-		File file = new File(pdfUrl);
-		try {
-			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
-			int size = 0;
-
 			// create tmpImages directory
 			File tmpImagesDirectory = new File("resources", "tmpImages");
-			try {
-				tmpImagesDirectory.mkdir();
-			} catch (SecurityException e) {
-				// could not create the tmpImages Directory
-			}
+			tmpImagesDirectory.mkdir();
 
 			ArrayList<String> outputFilenamesList = new ArrayList<String>();
 
 			// check if directory is created
-			if (tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory()) {
-				// convert PDF to individual images
-				PDDocument document;
-				document = PDDocument.loadNonSeq(new File(pdfUrl), null);
-				List<PDPage> pdPages = document.getDocumentCatalog().getAllPages();
-				int page = 0;
-				for (PDPage pdPage : pdPages) {
-					++page;
-					BufferedImage bim = pdPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
-					String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(),
-							new File(pdfUrl).getName() + "-" + page + ".jpg").getAbsolutePath();
-					ImageIOUtil.writeImage(bim, outputFileName, 300);
-					outputFilenamesList.add(outputFileName);
-				}
-				document.close();
-			} else {
+			if (!(tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory())) {
 				// could not create tmpImages directory
 				JOptionPane.showMessageDialog(null,
 						"Could not access the directory : " + tmpImagesDirectory.getAbsolutePath() + "\n"
 								+ "make sure that you have read and write access to this directory",
 						"", JOptionPane.INFORMATION_MESSAGE);
+				return null;
 			}
-
+			
+			// convert PDF to individual images
+			PDDocument document;
+			document = PDDocument.loadNonSeq(new File(pdfUrl), null);
+			List<PDPage> pdPages = document.getDocumentCatalog().getAllPages();
+			int page = 0;
+			for (PDPage pdPage : pdPages) {
+				++page;
+				BufferedImage bim = pdPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
+				String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(),
+						new File(pdfUrl).getName() + "-" + page + ".jpg").getAbsolutePath();
+				ImageIOUtil.writeImage(bim, outputFileName, 300);
+				outputFilenamesList.add(outputFileName);
+				
+				// check if import is cancelled
+				if(Call.workspace.cancelled) {
+					System.out.println("cancelled");
+					return null;
+				}
+			}
+			document.close();
+			return outputFilenamesList;
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static void importPdfAddImagesToProject(Project project, OpenPdf window, ArrayList<String> outputFilenamesList) {
+		
+		BufferedWriter bw = null;
+		// String tempPath = System.getProperty("java.io.tmpdir");
+		try {
+			bw = new BufferedWriter(new FileWriter("timelog.txt", true));
+			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
+			
 			ArrayList<Segment> newSegments = new ArrayList<Segment>();
 			for (String outputFilename : outputFilenamesList) {
 				Segment segment = new Segment(project.getProjectURL(), false);
@@ -729,33 +737,17 @@ public class ProjectService {
 				bw.write("\nTime taken for persistance is: " + (new_time - current_time));
 				current_time = new_time;
 			}
-
-			// GeneralUtils.stopOfficeInstance();
-			// String pdfName = FilenameUtils.getBaseName(pdfUrl);
-			// int i = 0;
-			// for (Segment s : newSegments) {
-			// String pptPath = new File(tempPath,
-			// pdfName + "." + i + ".ppt").getAbsolutePath();
-			//
-			// System.out.println("pptPath : " + pptPath);
-			// SegmentService.addPresentation(project, s, pptPath);
-			//// value = (int) (70 + (double) (i + 1) * (divider));
-			//// window.setprogressvalue(value);
-			// i++;
-			// }
-
+			
 			new_time = System.currentTimeMillis();
 			bw.write("\nTime taken for updating segments: " + (new_time - current_time));
 			current_time = new_time;
 			bw.write("Total time: " + (current_time - first_time));
 			bw.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
+			return;
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
+			return;
 		}
 	}
 

@@ -13,6 +13,7 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -67,67 +68,80 @@ public class OpenPdf {
 			@Override
 			protected Void doInBackground() throws Exception {
 				int progress=0;
-				 setProgress(0);
-				 System.out.println("calling creation");
+				setProgress(0);
+				System.out.println("calling creation");
 				// CreateProject.projectCreationMethod();	
-				 try {
-				 	Call.workspace.startOperation();
-				 	setProgress(10);
-				 	int displayIndex=Call.workspace.presentationInnerPanel.getComponentCount();
-				 	
-				 	ProjectService.importPdf(path, Call.workspace.currentProject, OpenPdf.this);
-				 	isTaskCancellable = false;
-				 	System.out.println("Returning here");
-				 	setProgress(75);
-				 	
-				 	if (!Call.workspace.cancelled) {
-						Call.workspace.repopulateProject();
-						
-						Call.workspace.revalidate();
-						Call.workspace.repaint();
-						Call.workspace.endOperation();
-						setProgress(100);
-						Thread.sleep(1000);
-						frame.setCursor(Cursor
-								.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-						frame.dispose();
-						
-					} else {
-				 		lblNewLabel1.setText("Cancelling import");
-				 		Call.workspace.cancelOperation();
-				 		setProgress(50);
-				 		Thread.sleep(1000);
-						frame.setCursor(Cursor
-								.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-						frame.dispose();
-				 	}
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}	
-			
+			 	Call.workspace.startOperation();
+			 	setProgress(10);
+			 	int displayIndex=Call.workspace.presentationInnerPanel.getComponentCount();
+			 	
+			 	ArrayList<String> outputFilenamesList = ProjectService.importPdfGenerateImages(path, Call.workspace.currentProject, OpenPdf.this);
+	
+			 	if(Call.workspace.cancelled) {
+			 		JOptionPane.showMessageDialog(null,
+							"Import Cancelled",
+							"", 
+							JOptionPane.INFORMATION_MESSAGE);
+			 		return null;
+			 	}
+			 	
+			 	if((outputFilenamesList == null))  {
+		 			// could not generate output files
+		 			JOptionPane.showMessageDialog(null,
+						"Could not import PDF",
+						"", 
+						JOptionPane.INFORMATION_MESSAGE);
+			 		return null;
+			 	}
+			 	
+			 	isTaskCancellable = false;
+			 	setProgress(50);
+			 	ProjectService.importPdfAddImagesToProject(Call.workspace.currentProject, OpenPdf.this, outputFilenamesList);
+			 	System.out.println("Returning here");
+			 	setProgress(75);
+			 	
+			 	if (!Call.workspace.cancelled) {
+					Call.workspace.repopulateProject();
+					
+					Call.workspace.revalidate();
+					Call.workspace.repaint();
+					Call.workspace.endOperation();
+					setProgress(100);
+					Thread.sleep(1000);
+					frame.setCursor(Cursor
+							.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					frame.dispose();
+					
+				} else {
+			 		lblNewLabel1.setText("Cancelling import");
+			 		Call.workspace.cancelOperation();
+			 		setProgress(50);
+			 		Thread.sleep(1000);
+					frame.setCursor(Cursor
+							.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					frame.dispose();
+			 	}
 				return null;
 			}
 		 
 
 
-		public void propertyChange(PropertyChangeEvent evt) {
-			
-			if ("progress" == evt.getPropertyName()) {
-	            int progress = (Integer) evt.getNewValue();
-	            progressBar.setIndeterminate(false);
-	            progressBar.setValue(progress);
+			public void propertyChange(PropertyChangeEvent evt) {
+				
+				if ("progress" == evt.getPropertyName()) {
+		            int progress = (Integer) evt.getNewValue();
+		            progressBar.setIndeterminate(false);
+		            progressBar.setValue(progress);
+				}
+				
 			}
-			
+		
+		
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub	
+			}
+
 		}
-
-
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		 }
 		ProgressDialog() {
 			
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -143,9 +157,20 @@ public class OpenPdf {
 					        if (confirm == 0) {
 					        	if (task != null) {
 					        		System.out.println("cancelling task");
-					        		task.cancel(true);
-					        		Call.workspace.endOperation();
-									frame.dispose();
+					        		if(task.cancel(true)) {
+					        			Call.workspace.cancelled = true;
+						        		Call.workspace.endOperation();
+										frame.dispose();
+					        		} else {
+					        			// could not cancel
+					        			JOptionPane.showMessageDialog(
+					        				null,
+											"Could not cancel",
+											"", 
+											JOptionPane.INFORMATION_MESSAGE
+										);
+					        		}
+	
 					        	}
 					        }
 			    	} else {

@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/2oebtk9mzz.flv" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" afterPath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" afterPath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" />
     </list>
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,27 +26,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Workspace.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Workspace.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/gui/Workspace.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
               <caret line="442" column="33" selection-start-line="442" selection-start-column="33" selection-end-line="442" selection-end-column="33" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Wait.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/Wait.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="95" column="14" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
-              <folding>
-                <element signature="e#341#342#0" expanded="true" />
-                <element signature="e#373#374#0" expanded="true" />
-                <element signature="e#771#860#0" expanded="true" />
-                <element signature="e#3816#3817#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -99,8 +85,20 @@
       <file leaf-file-name="ProjectService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="180" column="77" selection-start-line="180" selection-start-column="77" selection-end-line="180" selection-end-column="77" />
+            <state relative-caret-position="624">
+              <caret line="698" column="29" selection-start-line="698" selection-start-column="29" selection-end-line="698" selection-end-column="29" />
+              <folding>
+                <element signature="e#27708#27717#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OpenPdf.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="243" column="14" selection-start-line="243" selection-start-column="14" selection-end-line="243" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -119,8 +117,8 @@
       <file leaf-file-name="CreateProject.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="111" column="53" selection-start-line="111" selection-start-column="53" selection-end-line="111" selection-end-column="53" />
+            <state relative-caret-position="2220">
+              <caret line="174" column="8" selection-start-line="174" selection-start-column="8" selection-end-line="174" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -129,11 +127,9 @@
       <file leaf-file-name="OpenAndroid.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/OpenAndroid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="105" column="36" selection-start-line="105" selection-start-column="36" selection-end-line="105" selection-end-column="36" />
-              <folding>
-                <marker date="1482694549000" expanded="true" signature="2988:3012" ph="//..." />
-              </folding>
+            <state relative-caret-position="735">
+              <caret line="109" column="36" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -181,9 +177,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenAndroid.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Project.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/Workspace.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" />
       </list>
     </option>
   </component>
@@ -1008,12 +1004,12 @@
       <workItem from="1481789824702" duration="7755000" />
       <workItem from="1482039230848" duration="2639000" />
       <workItem from="1482129731392" duration="17542000" />
-      <workItem from="1482691103957" duration="2986000" />
+      <workItem from="1482691103957" duration="3362000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39536000" />
+    <option name="totallyTimeSpent" value="39912000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1600" y="-475" width="1600" height="895" extended-state="6" />
@@ -1074,13 +1070,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="110" column="28" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/poi/PptToImages.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="975">
@@ -1389,10 +1378,10 @@
         <state relative-caret-position="555">
           <caret line="95" column="14" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
           <folding>
-            <element signature="e#341#342#0" expanded="true" />
-            <element signature="e#373#374#0" expanded="true" />
-            <element signature="e#771#860#0" expanded="true" />
-            <element signature="e#3816#3817#0" expanded="true" />
+            <element signature="e#341#342#0" expanded="false" />
+            <element signature="e#373#374#0" expanded="false" />
+            <element signature="e#771#860#0" expanded="false" />
+            <element signature="e#3816#3817#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1407,11 +1396,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/OpenAndroid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="105" column="36" selection-start-line="105" selection-start-column="36" selection-end-line="105" selection-end-column="36" />
-          <folding>
-            <marker date="1482694549000" expanded="true" signature="2988:3012" ph="//..." />
-          </folding>
+        <state relative-caret-position="735">
+          <caret line="109" column="36" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1435,14 +1422,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="180" column="77" selection-start-line="180" selection-start-column="77" selection-end-line="180" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -1461,18 +1440,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="111" column="53" selection-start-line="111" selection-start-column="53" selection-end-line="111" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gui/Workspace.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="442" column="33" selection-start-line="442" selection-start-column="33" selection-end-line="442" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="698" column="29" selection-start-line="698" selection-start-column="29" selection-end-line="698" selection-end-column="29" />
+          <folding>
+            <element signature="e#27708#27717#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2220">
+          <caret line="174" column="8" selection-start-line="174" selection-start-column="8" selection-end-line="174" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="243" column="14" selection-start-line="243" selection-start-column="14" selection-end-line="243" selection-end-column="14" />
           <folding />
         </state>
       </provider>
