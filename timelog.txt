@@ -1,7 +1,17 @@
 
 Time taken for image creation is: 2
-Time taken for persistance is: 10
-Time taken for updating segments: 0Total time: 12
+Time taken for persistance is: 11
+Time taken for image creation is: 1
+Time taken for persistance is: 18
 Time taken for image creation is: 0
-Time taken for persistance is: 24
-Time taken for updating segments: 0Total time: 24
+Time taken for persistance is: 9
+Time taken for image creation is: 1
+Time taken for persistance is: 8
+Time taken for image creation is: 0
+Time taken for persistance is: 10
+Time taken for image creation is: 1
+Time taken for persistance is: 14
+Time taken for updating segments: 0Total time: 75
+Time taken for image creation is: 1
+Time taken for persistance is: 15
+Time taken for updating segments: 0Total time: 16
