@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/poi/PdfToImages.java" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/timelog.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" afterPath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPresentation.java" afterPath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPresentation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/openOfficePath.txt" afterPath="$PROJECT_DIR$/lib/openOfficePath.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/librelog.txt" afterPath="$PROJECT_DIR$/librelog.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/userPreferences.json" afterPath="$PROJECT_DIR$/resources/userPreferences.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/poi/PptToImages.java" afterPath="$PROJECT_DIR$/src/main/java/poi/PptToImages.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/poi/PptxToImages.java" afterPath="$PROJECT_DIR$/src/main/java/poi/PptxToImages.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/poi/PresentationToImages.java" afterPath="$PROJECT_DIR$/src/main/java/poi/PresentationToImages.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/UserPreferences.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/UserPreferences.java" />
     </list>
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,25 +32,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Workspace.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gui/Workspace.java">
+      <file leaf-file-name="ProjectService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="442" column="33" selection-start-line="442" selection-start-column="33" selection-end-line="442" selection-end-column="33" />
+            <state relative-caret-position="453">
+              <caret line="607" column="4" selection-start-line="607" selection-start-column="4" selection-end-line="607" selection-end-column="4" />
+              <folding>
+                <element signature="e#23168#23177#0" expanded="true" />
+                <element signature="e#28282#28291#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeneralUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="671">
+              <caret line="229" column="25" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
+      <file leaf-file-name="CarbonProvider.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Hotkey/osx/CarbonProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="584" column="12" selection-start-line="584" selection-start-column="12" selection-end-line="584" selection-end-column="12" />
-              <folding>
-                <element signature="e#23168#23177#0" expanded="true" />
-                <element signature="e#27469#27478#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="251">
+              <caret line="110" column="25" selection-start-line="110" selection-start-column="25" selection-end-line="110" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -59,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/poi/PptxToImages.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+              <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -79,17 +89,17 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/poi/PptToImages.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="45" column="19" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
+              <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PresentationToImages.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PresentationToImages.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/poi/PresentationToImages.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+              <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -110,16 +120,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="192">
               <caret line="78" column="3" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OpenProject.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/OpenProject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="136" column="41" selection-start-line="136" selection-start-column="41" selection-end-line="136" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -177,13 +177,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectOperations.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenAndroid.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Project.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/Workspace.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenPresentation.java" />
         <option value="$PROJECT_DIR$/src/main/java/poi/PptToImages.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" />
         <option value="$PROJECT_DIR$/src/main/java/poi/PresentationToImages.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java" />
       </list>
     </option>
   </component>
@@ -1034,12 +1034,12 @@
       <workItem from="1481789824702" duration="7755000" />
       <workItem from="1482039230848" duration="2639000" />
       <workItem from="1482129731392" duration="17542000" />
-      <workItem from="1482691103957" duration="3956000" />
+      <workItem from="1482691103957" duration="4269000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40506000" />
+    <option name="totallyTimeSpent" value="40819000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1600" y="-475" width="1600" height="895" extended-state="6" />
@@ -1100,13 +1100,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/poi/PptToImages.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/FFMPEGWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3300">
@@ -1412,16 +1405,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="178" column="20" selection-start-line="178" selection-start-column="20" selection-end-line="178" selection-end-column="20" />
-          <folding>
-            <marker date="1482694536000" expanded="true" signature="4972:4976" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/OpenProject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
@@ -1473,7 +1456,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/poi/PptToImages.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="45" column="19" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -1481,7 +1464,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/poi/PptxToImages.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -1489,10 +1472,10 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="453">
-          <caret line="584" column="12" selection-start-line="584" selection-start-column="12" selection-end-line="584" selection-end-column="12" />
+          <caret line="607" column="4" selection-start-line="607" selection-start-column="4" selection-end-line="607" selection-end-column="4" />
           <folding>
             <element signature="e#23168#23177#0" expanded="true" />
-            <element signature="e#27469#27478#0" expanded="true" />
+            <element signature="e#28282#28291#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1508,7 +1491,23 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/poi/PresentationToImages.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+          <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/utils/GeneralUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="671">
+          <caret line="229" column="25" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Hotkey/osx/CarbonProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="110" column="25" selection-start-line="110" selection-start-column="25" selection-end-line="110" selection-end-column="25" />
           <folding />
         </state>
       </provider>

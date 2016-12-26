@@ -1,31 +1,7 @@
 
-Time taken for copying the ppt: 1
-Time taken for poi to seperate the prsentation is: 221
-Time taken for copying the ppt: 19
-Time taken for poi to seperate the prsentation is: 304
-Time taken for image creation is: 719
-Time taken for persistance is: 162
-Time taken for image creation is: 3
-Time taken for persistance is: 10
-Time taken for updating segments: 5616Total time: 6510
-Time taken for copying the ppt: 3
-Time taken for poi to seperate the prsentation is: 277
-Time taken for copying the ppt: 1
-Time taken for poi to seperate the prsentation is: 210
-Time taken for copying the ppt: 0
-Time taken for poi to seperate the prsentation is: 119
-Time taken for copying the ppt: 11
-Time taken for poi to seperate the prsentation is: 145
-Time taken for copying the ppt: 3
-Time taken for poi to seperate the prsentation is: 129
-Time taken for image creation is: 941
-Time taken for persistance is: 49
-Time taken for image creation is: 0
-Time taken for persistance is: 15
-Time taken for image creation is: 7
-Time taken for persistance is: 10
 Time taken for image creation is: 2
-Time taken for persistance is: 50
-Time taken for image creation is: 1
-Time taken for persistance is: 11
-Time taken for updating segments: 14424Total time: 15510
+Time taken for persistance is: 10
+Time taken for updating segments: 0Total time: 12
+Time taken for image creation is: 0
+Time taken for persistance is: 24
+Time taken for updating segments: 0Total time: 24

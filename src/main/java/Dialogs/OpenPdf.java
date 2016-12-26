@@ -75,7 +75,11 @@ public class OpenPdf {
 			 	setProgress(10);
 			 	int displayIndex=Call.workspace.presentationInnerPanel.getComponentCount();
 			 	
-			 	ArrayList<String> outputFilenamesList = ProjectService.importPdfGenerateImages(path, Call.workspace.currentProject, OpenPdf.this);
+			 	ArrayList<String> outputFilenamesList = ProjectService.importPdfGenerateImagesUsingGhostscript(path);
+			 	System.out.println("openPdf list printing : " );
+			 	for(int i=0; i<outputFilenamesList.size(); i++) {
+			 		System.out.println(outputFilenamesList.get(i));
+			 	}
 	
 			 	if(Call.workspace.cancelled) {
 			 		lblNewLabel1.setText("Cancelling import");
@@ -118,8 +122,6 @@ public class OpenPdf {
 					
 				return null;
 			}
-		 
-
 
 			public void propertyChange(PropertyChangeEvent evt) {
 				
@@ -127,8 +129,7 @@ public class OpenPdf {
 		            int progress = (Integer) evt.getNewValue();
 		            progressBar.setIndeterminate(false);
 		            progressBar.setValue(progress);
-				}
-				
+				}	
 			}
 		
 		

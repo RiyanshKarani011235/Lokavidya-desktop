@@ -265,8 +265,8 @@ public class ProjectService {
 
 	public static void main(String[] args) {
 
-		System.out.println(FilenameUtils.getExtension(new File("ab;asdflkj#@..#..2!@#$%^&*()?><:';/.,][{|}c",
-				"d;#;;;;...sd.efab;asdflkj#@..#..2!@#$%^&*()?><:';/.,][{|}.zip").getAbsolutePath()));
+//		System.out.println(FilenameUtils.getExtension(new File("ab;asdflkj#@..#..2!@#$%^&*()?><:';/.,][{|}c",
+//				"d;#;;;;...sd.efab;asdflkj#@..#..2!@#$%^&*()?><:';/.,][{|}.zip").getAbsolutePath()));
 
 		// GeneralUtils.convertImageToPresentation("/home/frg/Documents/eighteen/ecezznvr5a.png",
 		// "/home/frg/Desktop/abc.odp");
@@ -395,6 +395,9 @@ public class ProjectService {
 		// "/home/sanket/Documents/test.odp");
 		// GeneralUtils.convertPresentationToImage("/home/sanket/Documents/test.odp",
 		// "/home/sanket/Documents/test.png");
+
+		importPdfGenerateImagesUsingGhostscript("/Users/ironstein/desktop/desktop/slides01shkene.pdf");
+//		importPdfGenerateImages("/Users/ironstein/desktop/mias.pdf");
 
 		System.exit(0);
 
@@ -729,6 +732,58 @@ public class ProjectService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static ArrayList<String> importPdfGenerateImagesUsingGhostscript(String pdfUrl) {
+		// create tmpImages directory
+		File tmpImagesDirectory = new File("resources", "tmpImages");
+		tmpImagesDirectory.mkdir();
+
+		ArrayList<String> outputFilenamesList = new ArrayList<String>();
+
+		// check if directory is created
+		if (!(tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory())) {
+			// could not create tmpImages directory
+			JOptionPane.showMessageDialog(null,
+					"Could not access the directory : " + tmpImagesDirectory.getAbsolutePath() + "\n"
+							+ "make sure that you have read and write access to this directory",
+					"", JOptionPane.INFORMATION_MESSAGE);
+			return null;
+		}
+		
+		// cleaning tmpImagesDirectory
+		try {
+			FileUtils.cleanDirectory(tmpImagesDirectory);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// convert PDF to individual images
+		String ghostScriptPath = GeneralUtils.findGhostScriptPath();
+		String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(),
+				FilenameUtils.getBaseName(new File(pdfUrl).getName()) + "-%d.png").getAbsolutePath();
+		String[] command = {
+				ghostScriptPath,
+				"-sDEVICE=png16m", 
+				"-dTextAlphaBits=4", 
+				"-r300", 
+				"-o",
+				outputFileName,
+				pdfUrl
+		};
+		
+		boolean b = GeneralUtils.runProcess(command);
+		if((!b) || Call.workspace.cancelled) {
+			return null;
+		}
+		
+		String[] list = tmpImagesDirectory.list();
+		for(int i=0; i<list.length; i++) {
+			outputFilenamesList.add(new File(tmpImagesDirectory,list[i]).getAbsolutePath());
+		}
+		
+		return outputFilenamesList;
 	}
 	
 	public static void importPdfAddImagesToProject(Project project, OpenPdf window, ArrayList<String> outputFilenamesList) {
