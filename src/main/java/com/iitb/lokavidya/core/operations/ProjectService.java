@@ -267,146 +267,6 @@ public class ProjectService {
 		}
 	}
 
-	public static void main(String[] args) {
-
-//		System.out.println(FilenameUtils.getExtension(new File("ab;asdflkj#@..#..2!@#$%^&*()?><:';/.,][{|}c",
-//				"d;#;;;;...sd.efab;asdflkj#@..#..2!@#$%^&*()?><:';/.,][{|}.zip").getAbsolutePath()));
-
-		// GeneralUtils.convertImageToPresentation("/home/frg/Documents/eighteen/ecezznvr5a.png",
-		// "/home/frg/Desktop/abc.odp");
-		//
-		// // System.out.println(System.getProperty("java.io.tmpdir"));
-		// Project test =
-		// ProjectService.getInstance("/home/frg/Documents/seven/seven.json");
-
-		//
-		//
-		////
-		// Segment segment4 = new Segment(test.getProjectURL());
-		// Video video = new
-		// Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL());
-		// segment4.setVideo(video);
-		// test.addSegment(segment4);
-		// ProjectService.persist(test);
-		//// importAndroidProject("/home/sanket/Documents/asd/asd.json",
-		// "/home/sanket/Documents/material-required.zip");
-		// System.out.println(test);
-		// importPresentation("/home/sanket/Documents/Lokavidya_Desktop_Application
-		// using LibreOffice.pptx", test);
-		// SegmentService.deleteImage(segment);
-		// ProjectService.persist(test);
-		// ProjectService.exportAndroidProject("/home/sanket/Documents/asd",
-		// "/home/sanket/Documents");
-		// ProjectService.importAndroidProject("/home/sanket/Documents/pazx/pazx.json",
-		// "/home/sanket/Documents/material-required.zip");
-		// ProjectService.exportAndroidProject("/home/sanket/Documents/okzjxclkj",
-		// "/home/sanket/Documents");
-
-		/*
-		 * Segment segment5 = new Segment(test.getProjectURL()); video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL());
-		 * System.out.println("VideoURL"+video.getVideoURL());
-		 * segment2.setVideo(video); test.addSegment(segment5);
-		 */
-
-		/*
-		 * // System.out.println(System.getProperty("java.io.tmpdir")); Project
-		 * test= ProjectService.createNewProject("/home/sanket/Documents/asd");
-		 * // Segment segment = new Segment("/home/sanket/Documents/asd"); // //
-		 * Slide slide = new
-		 * Slide("/home/sanket/Documents/test.png",test.getProjectURL()); //
-		 * Audio audio = new
-		 * Audio("/home/sanket/Documents/testsunday/audio/testsunday.1.wav",test
-		 * .getProjectURL()); // slide.setAudio(audio); // List<Reference>
-		 * referencesList = new ArrayList<Reference> (); // Reference reference
-		 * = new Reference(); // reference.setVideoID("123"); //
-		 * referencesList.add(reference); // segment.setReferences(new
-		 * HashSet<Reference>(referencesList)); // segment.setSlide(slide); //
-		 * test.addSegment(segment); // // // // // Segment segment2 = new
-		 * Segment("/home/sanket/Documents/asd"); // Video video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * System.out.println("VideoURL"+video.getVideoURL()); //
-		 * segment2.setVideo(video); // test.addSegment(segment2); //
-		 * ProjectService.persist(test); // // slide = new
-		 * Slide("/home/sanket/Documents/test.png",test.getProjectURL()); //
-		 * audio = new
-		 * Audio("/home/sanket/Documents/testsunday/audio/testsunday.1.wav",test
-		 * .getProjectURL()); // slide.setAudio(audio); // referencesList = new
-		 * ArrayList<Reference> (); // reference = new Reference(); //
-		 * reference.setVideoID("123"); // referencesList.add(reference); //
-		 * segment2.setReferences(new HashSet<Reference>(referencesList)); //
-		 * segment2.setSlide(slide); // test.addSegment(segment2); // // Segment
-		 * segment3 = new Segment("/home/sanket/Documents/asd"); // video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * System.out.println("VideoURL"+video.getVideoURL()); //
-		 * segment2.setVideo(video); // test.addSegment(segment3); // // //
-		 * slide = new
-		 * Slide("/home/sanket/Documents/test.png",test.getProjectURL()); //
-		 * audio = new
-		 * Audio("/home/sanket/Documents/testsunday/audio/testsunday.1.wav",test
-		 * .getProjectURL()); // slide.setAudio(audio); // referencesList = new
-		 * ArrayList<Reference> (); // reference = new Reference(); //
-		 * reference.setVideoID("123"); // referencesList.add(reference); //
-		 * segment3.setReferences(new HashSet<Reference>(referencesList)); //
-		 * segment3.setSlide(slide); // test.addSegment(segment3); // // //
-		 * Segment segment4 = new Segment("/home/sanket/Documents/asd"); //
-		 * video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * System.out.println("VideoURL"+video.getVideoURL()); //
-		 * segment2.setVideo(video); // test.addSegment(segment4); // // Segment
-		 * segment5 = new Segment("/home/sanket/Documents/asd"); // video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * System.out.println("VideoURL"+video.getVideoURL()); //
-		 * segment2.setVideo(video); // test.addSegment(segment5); // //
-		 * test.swapSegment(segment, segment2); // test.swapSegment(segment3,
-		 * segment2); //
-		 * test=ProjectService.getInstance("/home/sanket/Documents/asd/asd.json"
-		 * ); // // // video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * segment4.setVideo(video); // test.addSegment(segment4); //
-		 * importPresentation("/home/sanket/Documents/Lokavidya_Desktop_Application using LibreOffice.pptx"
-		 * , test); //SegmentService.deleteImage(segment);
-		 * //ProjectService.persist(test);
-		 * //ProjectService.exportAndroidProject("/home/sanket/Documents/asd",
-		 * "/home/sanket/Documents");
-		 * //ProjectService.importAndroidProject("/home/sanket/Desktop",
-		 * "/home/sanket/Documents/asd.zip");
-		 * 
-		 * >>>>>>> e136ecc1c28748abbbb0e8fedbf5338b1c4f2b38
-		 * 
-		 * // test.swapSegment(segment, segment2); // test.swapSegment(segment3,
-		 * segment2); //test=ProjectService.getInstance(
-		 * "/home/sanket/Documents/asd/asd.json"); //
-		 * test=ProjectService.getInstance(
-		 * "/Users/SidRama/Documents/asd/asd.json");
-		 * 
-		 * 
-		 * //SegmentService.deleteImage(segment); ProjectService.persist(test);
-		 * System.out.println("Stitching now.... ");
-		 */
-		// ProjectOperations.stitch(test);
-		// System.out.println("Stitching done... ");
-		// ProjectService.exportAndroidProject("/home/sanket/Documents/asd",
-		// "/home/sanket/Documents");
-		// ProjectService.importAndroidProject("/home/sanket/Desktop",
-		// "/home/sanket/Documents/asd.zip");
-		// ProjectService.exportAndroidProject("/Users/SidRama/Documents/asd",
-		// "/Users/SidRama/Documents");
-		// ProjectService.importAndroidProject("/Users/SidRama/Desktop",
-		// "/Users/SidRama/Documents/asd.zip");
-
-		// GeneralUtils.convertImageToPresentation("/home/sanket/Downloads/aPDxmvV_700b_v1.jpg",
-		// "/home/sanket/Documents/test.odp");
-		// GeneralUtils.convertPresentationToImage("/home/sanket/Documents/test.odp",
-		// "/home/sanket/Documents/test.png");
-
-		importPdfGenerateImagesUsingGhostscript("/Users/ironstein/desktop/desktop/slides01shkene.pdf");
-//		importPdfGenerateImages("/Users/ironstein/desktop/mias.pdf");
-
-		System.exit(0);
-
-	}
-
 	public static void exportAndroidProject(String projectPath, String androidProjectPath) {
 		Project project = ProjectService
 				.getInstance(projectPath + File.separator + FilenameUtils.getName(projectPath) + ".json");
@@ -494,11 +354,23 @@ public class ProjectService {
 
 		Project project = getInstance(projectjsonpath);
 		String tmpPath = System.getProperty("java.io.tmpdir");
+		
+		// deleting all folders with the same name as that of the zip file in tmpdir
+		String projTmpDir = FilenameUtils.getBaseName(zipPath);
+		File projectTmp = new File(tmpPath, projTmpDir);
+		System.out.println("projectTmp : " + projectTmp);
+		if(projectTmp.exists()) {
+			try {
+				FileUtils.deleteDirectory(projectTmp);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		System.out.println("extracting zip");
 		GeneralUtils.extractZip(zipPath, tmpPath);
 		System.out.println("extracting zip complete");
-		String projTmpDir = FilenameUtils.getBaseName(zipPath);
-		File projectTmp = new File(tmpPath, projTmpDir);
 		File projectTmpImage = new File(projectTmp.getAbsolutePath(), "images");
 		File projectTmpAudio = new File(projectTmp.getAbsolutePath(), "audio");
 

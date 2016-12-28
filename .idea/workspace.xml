@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/timelog.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java" afterPath="$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" afterPath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" />
     </list>
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,12 +25,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProjectService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProjectService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="89" column="36" selection-start-line="89" selection-start-column="36" selection-end-line="89" selection-end-column="36" />
-              <folding />
+            <state relative-caret-position="15">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding>
+                <marker date="1482918772000" expanded="true" signature="12626:14971" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -127,11 +128,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateProject.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CreateProject.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="98" column="78" selection-start-line="98" selection-start-column="78" selection-end-line="98" selection-end-column="78" />
+            <state relative-caret-position="3405">
+              <caret line="255" column="91" selection-start-line="255" selection-start-column="91" selection-end-line="255" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -1046,12 +1047,12 @@
       <workItem from="1482129731392" duration="17542000" />
       <workItem from="1482691103957" duration="4679000" />
       <workItem from="1482899264402" duration="717000" />
-      <workItem from="1482910234423" duration="1067000" />
+      <workItem from="1482910234423" duration="2162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43013000" />
+    <option name="totallyTimeSpent" value="44108000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
@@ -1070,6 +1071,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26484376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37138927" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1080,7 +1082,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37138927" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1462,14 +1463,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="98" column="78" selection-start-line="98" selection-start-column="78" selection-end-line="98" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Project.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
@@ -1501,8 +1494,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="89" column="36" selection-start-line="89" selection-start-column="36" selection-end-line="89" selection-end-column="36" />
+        <state relative-caret-position="15">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <marker date="1482918772000" expanded="true" signature="12626:14971" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3405">
+          <caret line="255" column="91" selection-start-line="255" selection-start-column="91" selection-end-line="255" selection-end-column="91" />
           <folding />
         </state>
       </provider>
