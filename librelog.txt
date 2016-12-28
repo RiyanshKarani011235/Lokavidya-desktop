@@ -1,3 +1,0 @@
-
-Acquired mutex lock for /Users/ironstein/Documents/123eds/wgif1mb5kx.odp
-Released mutex lock for /Users/ironstein/Documents/123eds/wgif1mb5kx.png

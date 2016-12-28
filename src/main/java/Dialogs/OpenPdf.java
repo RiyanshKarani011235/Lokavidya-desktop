@@ -110,17 +110,22 @@ public class OpenPdf {
 			 	
 			 	setProgress(75);
 				Call.workspace.repopulateProject();
+				System.out.println("done repopulating project");
 				setProgress(80);
 				Call.workspace.revalidate();
+				System.out.println("done revalidating project");
 				setProgress(85);
 				Call.workspace.repaint();
+				System.out.println("done repainting project");
 				setProgress(90);
 				Call.workspace.endOperation();
+				System.out.println("done");
 				setProgress(100);
 				Thread.sleep(1000);
 				frame.setCursor(Cursor
 						.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 				frame.dispose();
+				System.out.println("done disposing");
 					
 				return null;
 			}
@@ -291,7 +296,7 @@ public class OpenPdf {
         innerPanel.setVisible(false);
         innerPanel.setOpaque(true);
         
-        lblNewLabel1 = new JLabel("Importing presentation..Please wait.");
+        lblNewLabel1 = new JLabel("Importing PDF..Please wait.");
         innerPanel.add(lblNewLabel1, BorderLayout.SOUTH);
         //innerPanel.setVisible(false);
 		frame.getContentPane().add(innerPanel);

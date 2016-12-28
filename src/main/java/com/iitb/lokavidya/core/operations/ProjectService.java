@@ -355,7 +355,7 @@ public class ProjectService {
 		Project project = getInstance(projectjsonpath);
 		String tmpPath = System.getProperty("java.io.tmpdir");
 		
-		// deleting all folders with the same name as that of the zip file in tmpdir
+		// deleting all folders with the same name as that of the zip file in tmpPath
 		String projTmpDir = FilenameUtils.getBaseName(zipPath);
 		File projectTmp = new File(tmpPath, projTmpDir);
 		System.out.println("projectTmp : " + projectTmp);
@@ -612,10 +612,26 @@ public class ProjectService {
 	
 	public static ArrayList<String> importPdfGenerateImagesUsingGhostscript(String pdfUrl) {
 		// create tmpImages directory
-		File tmpImagesDirectory = new File("resources", "tmpImages");
-		tmpImagesDirectory.mkdir();
+		File tmpImagesDirectory = new File(System.getProperty("java.io.tmpdir"), "tmpImages1");
+		File tmpImagesDirectory2 = new File(System.getProperty("java.io.tmpdir"), "tmpImages2");
 
-		ArrayList<String> outputFilenamesList = new ArrayList<String>();
+		System.out.println("tmpImagesDirectory : " + tmpImagesDirectory.getAbsolutePath());
+		System.out.println("tmpImagesDirectory2 : " + tmpImagesDirectory2.getAbsolutePath());
+		
+		// creating tmpImagesDirectory
+		tmpImagesDirectory.mkdir();
+		tmpImagesDirectory2.mkdir();
+		
+		// cleaning tmpImagesDirectory
+		try {
+			FileUtils.cleanDirectory(tmpImagesDirectory);
+			FileUtils.cleanDirectory(tmpImagesDirectory2);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ArrayList<String> outputImagesList = new ArrayList<String>();
 
 		// check if directory is created
 		if (!(tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory())) {
@@ -659,12 +675,85 @@ public class ProjectService {
 			return null;
 		}
 		
+		// scale the image to fit the window width and window height
 		String[] list = tmpImagesDirectory.list();
 		for(int i=0; i<list.length; i++) {
-			outputFilenamesList.add(new File(tmpImagesDirectory,list[i]).getAbsolutePath());
+			System.out.println("tmpImage : " + list[i]);
+			BufferedImage rawShot;
+			try {
+				String inputImageName = new File(tmpImagesDirectory, list[i]).getAbsolutePath(); 
+				rawShot = ImageIO.read(new File(inputImageName));
+				int hVideo = Call.workspace.videoHeight;
+				int wVideo = Call.workspace.videoWidth;
+				int hShot = rawShot.getHeight();
+				int wShot = rawShot.getWidth();
+
+				int newImageHeight;
+				int newImageWidth;
+				
+				if((hShot > hVideo) || (wShot > wVideo)) {
+					// scale the image down
+					if((hShot > hVideo) && (wShot <= wVideo)) {
+						// scale down the height
+						newImageHeight = hVideo;
+						newImageWidth = (int) Math.ceil(hVideo * wShot / hShot);
+					} else if((hShot <= hVideo) && (wShot > wVideo)) {
+						// scale down the width
+						newImageWidth = wVideo;
+						newImageHeight = (int) Math.ceil(wVideo * hShot / wShot);
+					} else {
+						// scale down both
+						if((int) Math.ceil(hVideo * wShot / hShot) > wVideo) {
+							// the shot width should be the same as window width
+							newImageWidth = wVideo;
+							newImageHeight = (int) Math.ceil(wVideo * hShot / wShot);
+						} else {
+							// the shot height should be the same as window height
+							newImageHeight = hVideo;
+							newImageWidth = (int) Math.ceil(hVideo * wShot / hShot);
+						}
+					}
+				} else {
+					// scale the image up
+					if(((int) Math.ceil(hVideo * wShot / hShot)) > wVideo) {
+						// scale height to the maximum
+						newImageHeight = hVideo;
+						newImageWidth = (int) Math.ceil(hVideo * wShot / hShot);
+					} else {
+						// scale width to maximum
+						newImageWidth = wVideo;
+						newImageHeight = (int) Math.ceil(wVideo * hShot / wShot);
+					}
+				}
+				
+				String resizedImage = new File(tmpImagesDirectory2, new File(list[i]).getName()).getAbsolutePath();
+				FFMPEGWrapper wrapper = new FFMPEGWrapper();
+				String[] command_ = {
+						wrapper.pathExecutable,
+						"-i",
+						inputImageName,
+						"-vf",
+						"scale=" + newImageWidth + ":" + newImageHeight,
+						resizedImage
+				};
+				
+				b = GeneralUtils.runProcess(command_);
+				if((!b) || Call.workspace.cancelled) {
+					return null;
+				}
+				outputImagesList.add(resizedImage);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
-		return outputFilenamesList;
+		System.out.println("outpuImagesList : ");
+		for(int i=0; i<outputImagesList.size(); i++) {
+			System.out.println(outputImagesList.get(i));
+		}
+		return outputImagesList;
 	}
 	
 	public static void importPdfAddImagesToProject(Project project, OpenPdf window, ArrayList<String> outputFilenamesList) {
