@@ -209,7 +209,11 @@ public class OpenPdf {
 		}
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
-			// TODO Auto-generated method stub
+			if ("progress" == evt.getPropertyName()) {
+				int progress = (Integer) evt.getNewValue();
+				progressBar.setIndeterminate(false);
+				progressBar.setValue(progress);
+			}
 			
 		}
 		@Override

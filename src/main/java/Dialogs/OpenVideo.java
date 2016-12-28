@@ -91,19 +91,6 @@ public class OpenVideo {
 				return null;
 			}
 
-			public void propertyChange(PropertyChangeEvent evt) {
-				if ("progress" == evt.getPropertyName()) {
-					int progress = (Integer) evt.getNewValue();
-					progressBar.setIndeterminate(false);
-					progressBar.setValue(progress);
-				}
-			}
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
 		}
 
 		ProgressDialog() {
@@ -159,8 +146,11 @@ public class OpenVideo {
 
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
-			// TODO Auto-generated method stub
-
+			if ("progress" == evt.getPropertyName()) {
+				int progress = (Integer) evt.getNewValue();
+				progressBar.setIndeterminate(false);
+				progressBar.setValue(progress);
+			}
 		}
 
 		@Override
