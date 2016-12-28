@@ -101,7 +101,6 @@ public class CreateProject {
 								lblNewLabel1.setText("Cancelling creation");
 								setProgress(50);
 								FileUtils.cleanDirectory(newProj);
-								;
 								Thread.sleep(1000);
 							} else {
 								setProgress(65);

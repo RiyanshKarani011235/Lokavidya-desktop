@@ -88,6 +88,10 @@ public class ProjectService {
 
 		Segment segment = new Segment(projectURL);
 		project.addSegment(segment);
+		
+		// make the currentSegment as the first segment of the project
+		// Ironstein 28-12-16
+		Call.workspace.currentSegment = project.getSegmentsMap().get(project.getOrderingSequence().get(0));
 
 		ProjectService.persist(project);
 		GeneralUtils.stopOfficeInstance();

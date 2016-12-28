@@ -677,17 +677,18 @@ WindowStateListener {
 		System.out.println("Showing slide "+index);
 		Segment s=currentProject.getSlideSegment(index);
 		
-		Segment oldSegment=currentSegment;
-		currentSegment =s;
+		Segment oldSegment = currentSegment;
+		currentSegment = s;
 		
 		lblSlideDisplay.setIcon(UIUtils.getPreview(s.getSlide().getImageURL(),lblSlideDisplay.getWidth(),lblSlideDisplay.getHeight()));
 		String duration="--:--";
 		if(s.getSlide().getAudio()!=null || s.getVideo()!=null){
 			duration = GeneralUtils.convertToMinSecFormat(s.getTime());
 		}
-		 Call.workspace.timeDisplayLabel.setText(duration);
-		if(oldSegment!=null)
+		Call.workspace.timeDisplayLabel.setText(duration);
+		if(oldSegment!=null) {
 			customPanelList.get(currentProject.indexOf(oldSegment)).stopPreview();
+		}
 		highlightCurrent();
 		Call.workspace.revalidate();
 		Call.workspace.repaint();
