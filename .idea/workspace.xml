@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/librelog.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" afterPath="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Slide.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Slide.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" afterPath="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timelog.txt" afterPath="$PROJECT_DIR$/timelog.txt" />
     </list>
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,15 +28,81 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProjectService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProjectService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="159" column="44" selection-start-line="159" selection-start-column="44" selection-end-line="159" selection-end-column="44" />
+            <state relative-caret-position="171">
+              <caret line="780" column="50" selection-start-line="780" selection-start-column="50" selection-end-line="780" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#16910#16919#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Slide.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Slide.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="155" column="55" selection-start-line="155" selection-start-column="55" selection-end-line="155" selection-end-column="55" />
+              <folding>
+                <element signature="e#542#543#0" expanded="true" />
+                <element signature="e#560#561#0" expanded="true" />
+                <element signature="e#586#587#0" expanded="true" />
+                <element signature="e#664#665#0" expanded="true" />
+                <marker date="1482954470000" expanded="false" signature="6460:6465" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="6475:6478" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="6510:6515" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="6528:6531" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="6561:6566" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="6582:6585" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="6628:6633" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="6658:6661" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="6689:6694" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="6717:6720" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="6759:6764" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="6794:6797" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="6834:6839" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="6862:6865" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="6922:6927" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="6966:6969" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="7004:7009" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="7030:7033" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="7086:7091" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="7126:7129" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="7162:7167" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="7195:7198" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="7247:7252" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="7292:7295" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="7321:7326" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="7339:7342" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="7378:7383" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="7402:7405" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="7665:7670" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="7698:7701" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="8055:8060" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="8090:8093" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="8131:8136" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="8162:8165" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="8212:8217" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="8243:8246" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="8280:8285" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="8307:8310" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="8345:8350" ph=" { " />
+                <marker date="1482954470000" expanded="false" signature="8372:8375" ph=" }" />
+                <marker date="1482954470000" expanded="false" signature="8445:8448" ph=" }" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Segment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Segment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -98,38 +166,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PresentationToImages.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/poi/PresentationToImages.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#618#626#0" expanded="false" />
-                <element signature="e#885#893#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/iitb/lokavidya/AppTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#346#347#0" expanded="false" />
-                <element signature="e#379#380#0" expanded="false" />
-                <element signature="e#480#481#0" expanded="false" />
-                <element signature="e#533#534#0" expanded="false" />
-                <element signature="e#608#609#0" expanded="false" />
-                <element signature="e#642#643#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CreateProject.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -144,7 +180,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="810">
-              <caret line="94" column="17" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
+              <caret line="94" column="16" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -199,6 +235,7 @@
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java" />
         <option value="$PROJECT_DIR$/src/main/java/Dialogs/CreateProject.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Slide.java" />
       </list>
     </option>
   </component>
@@ -606,6 +643,9 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -1049,12 +1089,12 @@
       <workItem from="1482129731392" duration="17542000" />
       <workItem from="1482691103957" duration="4679000" />
       <workItem from="1482899264402" duration="717000" />
-      <workItem from="1482910234423" duration="3145000" />
+      <workItem from="1482910234423" duration="6166000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45091000" />
+    <option name="totallyTimeSpent" value="48112000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
@@ -1133,13 +1173,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
           <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Slide.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="144" column="36" selection-start-line="144" selection-start-column="36" selection-end-line="144" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -1350,14 +1383,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Segment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/OpenAndroid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="735">
@@ -1452,7 +1477,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/Dialogs/OpenPdf.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
-          <caret line="94" column="17" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
+          <caret line="94" column="16" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1502,10 +1527,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Segment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/operations/ProjectService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="159" column="44" selection-start-line="159" selection-start-column="44" selection-end-line="159" selection-end-column="44" />
+        <state relative-caret-position="171">
+          <caret line="780" column="50" selection-start-line="780" selection-start-column="50" selection-end-line="780" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#16910#16919#0" expanded="true" />
@@ -1513,5 +1546,145 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iitb/lokavidya/core/data/Slide.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="155" column="55" selection-start-line="155" selection-start-column="55" selection-end-line="155" selection-end-column="55" />
+          <folding>
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#560#561#0" expanded="true" />
+            <element signature="e#586#587#0" expanded="true" />
+            <element signature="e#664#665#0" expanded="true" />
+            <marker date="1482954470000" expanded="false" signature="6460:6465" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="6475:6478" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="6510:6515" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="6528:6531" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="6561:6566" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="6582:6585" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="6628:6633" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="6658:6661" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="6689:6694" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="6717:6720" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="6759:6764" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="6794:6797" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="6834:6839" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="6862:6865" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="6922:6927" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="6966:6969" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="7004:7009" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="7030:7033" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="7086:7091" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="7126:7129" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="7162:7167" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="7195:7198" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="7247:7252" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="7292:7295" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="7321:7326" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="7339:7342" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="7378:7383" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="7402:7405" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="7665:7670" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="7698:7701" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="8055:8060" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="8090:8093" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="8131:8136" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="8162:8165" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="8212:8217" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="8243:8246" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="8280:8285" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="8307:8310" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="8345:8350" ph=" { " />
+            <marker date="1482954470000" expanded="false" signature="8372:8375" ph=" }" />
+            <marker date="1482954470000" expanded="false" signature="8445:8448" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>jeffjosesvlj-lokavidya-desktop-central</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

@@ -1,14 +1,14 @@
 
-Time taken for image creation is: 2
-Time taken for persistance is: 15
-Time taken for image creation is: 0
-Time taken for persistance is: 12
-Time taken for image creation is: 0
-Time taken for persistance is: 51
-Time taken for image creation is: 0
-Time taken for persistance is: 12
+Time taken for image creation is: 5
+Time taken for persistance is: 10
 Time taken for image creation is: 1
-Time taken for persistance is: 50
-Time taken for image creation is: 0
-Time taken for persistance is: 11
-Time taken for updating segments: 0Total time: 154
+Time taken for persistance is: 8
+Time taken for image creation is: 1
+Time taken for persistance is: 47
+Time taken for image creation is: 1
+Time taken for persistance is: 9
+Time taken for image creation is: 1
+Time taken for persistance is: 49
+Time taken for image creation is: 1
+Time taken for persistance is: 6
+Time taken for updating segments: 0Total time: 139

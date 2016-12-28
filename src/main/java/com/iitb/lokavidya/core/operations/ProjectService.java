@@ -677,6 +677,7 @@ public class ProjectService {
 		
 		// scale the image to fit the window width and window height
 		String[] list = tmpImagesDirectory.list();
+		FFMPEGWrapper wrapper = new FFMPEGWrapper();
 		for(int i=0; i<list.length; i++) {
 			System.out.println("tmpImage : " + list[i]);
 			BufferedImage rawShot;
@@ -727,7 +728,6 @@ public class ProjectService {
 				}
 				
 				String resizedImage = new File(tmpImagesDirectory2, new File(list[i]).getName()).getAbsolutePath();
-				FFMPEGWrapper wrapper = new FFMPEGWrapper();
 				String[] command_ = {
 						wrapper.pathExecutable,
 						"-i",
@@ -764,7 +764,6 @@ public class ProjectService {
 			bw = new BufferedWriter(new FileWriter("timelog.txt", true));
 			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
 			
-			ArrayList<Segment> newSegments = new ArrayList<Segment>();
 			for (String outputFilename : outputFilenamesList) {
 				Segment segment = new Segment(project.getProjectURL(), false);
 				Slide slide = new Slide(outputFilename, project.getProjectURL(), false);
@@ -772,7 +771,6 @@ public class ProjectService {
 				bw.write("\nTime taken for image creation is: " + (new_time - current_time));
 				current_time = new_time;
 				segment.setSlide(slide);
-				newSegments.add(segment);
 				project.addSegment(segment);
 				ProjectService.persist(project);
 				new_time = System.currentTimeMillis();
@@ -790,6 +788,18 @@ public class ProjectService {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			return;
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			FileUtils.copyFile(
+				new File("/var/folders/xr/_c3wy9_9429gxpfbpbt0xybc0000gn/T/tmpImages2/mias-1.png"), 
+				new File("/users/ironstein/desktop/doesnt_work.jpg")
+			);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

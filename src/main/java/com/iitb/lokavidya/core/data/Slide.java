@@ -153,7 +153,13 @@ public class Slide implements Serializable {
 			// this.id= GeneralUtils.generateRandomNumber(11).intValue();
 			String imageName = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
 			File newFile = new File(projectURL, imageName + "." + FilenameUtils.getExtension(sourceImageURL));
-			new File(sourceImageURL).renameTo(newFile);
+//			new File(sourceImageURL).renameTo(newFile);
+			try {
+				FileUtils.copyFile(new File(sourceImageURL), newFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			this.imageURL = newFile.getAbsolutePath();
 			populateProperties(sourceImageURL);
 		}
