@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserPreferences {
@@ -149,15 +150,17 @@ public class UserPreferences {
 		}
 		
 		// get value with escaped forward slash
-		String newValue = "";
+		String newValue = "\"";
 		char[] charArray = value.toCharArray();
 		for(int i=0; i<charArray.length; i++) {
-			if(charArray[i] == '/') {
-				newValue += "?";
+			if(charArray[i] == '\\') {
+				newValue += "\\\\";
 			} else {
 				newValue += charArray[i];
 			}
 		}
+		newValue += "\"";
+		
 		System.out.println(newValue);
 		jsonValue = new JsonParser().parse(newValue);
 		paths.remove(property);
@@ -180,21 +183,22 @@ public class UserPreferences {
 		} 
 		
 		String valueString = value.getAsString();
+		
+		System.out.println("valueString : " + valueString);
 		String newValueString = "";
-		char[] charArray = valueString.toCharArray();
-		for(int i=0; i<charArray.length; i++) {
-			if(charArray[i] == '?') {
-				newValueString += "/";
-			} else {
-				newValueString += charArray[i];
-			}
-		}
+		
+		newValueString = valueString.replace("\\\\", "\\");
 		return newValueString;
 	}
 	
 	public static void main(String [] args) {
 //		UserPreferences u = new UserPreferences();
-		validateJsonObject();
+//		validateJsonObject();
+//		UserPreferences u = new UserPreferences();
+//		u.updatePath("ghostScript", "Program Files");
+//		JsonElement jsonValue = new JsonParser().parse("\"C:  /\\////Program*Files?sdlkjf.exe\"");
+		String s = "\\\\asdbasdgflkjdsa\\\\sdaga\\sdg\\\\";
+		System.out.println(s.replace("\\\\", "\\"));
 	}
 	
 }

@@ -761,6 +761,11 @@ public class ProjectService {
 		
 		// convert PDF to individual images
 		String ghostScriptPath = GeneralUtils.findGhostScriptPath();
+		if(ghostScriptPath == null) {
+			// ghostScript path not found
+			return null;
+		}
+		
 		String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(),
 				FilenameUtils.getBaseName(new File(pdfUrl).getName()) + "-%d.png").getAbsolutePath();
 		String[] command = {

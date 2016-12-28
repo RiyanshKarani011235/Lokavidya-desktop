@@ -1,1 +1,1 @@
-{"displayInstructions":{"readInstructions":"n","openPresentation":"n","openVideo":"n","openAndroidProject":"n","openPdf":"n"},"paths":{"OpenOffice":"?Applications?LibreOffice.app?Contents?MacOS?soffice","ghostScript":"?usr?local?bin?gs"}}
+{"displayInstructions":{"openPresentation":"n","openVideo":"n","openAndroidProject":"n","readInstructions":"y","openPdf":"y"},"paths":{"OpenOffice":"?Applications?LibreOffice.app?Contents?MacOS?soffice","ghostScript":"/usr/local/bin/gsc"}}

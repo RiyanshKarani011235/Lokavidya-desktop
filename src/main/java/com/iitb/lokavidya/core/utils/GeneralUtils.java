@@ -207,6 +207,7 @@ public class GeneralUtils {
 
 	public static String findOooPath() {
 
+		// setting default values
 		String openOfficePath = "", execName = "";
 		if (System.getProperty("os.name").contains("Linux")) {
 			openOfficePath = "/usr/lib/libreoffice/program/simpress";
@@ -219,19 +220,26 @@ public class GeneralUtils {
 			execName = "soffice";
 		}
 
-		if (new File(openOfficePath).exists()) {
-			System.out.println("OPen Office path found" + openOfficePath);
+		// check if the default value is correct
+		if ((openOfficePath != "") && (new File(openOfficePath).exists())) {
+			System.out.println("OpenOffice path found" + openOfficePath);
 			return openOfficePath;
 		}
 		
+		// if default values not correct, check in userPreferences.json
 		UserPreferences u = new UserPreferences();
 		openOfficePath = u.getPath("OpenOffice");
 		if(!(openOfficePath == null)) {
-			if(new File(openOfficePath).exists()) {
+			if((new File(openOfficePath).exists()) && (openOfficePath.endsWith(execName))) {
 				return openOfficePath;
+			} else {
+				// write null to openOffice path if the currently 
+				// written path does not exist or incorrect
+				u.updatePath("OpenOffice", "");
 			}
 		}
 		
+		// if not in userPreferences.json, ask the user
 		openOfficePath = getOoPathFromUser(execName);
 		System.out.println("before updating : " + openOfficePath);
 		u.updatePath("OpenOffice", openOfficePath);
@@ -241,86 +249,125 @@ public class GeneralUtils {
 	public static String getOoPathFromUser(String execName) {
 		String openOfficePath;
 		String vidName = (String) JEnhancedOptionPane.showInputDialog(
-				"Lokavidya could not find your installed location of Libreoffice. Please enter the location",
+				"Lokavidya could not find your installed location of Libreoffice. Please enter the location\n" + 
+				"You need to enter the name of the folder that contains the executable named " + execName + "\n" +
+				"An example location would be \"C:\\Program Files (x86)\\LibreOffice 5\\program\\\" for Windows " + 
+				"or /usr/lib/libreoffice/program/ for Linux or /Applications/LibreOffice.app/Contents/MacOs for Mac OS",
 				new Object[] { "Run", "Discard" });
 		if (vidName != null) {
 			System.out.println(vidName);
 			File f = new File(vidName), found = null;
 			if (f.exists()) {
 				found = search(f, execName);
-				if (found != null) {
-					if (found.exists()) {
-						openOfficePath = found.getAbsolutePath();
-						System.out.println("Path found: " + openOfficePath);
-						return openOfficePath;
-					} else {
-						JOptionPane.showMessageDialog(null, "Lokavidya cannot find Libreoffice.", "",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
+				if ((found != null) && (found.exists())) {
+					openOfficePath = found.getAbsolutePath();
+					System.out.println("Path found: " + openOfficePath);
+					return openOfficePath;
 				}
-
-			} else {
-				JOptionPane.showMessageDialog(null, "Lokavidya cannot find Libreoffice.", "",
-						JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
+		JOptionPane.showMessageDialog(null, "Sorry, Lokavidya cannot find Libreoffice.", "",
+			JOptionPane.INFORMATION_MESSAGE);
 		return null;
 	}
 	
 	public static String findGhostScriptPath() {
-		String ghostScriptPath = "/usr/local/bin/gs";
-		String execName = "gs";
 		
+		ArrayList<String> execName = new ArrayList<String>();
+
+		// setting to default values
+		String ghostScriptPath = "/usr/local/bin/gsc";
 		if(System.getProperty("os.name").contains("Windows")) {
+			// windows
 			ghostScriptPath = "";
-			execName = "gswin32";
+			execName.add("gswin32c.exe");
+			execName.add("gswin64c.exe");
+		} else {
+			execName.add("gsc");
+			if(!System.getProperty("os.name").toLowerCase().contains("mac")) {
+				// linux
+				ghostScriptPath = "/usr/bin/gsc";
+			} else {
+				// mac
+			}
 		}
 		
+		// checking if default values are correct
 		if ((ghostScriptPath != "") && new File(ghostScriptPath).exists()) {
 			System.out.println("OPen Office path found" + ghostScriptPath);
 			return ghostScriptPath;
 		}
 		
+		// if default values not correct, check in userPreferences.json
 		UserPreferences u = new UserPreferences();
 		ghostScriptPath = u.getPath("ghostScript");
 		if(!(ghostScriptPath == null)) {
-			if(new File(ghostScriptPath).exists()) {
-				return ghostScriptPath;
+			if((new File(ghostScriptPath).exists())) {
+				// checking if ghostScriptPath in userPreferences.json is correct
+				for(int i=0; i<execName.size(); i++) {
+					if(ghostScriptPath.endsWith(execName.get(i))) {
+						return ghostScriptPath;
+					}
+				}
+			} else {
+				// write null to ghostScript path if the currently 
+				// written path does not exist or is incorrect
+				u.updatePath("ghostScript", "");
 			}
 		}
 		
+		// if not in userPreferences.json, ask user for the path
 		ghostScriptPath = getGhostScriptPathFromUser(execName);
-		System.out.println("before updating : " + ghostScriptPath);
-		u.updatePath("ghostScript", ghostScriptPath);
+		System.out.println("ghostScriptPath : " + ghostScriptPath);
+		if(ghostScriptPath == null) {
+			// user did not enter the correct path
+			u.updatePath("ghostScript", "");
+		} else {
+			// user entered the correct path
+			u.updatePath("ghostScript", ghostScriptPath);
+		}
+		
 		return ghostScriptPath;
 	}
 	
-	public static String getGhostScriptPathFromUser(String execName) {
+	public static String getGhostScriptPathFromUser(ArrayList<String> execName) {
 		String ghostScriptPath;
-		String vidName = (String) JEnhancedOptionPane.showInputDialog(
-				"Lokavidya could not find your installed location of ghostScript. Please enter the location",
+		
+		// building a message String
+		String messageString = "Lokavidya could not find your installed location of ghostScript. Please enter the location.\n" +
+				"You need to enter the name of the folder that contains the executable named \"";
+		for(int i=0; i<execName.size(); i++) {
+			messageString += execName.get(i) + "\"";
+			if(i != (execName.size() - 1)) {
+				messageString += " or \"";
+			}
+		} messageString += ".\n";
+		messageString += "An example location would be\n" + 
+			"C:\\Program Files\\gs\\ for Windows or\n" + 
+			"/usr/bin/ for Linux or\n" + 
+			"/usr/local/bin/ for Mac OS";
+		
+		ghostScriptPath = (String) JEnhancedOptionPane.showInputDialog(
+				messageString,
 				new Object[] { "Run", "Discard" });
-		if (vidName != null) {
-			System.out.println(vidName);
-			File f = new File(vidName), found = null;
-			if (f.exists()) {
-				found = search(f, execName);
-				if (found != null) {
-					if (found.exists()) {
+		if (ghostScriptPath != null) {
+			System.out.println(ghostScriptPath);
+			File f = new File(ghostScriptPath);
+			File found = null;
+			if (f.exists() && f.isDirectory()) {
+				for(int i=0; i<execName.size(); i++) {
+					found = search(f, execName.get(i));
+					if ((found != null) && (found.exists())) {
 						ghostScriptPath = found.getAbsolutePath();
 						System.out.println("Path found: " + ghostScriptPath);
 						return ghostScriptPath;
-					} else {
-						JOptionPane.showMessageDialog(null, "Lokavidya cannot find ghostScript.", "",
-								JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
-
-			} else {
-				JOptionPane.showMessageDialog(null, "Lokavidya cannot find ghostScript.", "",
-						JOptionPane.INFORMATION_MESSAGE);
-			}
+				
+			} 
 		}
+		JOptionPane.showMessageDialog(null, "Sorry, Lokavidya cannot find GhostScript executable at the location provided.", "",
+			JOptionPane.INFORMATION_MESSAGE);
 		return null;
 	}
 

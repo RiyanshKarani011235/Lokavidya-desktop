@@ -76,10 +76,6 @@ public class OpenPdf {
 			 	int displayIndex=Call.workspace.presentationInnerPanel.getComponentCount();
 			 	
 			 	ArrayList<String> outputFilenamesList = ProjectService.importPdfGenerateImagesUsingGhostscript(path);
-			 	System.out.println("openPdf list printing : " );
-			 	for(int i=0; i<outputFilenamesList.size(); i++) {
-			 		System.out.println(outputFilenamesList.get(i));
-			 	}
 	
 			 	if(Call.workspace.cancelled) {
 			 		lblNewLabel1.setText("Cancelling import");
@@ -99,7 +95,13 @@ public class OpenPdf {
 						"Could not import PDF",
 						"", 
 						JOptionPane.INFORMATION_MESSAGE);
+		 			frame.dispose();
 			 		return null;
+			 	}
+			 	
+			 	System.out.println("openPdf list printing : " );
+			 	for(int i=0; i<outputFilenamesList.size(); i++) {
+			 		System.out.println(outputFilenamesList.get(i));
 			 	}
 			 	
 			 	isTaskCancellable = false;
