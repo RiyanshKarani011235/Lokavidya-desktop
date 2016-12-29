@@ -268,16 +268,28 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 
 	public void changeSlideRight() {
 		try {
+			System.out.println("changeSlideRight : called");
 			paused = false;
 			WorkspaceUIHelper.disableRecord();
 			List<Segment> segmentList = currentProject.getOrderedSegmentList();
+			System.out.println("size : " + segmentList.size());
+			for(int i=0; i<segmentList.size(); i++) {
+				if(segmentList.get(i).getVideo() == null) {
+					System.out.println(i + " : isVideo");
+				} else {
+					System.out.println(i + " : is not video");
+				}
+			}
 			int position = segmentList.indexOf(currentSegment);
+			System.out.println("position : " + position);
 			if ((position + 1) != segmentList.size()) {
 
 				if (screenRecordingFlag) {
 					// Thread.sleep(1600);
 					po.stopToggleSlideRecording(currentProject);
+
 					setPreview(Integer.toString(position + 1));
+					System.out.println("after setPreview " + segmentList.indexOf(currentSegment));
 					Thread.sleep(300);
 					po.startToggleSlideRecording(currentProject, currentSegment);
 				} else {
@@ -659,10 +671,16 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 	public void setPreview(String slidename) {
 		int index = Integer.parseInt(slidename);
 		System.out.println("Showing slide " + index);
-		Segment s = currentProject.getSlideSegment(index);
+		while (currentProject.getOrderedSegmentList().get(index).getSlide() == null) {
+			// if video, skip this slide
+			index += 1;
+		}
+//		Segment s = currentProject.getSlideSegment(index);
+		Segment s = currentProject.getOrderedSegmentList().get(index);
 
 		Segment oldSegment = currentSegment;
 		currentSegment = s;
+		System.out.println("setPreview " + currentProject.getOrderedSegmentList().indexOf(currentSegment));
 
 		lblSlideDisplay.setIcon(UIUtils.getPreview(s.getSlide().getImageURL(), lblSlideDisplay.getWidth(),
 				lblSlideDisplay.getHeight()));
@@ -677,6 +695,8 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		highlightCurrent();
 		Call.workspace.revalidate();
 		Call.workspace.repaint();
+		System.out.println("setPreview returning");
+		System.out.println("after setPreview " + currentProject.getOrderedSegmentList().indexOf(currentSegment));
 	}
 
 	public void highlightCurrent() {
