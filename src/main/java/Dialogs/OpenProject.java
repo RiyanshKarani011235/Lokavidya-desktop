@@ -82,7 +82,7 @@ public class OpenProject {
 	private JProgressBar progressBar;
 	private JLabel lblNewLabel1;
 	
-	class ProgressDialog extends JPanel
+	public class ProgressDialog extends JPanel
 	implements ActionListener, 
 	PropertyChangeListener{
 		private static final long serialVersionUID = 1L;
@@ -135,6 +135,8 @@ public class OpenProject {
 						setProgress(50);
 						progressBar.setValue(50);
 						Call.workspace.repopulateProject();
+						Call.workspace.currentSegment = Call.workspace.currentProject.getSegmentsMap().get(
+								Call.workspace.currentProject.getOrderingSequence().get(0));
 						setProgress(100);
 						progressBar.setValue(100);
 						Thread.sleep(1000);

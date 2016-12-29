@@ -1,0 +1,13 @@
+You can check if you already have GhostScript installed by 
+running the following command : 
+
+which gs
+
+If the above command returns a path which ends with gs 
+(such as /usr/local/gs), then you already have GhostScript 
+installed and you do not need to go through the installation
+procedure. If however running the following command does not
+return anything, then you need to install GhostScript by 
+following the instructions below that can be found in the
+user manual (https://goo.gl/4wfQSJ). Look for the section 
+named “Installing GhostScript”.

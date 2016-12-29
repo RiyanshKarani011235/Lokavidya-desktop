@@ -151,7 +151,14 @@ public class OpenPresentation {
 					        	}
 					        }
 			    	} else {
-		        		JOptionPane.showMessageDialog(null, "Import cannot be cancelled at this time");
+			    		String message = 
+			    				"Sorry, the import cannot be cancelled at this time because\n" +
+			    				"the project has already been modified and cancelling import at\n" + 
+			    				"this time might corrupt the project. If you do not want to\n" + 
+			    				"include the following slides in this project, you can delete\n" + 
+			    				"the imported slides after import is complete.\n\n" + 
+			    				"The import will complete soon.";
+		        		JOptionPane.showMessageDialog(null, message);
 		        	}
 			    }
 			});

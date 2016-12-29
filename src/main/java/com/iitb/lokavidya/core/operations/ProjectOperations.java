@@ -180,7 +180,7 @@ public class ProjectOperations {
 	public static void discardSlideRecording(Project p) {
 		currentSound.stopRecording();
 		SegmentService.deleteAudio(p, segment);
-		Call.workspace.cancelOperation();
+//		Call.workspace.cancelOperation();
 	}
 
 	public void discardToggleSlideRecording(Project project) {
@@ -188,7 +188,7 @@ public class ProjectOperations {
         currentMuteVideo.stop();
 		SegmentService.deleteVideo(project,segment );
 		SegmentService.deleteAudio(project, segment);
-        Call.workspace.cancelOperation();
+//        Call.workspace.cancelOperation();
 	}
 
 	public void stopToggleSlideRecording(Project project) {

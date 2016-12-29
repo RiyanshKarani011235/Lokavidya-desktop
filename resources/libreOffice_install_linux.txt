@@ -1,0 +1,4 @@
+LibreOffice comes already installed with the operating 
+system installation.By default, the installer installs 
+the LibreOffice binaries in a folder named similar to 
+/usr/lib/libreoffice/program/.

@@ -216,7 +216,7 @@ public class GeneralUtils {
 			openOfficePath = "C:\\Program Files (x86)\\LibreOffice 5\\program\\simpress.exe";
 			execName = "simpress.exe";
 		} else if (System.getProperty("os.name").startsWith("Mac")) {
-			openOfficePath = "/Applications/LibreOffice.app/Contents/MacOS/soffice";
+			openOfficePath = "/Applications/LibreOfice.app/Contents/MacOS/soffice";
 			execName = "soffice";
 		}
 
@@ -251,8 +251,9 @@ public class GeneralUtils {
 		String vidName = (String) JEnhancedOptionPane.showInputDialog(
 				"Lokavidya could not find your installed location of Libreoffice. Please enter the location\n" + 
 				"You need to enter the name of the folder that contains the executable named " + execName + "\n" +
-				"An example location would be \"C:\\Program Files (x86)\\LibreOffice 5\\program\\\" for Windows " + 
-				"or /usr/lib/libreoffice/program/ for Linux or /Applications/LibreOffice.app/Contents/MacOs for Mac OS",
+				"An example location would be \"C:\\Program Files (x86)\\LibreOffice 5\\program\\\" for Windows \n" + 
+				"or /usr/lib/libreoffice/program/ for Linux or /Applications/LibreOffice.app/Contents/MacOs for Mac OS" + 
+				"\n\nFor further help, click on Help > LibreOffice help",
 				new Object[] { "Run", "Discard" });
 		if (vidName != null) {
 			System.out.println(vidName);
@@ -266,8 +267,11 @@ public class GeneralUtils {
 				}
 			}
 		}
-		JOptionPane.showMessageDialog(null, "Sorry, Lokavidya cannot find Libreoffice.", "",
+		JOptionPane.showMessageDialog(null, "Sorry, Lokavidya cannot find Libreoffice.\n" + 
+				"Lokavidya cannot work without installing LibreOffice,\n" + 
+				"so install LibreOffice and then try again later.", "",
 			JOptionPane.INFORMATION_MESSAGE);
+		Call.workspace.cancelOperation();
 		return null;
 	}
 	
@@ -276,17 +280,17 @@ public class GeneralUtils {
 		ArrayList<String> execName = new ArrayList<String>();
 
 		// setting to default values
-		String ghostScriptPath = "/usr/local/bin/gsc";
+		String ghostScriptPath = "/usr/local/bin/gs";
 		if(System.getProperty("os.name").contains("Windows")) {
 			// windows
 			ghostScriptPath = "";
 			execName.add("gswin32c.exe");
 			execName.add("gswin64c.exe");
 		} else {
-			execName.add("gsc");
+			execName.add("gs");
 			if(!System.getProperty("os.name").toLowerCase().contains("mac")) {
 				// linux
-				ghostScriptPath = "/usr/bin/gsc";
+				ghostScriptPath = "/usr/bin/gs";
 			} else {
 				// mac
 			}
@@ -345,7 +349,8 @@ public class GeneralUtils {
 		messageString += "An example location would be\n" + 
 			"C:\\Program Files\\gs\\ for Windows or\n" + 
 			"/usr/bin/ for Linux or\n" + 
-			"/usr/local/bin/ for Mac OS";
+			"/usr/local/bin/ for Mac OS" +
+			"\n\nFor further help, click on Help > GhostScript help";
 		
 		ghostScriptPath = (String) JEnhancedOptionPane.showInputDialog(
 				messageString,

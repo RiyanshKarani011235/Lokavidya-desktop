@@ -1,0 +1,10 @@
+First check whether you have LibreOffice installed on
+your system. By default, the installer installs the 
+LibreOffice binaries in a folder named similar to 
+C:\Program Files (x86)\LibreOffice 5\program\.
+
+If you don’t have LibreOffice installed on your system,
+then you need to install GhostScript by following the 
+instructions below that can be found in the user manual 
+(https://goo.gl/4wfQSJ). Look for the section named
+“Installing LibreOffice”.
