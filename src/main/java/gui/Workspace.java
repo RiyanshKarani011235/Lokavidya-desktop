@@ -307,7 +307,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 	 */
 
 	public void showOutput() {
-		tabbedPane.setSelectedIndex(2);
+		tabbedPane.setSelectedIndex(1);
 
 	}
 
@@ -1151,10 +1151,10 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		menuBar.add(mnOptions);
 		/* Import Menu */
 		mnImport = new JMenu("Import");
-		mntmPresentation = new JMenuItem("Presentation ...");
-		mntmVideo = new JMenuItem("Video ...");
-		mntmAndroid = new JMenuItem("Android Project ...");
-		mntmPdf = new JMenuItem("PDF ...");
+		mntmPresentation = new JMenuItem("Presentation");
+		mntmVideo = new JMenuItem("Video");
+		mntmAndroid = new JMenuItem("Android Project");
+		mntmPdf = new JMenuItem("PDF");
 		mnImport.add(mntmPresentation);
 		mnImport.add(mntmVideo);
 		mnImport.add(mntmAndroid);
@@ -1218,7 +1218,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		});
 
 		mntmVideoFormat = new JMenuItem("Video Format");
-		// mnOptions.add(mntmVideoFormat);
+		 mnOptions.add(mntmVideoFormat);
 		mntmVideoFormat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VideoFormat.main(null);
@@ -1262,7 +1262,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		menuBar.add(mnExport);
 
 		mntmFormat = new JMenuItem("Video Format");
-		mnExport.add(mntmFormat);
+//		mnExport.add(mntmFormat);
 
 		mntmAndroidexp = new JMenuItem("Android Project");
 		mnExport.add(mntmAndroidexp);
