@@ -267,7 +267,8 @@ public class GeneralUtils {
 				}
 			}
 		}
-		JOptionPane.showMessageDialog(null, "Sorry, Lokavidya cannot find Libreoffice.\n" + 
+		JOptionPane.showMessageDialog(null, 
+				"Sorry, Lokavidya cannot find Libreoffice.\n" + 
 				"Lokavidya cannot work without installing LibreOffice,\n" + 
 				"so install LibreOffice and then try again later.", "",
 			JOptionPane.INFORMATION_MESSAGE);

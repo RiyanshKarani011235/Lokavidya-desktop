@@ -1852,6 +1852,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton_1, 4, SpringLayout.SOUTH, textField);
 		springLayout.putConstraint(SpringLayout.EAST, btnNewButton_1, -10, SpringLayout.EAST,
 				notesFrame.getContentPane());
+
 		notesFrame.getContentPane().add(btnNewButton_1);
 		notesArea = new JTextArea();
 		springLayout.putConstraint(SpringLayout.NORTH, notesArea, 9, SpringLayout.SOUTH, btnNewButton);
