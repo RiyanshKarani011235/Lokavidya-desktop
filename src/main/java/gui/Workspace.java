@@ -288,14 +288,14 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 					// Thread.sleep(1600);
 					po.stopToggleSlideRecording(currentProject);
 
-					setPreview(Integer.toString(position + 1));
+					setPreview(Integer.toString(position + 1), null);
 					System.out.println("after setPreview " + segmentList.indexOf(currentSegment));
 					Thread.sleep(300);
 					po.startToggleSlideRecording(currentProject, currentSegment);
 				} else {
 					// Thread.sleep(1600);
 					ProjectOperations.stopAudioToggleRecording();
-					setPreview(Integer.toString(position + 1));
+					setPreview(Integer.toString(position + 1), null);
 					Thread.sleep(300);
 					ProjectOperations.startAudioRecording(currentProject, currentSegment);
 				}
@@ -584,7 +584,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		String ind = "  Slide " + Integer.toString(index + 1);
 		JLabel label = new JLabel(ind);
 
-		label.setName(ind);
+		label.setName(Integer.toString(index));
 		label.setIcon(UIUtils.getThumbnail(slide.getImageURL()));
 
 		label.addMouseListener(new MouseAdapter() {
@@ -671,11 +671,36 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 	public void setPreview(String slidename) {
 		int index = Integer.parseInt(slidename);
 		System.out.println("Showing slide " + index);
+		
+		Segment s = currentProject.getSlideSegment(index);
+		Segment oldSegment = currentSegment;
+		currentSegment = s;
+		System.out.println("setPreview " + currentProject.getOrderedSegmentList().indexOf(currentSegment));
+
+		lblSlideDisplay.setIcon(UIUtils.getPreview(s.getSlide().getImageURL(), lblSlideDisplay.getWidth(),
+				lblSlideDisplay.getHeight()));
+		String duration = "--:--";
+		if (s.getSlide().getAudio() != null || s.getVideo() != null) {
+			duration = GeneralUtils.convertToMinSecFormat(s.getTime());
+		}
+		Call.workspace.timeDisplayLabel.setText(duration);
+		if (oldSegment != null) {
+			customPanelList.get(currentProject.indexOf(oldSegment)).stopPreview();
+		}
+		highlightCurrent();
+		Call.workspace.revalidate();
+		Call.workspace.repaint();
+		System.out.println("setPreview returning");
+		System.out.println("after setPreview " + currentProject.getOrderedSegmentList().indexOf(currentSegment));
+	}
+
+	public void setPreview(String slidename, String uselessString) {
+		int index = Integer.parseInt(slidename);
+		System.out.println("Showing slide " + index);
 		while (currentProject.getOrderedSegmentList().get(index).getSlide() == null) {
 			// if video, skip this slide
 			index += 1;
 		}
-//		Segment s = currentProject.getSlideSegment(index);
 		Segment s = currentProject.getOrderedSegmentList().get(index);
 
 		Segment oldSegment = currentSegment;
