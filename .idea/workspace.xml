@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8bd95d1f-3b22-4c32-b021-da738fb9ab1d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" afterPath="$PROJECT_DIR$/src/main/java/gui/Workspace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="jeffjosesvlj-lokavidya-desktop-central.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1066,12 +1066,12 @@
       <workItem from="1482691103957" duration="4679000" />
       <workItem from="1482899264402" duration="717000" />
       <workItem from="1482910234423" duration="14574000" />
-      <workItem from="1483035863402" duration="5777000" />
+      <workItem from="1483035863402" duration="5867000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62297000" />
+    <option name="totallyTimeSpent" value="62387000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
