@@ -1,0 +1,3 @@
+
+Acquired mutex lock for /Users/ironstein/Documents/0020003/tamil_0.pptx
+Acquired mutex lock for /Users/ironstein/Documents/0020003/tamil_0.pptx

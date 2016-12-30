@@ -1,0 +1,6 @@
+
+Time taken for copying the ppt: 1
+Time taken for poi to seperate the prsentation is: 289
+Time taken for copying the ppt: 3
+Time taken for poi to seperate the prsentation is: 167
+Time taken for updating segments: 593Total time: 593
