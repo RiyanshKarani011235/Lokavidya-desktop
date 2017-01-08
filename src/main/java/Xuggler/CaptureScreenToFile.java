@@ -277,7 +277,7 @@ public class CaptureScreenToFile {
 				}
 			} else {
 				// scale the image up
-				if(((int) Math.ceil(hVideo * wShot / hShot)) > wVideo) {
+				if(((int) Math.ceil(hVideo * wShot / hShot)) <= wVideo) {
 					// scale height to the maximum
 					newShotHeight = hVideo;
 					newShotWidth = (int) Math.ceil(hVideo * wShot / hShot);

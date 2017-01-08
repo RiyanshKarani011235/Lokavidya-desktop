@@ -28,6 +28,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.text.html.StyleSheet.ListPainter;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -659,7 +660,7 @@ public class ProjectService {
 		}
 		
 		String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(),
-				FilenameUtils.getBaseName(new File(pdfUrl).getName()) + "-%d.png").getAbsolutePath();
+				FilenameUtils.getBaseName(new File(pdfUrl).getName()) + "-%03d.png").getAbsolutePath();
 		String[] command = {
 				ghostScriptPath,
 				"-sDEVICE=png16m", 
@@ -677,6 +678,12 @@ public class ProjectService {
 		
 		// scale the image to fit the window width and window height
 		String[] list = tmpImagesDirectory.list();
+		Arrays.sort(list);
+		System.out.println("sorted list : ");
+		for(int i=0; i<list.length; i++) {
+			System.out.println(list[i]);
+		}
+		System.out.println("the end .........");
 		FFMPEGWrapper wrapper = new FFMPEGWrapper();
 		for(int i=0; i<list.length; i++) {
 			System.out.println("tmpImage : " + list[i]);

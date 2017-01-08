@@ -216,7 +216,7 @@ public class GeneralUtils {
 			openOfficePath = "C:\\Program Files (x86)\\LibreOffice 5\\program\\simpress.exe";
 			execName = "simpress.exe";
 		} else if (System.getProperty("os.name").startsWith("Mac")) {
-			openOfficePath = "/Applications/LibreOfice.app/Contents/MacOS/soffice";
+			openOfficePath = "/Applications/LibreOffice.app/Contents/MacOS/soffice";
 			execName = "soffice";
 		}
 

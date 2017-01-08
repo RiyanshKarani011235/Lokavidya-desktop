@@ -75,8 +75,14 @@ public class JTimer extends JFrame {
                 // do your reoccuring task
             	if(cntr==0){
             		frame.setVisible(false);
-
+            		
 					// enable screen recording button that was disabled during countdown
+            		try {
+						Thread.sleep(200);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					Call.workspace.btnScreenRec.setEnabled(true);
             		Call.workspace.startScreenRecording();
             		frame.dispose();

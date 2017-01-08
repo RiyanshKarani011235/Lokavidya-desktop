@@ -1350,7 +1350,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		});
 
 		mntmFeedback = new JMenuItem("Feedback");
-		mnHelp.add(mntmFeedback);
+//		mnHelp.add(mntmFeedback);
 
 		mntmFeedback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1845,7 +1845,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		int h = (int) t.getScreenSize().getHeight() - ((int) (3 * t.getScreenSize().getHeight() / 5));
 		contentPane.add(timelineFrame);
 		// Speaker's Notes Frame
-		notesFrame = new JInternalFrame("Speaker's Notes");
+		notesFrame = new JInternalFrame("Notes");
 		sl_contentPane.putConstraint(SpringLayout.EAST, slideFrame, -6, SpringLayout.WEST, notesFrame);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, notesFrame, 0, SpringLayout.SOUTH, explorerFrame);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, notesFrame, 0, SpringLayout.NORTH, contentPane);
@@ -1867,7 +1867,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 				notesFrame.getContentPane());
 
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		notesFrame.getContentPane().add(lblNewLabel_1);
+//		notesFrame.getContentPane().add(lblNewLabel_1);
 		// JTextField for path of upload
 		textField = new JTextField();
 		springLayout.putConstraint(SpringLayout.NORTH, textField, -2, SpringLayout.NORTH, notesFrame.getContentPane());
@@ -1876,7 +1876,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		springLayout.putConstraint(SpringLayout.WEST, textField, 139, SpringLayout.WEST, notesFrame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, textField, -10, SpringLayout.EAST, notesFrame.getContentPane());
 		textField.setText(pathDef);
-		notesFrame.getContentPane().add(textField);
+//		notesFrame.getContentPane().add(textField);
 		textField.setColumns(10);
 
 		// Browse Button
@@ -1890,7 +1890,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 				textField.setText(path);
 			}
 		});
-		notesFrame.getContentPane().add(btnNewButton);
+//		notesFrame.getContentPane().add(btnNewButton);
 		// Upload Button
 		btnNewButton_1 = new JButton("Extract");
 		springLayout.putConstraint(SpringLayout.WEST, btnNewButton, 10, SpringLayout.WEST, notesFrame.getContentPane());
@@ -1898,13 +1898,14 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		springLayout.putConstraint(SpringLayout.EAST, btnNewButton_1, -10, SpringLayout.EAST,
 				notesFrame.getContentPane());
 
-		notesFrame.getContentPane().add(btnNewButton_1);
+//		notesFrame.getContentPane().add(btnNewButton_1);
 		notesArea = new JTextArea();
 		springLayout.putConstraint(SpringLayout.NORTH, notesArea, 9, SpringLayout.SOUTH, btnNewButton);
 		springLayout.putConstraint(SpringLayout.WEST, notesArea, 10, SpringLayout.WEST, notesFrame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, notesArea, -10, SpringLayout.SOUTH, notesFrame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, notesArea, -10, SpringLayout.EAST, notesFrame.getContentPane());
 		notesArea.setVisible(true);
+		notesArea.setLineWrap(true);
 		notesFrame.getContentPane().add(notesArea);
 
 		this.disable();
