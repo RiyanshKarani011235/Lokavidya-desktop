@@ -2195,6 +2195,9 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 					Call.workspace.populateTimeline();
 					Call.workspace.removeExplorerSlides();
 					Call.workspace.populateExplorerSlides();
+					Call.workspace.currentSlideNumber = 0;
+					Workspace.currentSegment = Call.workspace.currentProject.getSlideSegment(0);
+					Workspace.currentSlide = null;
 					setProgress(100);
 
 					progressBar.setValue(100);
