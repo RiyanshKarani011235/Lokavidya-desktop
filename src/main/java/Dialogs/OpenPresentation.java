@@ -49,6 +49,9 @@ public class OpenPresentation {
 	public JPanel innerPanel;
 	private JButton button;
 	private JLabel lblNewLabel1;
+	private JButton btnCancel;
+	
+	private ProgressDialog dialog = null;
 
 	class ProgressDialog extends JPanel implements ActionListener, PropertyChangeListener {
 		public Task task;
@@ -126,40 +129,7 @@ public class OpenPresentation {
 
 			    @Override
 			    public void windowClosing(WindowEvent e) {
-			    	if(isTaskCancellable) {
-			    		int confirm = JOptionPane.showOptionDialog(
-			    			null, "Are You Sure to cancel the import?", 
-				            "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
-				            JOptionPane.QUESTION_MESSAGE, null, null, null);
-					        if (confirm == 0) {
-					        	if (task != null) {
-					        		System.out.println("cancelling task");
-					        		if(task.cancel(true)) {
-					        			Call.workspace.cancelled = true;
-						        		Call.workspace.endOperation();
-										frame.dispose();
-					        		} else {
-					        			// could not cancel
-					        			JOptionPane.showMessageDialog(
-					        				null,
-											"Could not cancel",
-											"", 
-											JOptionPane.INFORMATION_MESSAGE
-										);
-					        		}
-	
-					        	}
-					        }
-			    	} else {
-			    		String message = 
-			    				"Sorry, the import cannot be cancelled at this time because\n" +
-			    				"the project has already been modified and cancelling import at\n" + 
-			    				"this time might corrupt the project. If you do not want to\n" + 
-			    				"include the following slides in this project, you can delete\n" + 
-			    				"the imported slides after import is complete.\n\n" + 
-			    				"The import will complete soon.";
-		        		JOptionPane.showMessageDialog(null, message);
-		        	}
+			    	cancelImport();
 			    }
 			});
 
@@ -187,6 +157,43 @@ public class OpenPresentation {
 			task.addPropertyChangeListener(this);
 			frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			task.execute();
+		}
+		
+		public void cancelImport() {
+			if(isTaskCancellable) {
+	    		int confirm = JOptionPane.showOptionDialog(
+	    			null, "Are You Sure to cancel the import?", 
+		            "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+		            JOptionPane.QUESTION_MESSAGE, null, null, null);
+			        if (confirm == 0) {
+			        	if (task != null) {
+			        		System.out.println("cancelling task");
+			        		if(task.cancel(true)) {
+			        			Call.workspace.cancelled = true;
+				        		Call.workspace.endOperation();
+								frame.dispose();
+			        		} else {
+			        			// could not cancel
+			        			JOptionPane.showMessageDialog(
+			        				null,
+									"Could not cancel",
+									"", 
+									JOptionPane.INFORMATION_MESSAGE
+								);
+			        		}
+
+			        	}
+			        }
+	    	} else {
+	    		String message = 
+	    				"Sorry, the import cannot be cancelled at this time because\n" +
+	    				"the project has already been modified and cancelling import at\n" + 
+	    				"this time might corrupt the project. If you do not want to\n" + 
+	    				"include the following slides in this project, you can delete\n" + 
+	    				"the imported slides after import is complete.\n\n" + 
+	    				"The import will complete soon.";
+        		JOptionPane.showMessageDialog(null, message);
+        	}
 		}
 	}
 
@@ -241,6 +248,7 @@ public class OpenPresentation {
 		progressBar.setIndeterminate(true);
 
 		innerPanel = new JPanel();
+		springLayout.putConstraint(SpringLayout.EAST, innerPanel, -28, SpringLayout.EAST, frame.getContentPane());
 		innerPanel.setLayout(new BorderLayout(0, 0));
 		innerPanel.add(progressBar);
 		innerPanel.setSize(400, 30);
@@ -299,7 +307,7 @@ public class OpenPresentation {
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
 						// Where the GUI is constructed:
-						new ProgressDialog();
+						dialog = new ProgressDialog();
 						// Call.workspace.repopulateProject();
 						System.out.println("setup done");
 						// frame.dispose();
@@ -312,17 +320,20 @@ public class OpenPresentation {
 
 		frame.getContentPane().add(btnNewButton_1);
 
-		button = new JButton("Cancel");
-		button.addActionListener(new ActionListener() {
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Call.workspace.cancelled = true;
+				//Call.workspace.cancelled=true;
+				if(dialog != null) {
+					dialog.cancelImport();
+				} else {
+					frame.dispose();
+				}
 			}
 		});
-		springLayout.putConstraint(SpringLayout.NORTH, button, 0, SpringLayout.NORTH, btnNewButton_1);
-		springLayout.putConstraint(SpringLayout.EAST, button, -25, SpringLayout.EAST, frame.getContentPane());
-		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		// disable cancel button - ironstein 22-11-16
-		// frame.getContentPane().add(button);
-
+		springLayout.putConstraint(SpringLayout.NORTH, btnCancel, 0, SpringLayout.NORTH, btnNewButton_1);
+		springLayout.putConstraint(SpringLayout.WEST, btnCancel, 17, SpringLayout.EAST, btnNewButton_1);
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		frame.getContentPane().add(btnCancel);
 	}
 }

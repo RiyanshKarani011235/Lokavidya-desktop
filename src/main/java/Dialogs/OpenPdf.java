@@ -41,9 +41,10 @@ public class OpenPdf {
 	public JFrame frame;
 	public String pathDef;
 	public String path;
-	public ProgressDialog  dialog;
+	public ProgressDialog  dialog = null;
 	private JButton btnNewButton_1;
 	private JTextField textField_2;
+	private JButton btnCancel;
 
 	private JPanel innerPanel;
 	private JProgressBar progressBar;
@@ -152,40 +153,7 @@ public class OpenPdf {
 
 			    @Override
 			    public void windowClosing(WindowEvent e) {
-			    	if(isTaskCancellable) {
-			    		int confirm = JOptionPane.showOptionDialog(
-			    			null, "Are You Sure to cancel the import?", 
-				            "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
-				            JOptionPane.QUESTION_MESSAGE, null, null, null);
-					        if (confirm == 0) {
-					        	if (task != null) {
-					        		System.out.println("cancelling task");
-					        		if(task.cancel(true)) {
-					        			Call.workspace.cancelled = true;
-						        		Call.workspace.endOperation();
-										frame.dispose();
-					        		} else {
-					        			// could not cancel
-					        			JOptionPane.showMessageDialog(
-					        				null,
-											"Could not cancel",
-											"", 
-											JOptionPane.INFORMATION_MESSAGE
-										);
-					        		}
-	
-					        	}
-					        }
-			    	} else {
-			    		String message = 
-			    				"Sorry, the import cannot be cancelled at this time because\n" +
-			    				"the project has already been modified and cancelling import at\n" + 
-			    				"this time might corrupt the project. If you do not want to\n" + 
-			    				"include the following slides in this project, you can delete\n" + 
-			    				"the imported slides after import is complete.\n\n" + 
-			    				"The import will complete soon.";
-		        		JOptionPane.showMessageDialog(null, message);
-		        	}
+			    	cancelImport();
 			    }
 			});
 			
@@ -214,6 +182,7 @@ public class OpenPdf {
 	        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 	        task.execute();
 		}
+		
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
 			if ("progress" == evt.getPropertyName()) {
@@ -225,8 +194,44 @@ public class OpenPdf {
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
+			// TODO Auto-generated method stub	
+		}
+		
+		public void cancelImport() {
+			if(isTaskCancellable) {
+	    		int confirm = JOptionPane.showOptionDialog(
+	    			null, "Are You Sure to cancel the import?", 
+		            "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+		            JOptionPane.QUESTION_MESSAGE, null, null, null);
+			        if (confirm == 0) {
+			        	if (task != null) {
+			        		System.out.println("cancelling task");
+			        		if(task.cancel(true)) {
+			        			Call.workspace.cancelled = true;
+				        		Call.workspace.endOperation();
+								frame.dispose();
+			        		} else {
+			        			// could not cancel
+			        			JOptionPane.showMessageDialog(
+			        				null,
+									"Could not cancel",
+									"", 
+									JOptionPane.INFORMATION_MESSAGE
+								);
+			        		}
+
+			        	}
+			        }
+	    	} else {
+	    		String message = 
+	    				"Sorry, the import cannot be cancelled at this time because\n" +
+	    				"the project has already been modified and cancelling import at\n" + 
+	    				"this time might corrupt the project. If you do not want to\n" + 
+	    				"include the following slides in this project, you can delete\n" + 
+	    				"the imported slides after import is complete.\n\n" + 
+	    				"The import will complete soon.";
+        		JOptionPane.showMessageDialog(null, message);
+        	}
 		}
 }
 	public static void copyFile( File from, File to ){
@@ -327,6 +332,22 @@ public class OpenPdf {
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frame.getContentPane().add(btnNewButton_1);
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Call.workspace.cancelled=true;
+				if(dialog != null) {
+					dialog.cancelImport();
+				} else {
+					frame.dispose();
+				}
+			}
+		});
+		springLayout.putConstraint(SpringLayout.NORTH, btnCancel, 0, SpringLayout.NORTH, btnNewButton_1);
+		springLayout.putConstraint(SpringLayout.WEST, btnCancel, 17, SpringLayout.EAST, btnNewButton_1);
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		frame.getContentPane().add(btnCancel);
 	}
 
 }

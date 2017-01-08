@@ -50,6 +50,7 @@ public class OpenVideo {
 	private JPanel innerPanel;
 	private JProgressBar progressBar;
 	private JLabel lblNewLabel1;
+	private JButton btnCancel;
 
 	class ProgressDialog extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -100,29 +101,7 @@ public class OpenVideo {
 
 			    @Override
 			    public void windowClosing(WindowEvent e) {
-			    	if(isTaskCancellable) {
-			    		int confirm = JOptionPane.showOptionDialog(
-			    			null, "Are You Sure to cancel the import?", 
-				            "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
-				            JOptionPane.QUESTION_MESSAGE, null, null, null);
-					        if (confirm == 0) {
-					        	if (task != null) {
-					        		System.out.println("cancelling task");
-					        		task.cancel(true);
-					        		Call.workspace.endOperation();
-									frame.dispose();
-					        	}
-					        }
-			    	} else {
-			    		String message = 
-			    				"Sorry, the import cannot be cancelled at this time because\n" +
-			    				"the project has already been modified and cancelling import at\n" + 
-			    				"this time might corrupt the project. If you do not want to\n" + 
-			    				"include the following slides in this project, you can delete\n" + 
-			    				"the imported slides after import is complete.\n\n" + 
-			    				"The import will complete soon.";
-		        		JOptionPane.showMessageDialog(null, message);
-		        	}
+			    	cancelImport();
 			    }
 			});
 			
@@ -149,6 +128,32 @@ public class OpenVideo {
 			task.addPropertyChangeListener(this);
 			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			task.execute();
+		}
+		
+		public void cancelImport() {
+			if(isTaskCancellable) {
+	    		int confirm = JOptionPane.showOptionDialog(
+	    			null, "Are You Sure to cancel the import?", 
+		            "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+		            JOptionPane.QUESTION_MESSAGE, null, null, null);
+			        if (confirm == 0) {
+			        	if (task != null) {
+			        		System.out.println("cancelling task");
+			        		task.cancel(true);
+			        		Call.workspace.endOperation();
+							frame.dispose();
+			        	}
+			        }
+	    	} else {
+	    		String message = 
+	    				"Sorry, the import cannot be cancelled at this time because\n" +
+	    				"the project has already been modified and cancelling import at\n" + 
+	    				"this time might corrupt the project. If you do not want to\n" + 
+	    				"include the following slides in this project, you can delete\n" + 
+	    				"the imported slides after import is complete.\n\n" + 
+	    				"The import will complete soon.";
+        		JOptionPane.showMessageDialog(null, message);
+        	}
 		}
 
 		@Override
@@ -267,6 +272,22 @@ public class OpenVideo {
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frame.getContentPane().add(btnNewButton_1);
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Call.workspace.cancelled=true;
+				if(dialog != null) {
+					dialog.cancelImport();
+				} else {
+					frame.dispose();
+				}
+			}
+		});
+		springLayout.putConstraint(SpringLayout.NORTH, btnCancel, 0, SpringLayout.NORTH, btnNewButton_1);
+		springLayout.putConstraint(SpringLayout.WEST, btnCancel, 17, SpringLayout.EAST, btnNewButton_1);
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		frame.getContentPane().add(btnCancel);
 	}
 
 }

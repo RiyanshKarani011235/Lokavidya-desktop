@@ -433,6 +433,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		System.out.println("Populating Timeline");
 		populateTimeline();
 		System.out.println("Done Populating Project");
+		lblSlideDisplay.setIcon(createImageIcon("resources/start.jpg"));
 		this.setTitle(this.path);
 	}
 
