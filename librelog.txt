@@ -1,0 +1,6 @@
+
+Acquired mutex lock for /Users/ironstein/Documents/0113/test_presentation_0.pptx
+Acquired mutex lock for /Users/ironstein/Documents/0113/test_presentation_0.pptx
+Released mutex lock for /Users/ironstein/Documents/0113/img_1.jpg
+Acquired mutex lock for /Users/ironstein/Documents/0113/test_presentation.0.pptx
+Released mutex lock for /Users/ironstein/Documents/0113/kvfqqvme0x.odp

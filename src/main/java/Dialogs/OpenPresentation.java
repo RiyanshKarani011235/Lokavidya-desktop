@@ -231,10 +231,8 @@ public class OpenPresentation {
 	}
 
 	public void initialize() {
-
-		System.out.println("passed 1");
 		frame = new JFrame();
-		frame.setBounds(100, 100, 502, 280);
+		frame.setBounds(100, 100, 442, 280);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		SpringLayout springLayout = new SpringLayout();
 		frame.getContentPane().setLayout(springLayout);
@@ -242,32 +240,14 @@ public class OpenPresentation {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		frame.getContentPane().add(lblNewLabel);
 
-		progressBar = new JProgressBar(0, 100);
-		progressBar.setValue(0);
-		progressBar.setStringPainted(true);
-		progressBar.setIndeterminate(true);
-
-		innerPanel = new JPanel();
-		springLayout.putConstraint(SpringLayout.EAST, innerPanel, -28, SpringLayout.EAST, frame.getContentPane());
-		innerPanel.setLayout(new BorderLayout(0, 0));
-		innerPanel.add(progressBar);
-		innerPanel.setSize(400, 30);
-		innerPanel.setVisible(false);
-		innerPanel.setOpaque(true);
-
-		lblNewLabel1 = new JLabel("Importing presentation. Please wait....");
-		innerPanel.add(lblNewLabel1, BorderLayout.SOUTH);
-		// innerPanel.setVisible(false);
-		frame.getContentPane().add(innerPanel);
-
 		textField_2 = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, -3, SpringLayout.NORTH, textField_2);
-		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, -6, SpringLayout.WEST, textField_2);
 		springLayout.putConstraint(SpringLayout.NORTH, textField_2, 73, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, textField_2, 197, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, textField_2, 161, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 1, SpringLayout.NORTH, textField_2);
+		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, -6, SpringLayout.WEST, textField_2);
 
 		textField_2.setColumns(10);
-		String Os = System.getProperty("os.name");
+
 		pathDef = GeneralUtils.getDocumentsPath();
 		textField_2.setText(pathDef);
 		frame.getContentPane().add(textField_2);
@@ -285,41 +265,42 @@ public class OpenPresentation {
 		});
 		frame.getContentPane().add(btnNewButton_2);
 
-		btnNewButton_1 = new JButton("Import");
-		springLayout.putConstraint(SpringLayout.WEST, innerPanel, 38, SpringLayout.EAST, btnNewButton_1);
-		springLayout.putConstraint(SpringLayout.SOUTH, innerPanel, 0, SpringLayout.SOUTH, btnNewButton_1);
+		progressBar = new JProgressBar(0, 100);
+		progressBar.setValue(0);
+		progressBar.setStringPainted(true);
+		progressBar.setIndeterminate(true);
+		innerPanel = new JPanel();
+		springLayout.putConstraint(SpringLayout.EAST, innerPanel, -28, SpringLayout.EAST, frame.getContentPane());
 
+		innerPanel.setLayout(new BorderLayout(0, 0));
+		innerPanel.add(progressBar);
+		innerPanel.setSize(400, 30);
+		innerPanel.setVisible(false);
+		innerPanel.setOpaque(true);
+
+		lblNewLabel1 = new JLabel("Opening file..Please wait.");
+		innerPanel.add(lblNewLabel1, BorderLayout.SOUTH);
+		// innerPanel.setVisible(false);
+		frame.getContentPane().add(innerPanel);
+
+		btnNewButton_1 = new JButton("Import");
+		springLayout.putConstraint(SpringLayout.SOUTH, innerPanel, 0, SpringLayout.SOUTH, btnNewButton_1);
 		springLayout.putConstraint(SpringLayout.WEST, btnNewButton_1, 27, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton_1, -28, SpringLayout.SOUTH, frame.getContentPane());
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textField_2.getText().equals("")) {
-					System.out.println("Path null");
-					JOptionPane.showMessageDialog(null, "Enter the presentation location", "",
+				if (new File(textField_2.getText()).isDirectory() || textField_2.getText() == ""
+						|| !(textField_2.getText().endsWith(".ppt") || textField_2.getText().endsWith(".pptx"))) {
+					JOptionPane.showMessageDialog(null, "Enter the location for either a ppt file or a pptx file", "",
 							JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					path = textField_2.getText();
-					System.out.println(path);
-
-					// check if valid path
-					if (path == "" || new File(path).isDirectory()) {
-						JOptionPane.showMessageDialog(null, "Enter the presentation location", "",
-								JOptionPane.INFORMATION_MESSAGE);
-					} else {
-						// Where the GUI is constructed:
-						dialog = new ProgressDialog();
-						// Call.workspace.repopulateProject();
-						System.out.println("setup done");
-						// frame.dispose();
-					}
-
+					dialog = new ProgressDialog();
 				}
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-
 		frame.getContentPane().add(btnNewButton_1);
-
+		
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
