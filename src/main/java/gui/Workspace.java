@@ -167,7 +167,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 	public static boolean playing = false;
 	public List<File> deleteList;
 	public int framerate = 3;
-	private static JLabel lblSlideDisplay;
+	public static JLabel lblSlideDisplay;
 	int currentSlideNumber = 0;
 	public static LibSlide currentSlide = null;
 	public JButton stopbtn;
@@ -433,8 +433,6 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		System.out.println("Populating Timeline");
 		populateTimeline();
 		System.out.println("Done Populating Project");
-		lblSlideDisplay.setIcon(createImageIcon("resources/start.jpg"));
-		this.setTitle(this.path);
 	}
 
 	public void populateExplorer() {
@@ -733,7 +731,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		}
 	}
 
-	protected static ImageIcon createImageIcon(String path) {
+	public static ImageIcon createImageIcon(String path) {
 		System.out.println("path : " + path);
 		java.net.URL imgURL = Workspace.class.getResource(path);
 		if (imgURL != null) {

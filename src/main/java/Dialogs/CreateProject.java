@@ -109,6 +109,11 @@ public class CreateProject {
 								setProgress(75);
 
 								Call.workspace.createProject();
+								
+								// refresh the screen to show black screen
+								Call.workspace.lblSlideDisplay.setIcon(Call.workspace.createImageIcon("resources/start.jpg"));
+								Call.workspace.setTitle(Call.workspace.path);
+								
 								setProgress(100);
 								Thread.sleep(1000);
 							}

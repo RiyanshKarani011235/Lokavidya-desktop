@@ -241,7 +241,7 @@ public class CaptureScreenToFile {
 
 				// draw a cool tooltip
 				Graphics2D graphics2D = rawShot.createGraphics();
-				graphics2D.drawImage(cursor, x, y, 30, 30, null); // cursor.gif is 16x16 size.
+				graphics2D.drawImage(cursor, x, y, 48, 48, null); // cursor.gif is 48x48 size.
 			}
 
 			// scale the image to fit the window width and window height

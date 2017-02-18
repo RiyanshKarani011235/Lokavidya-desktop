@@ -25,12 +25,18 @@ public class VideoCapture implements Runnable {
 	}
 
 	public void start() {
+		System.out.println("VideoCapture : start : called");
+		
+		File tempFolder = new File(System.getProperty("java.io.tmpdir"), "ScreenRec");
+		tempFolder.mkdir();
+		videoEncoder = new CaptureScreenToFile(outFile);
 
 		thread = new Thread(this);
 		if (thread == null) {
 			System.out.println("Thread starting off as null");
 			// thread.setName("Capture");
 		} else {
+			System.out.println("Thread starting");
 			thread.start();
 		}
 	}
@@ -51,9 +57,6 @@ public class VideoCapture implements Runnable {
 
 	public void run() {
 		try {
-			File tempFolder = new File(System.getProperty("java.io.tmpdir"), "ScreenRec");
-			tempFolder.mkdir();
-			videoEncoder = new CaptureScreenToFile(outFile);
 
 			while (thread != null) {
 				if (!Call.workspace.paused) {
@@ -111,6 +114,7 @@ public class VideoCapture implements Runnable {
 			// outFile,Integer.toString(videoEncoder.getFps()));
 		} catch (Exception e) {
 			System.out.println("RunTime Exception");
+			e.printStackTrace();
 			shutDown(e.getMessage());
 		}
 	}
