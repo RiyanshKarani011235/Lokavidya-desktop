@@ -14,6 +14,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.TargetDataLine;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.math.RandomUtils;
+
+import com.iitb.lokavidya.core.utils.FFMPEGWrapper;
 import com.iitb.lokavidya.core.utils.GeneralUtils;
 
 import gui.Call;
@@ -62,9 +66,21 @@ public class AudioCapture implements Runnable {
 	private int mBufferLengthInBytes;
 	private byte[] mData;
 	private int mNumBytesRead;
+	private SynchronousAudioVideoCapture mCapture;
+	private int mFrameRate;
 	
-	public AudioCapture(String audioFilePath) throws UserDefinedExceptions.CouldNotStartRecordingException, LineUnavailableException {
-		this.mAudioFilePath = audioFilePath;
+	public int getFrameRate() {
+		return mFrameRate;
+	}
+	
+	public void setFrameRate(int frameRate) {
+		mFrameRate = frameRate;
+	}
+	
+	public AudioCapture(String audioFilePath, int frameRate, SynchronousAudioVideoCapture capture) throws UserDefinedExceptions.CouldNotStartRecordingException, LineUnavailableException {
+		mAudioFilePath = audioFilePath;
+		mCapture = capture;
+		mFrameRate = frameRate;
 		
 		// define the required attributes for our line
 		mFormat = new AudioFormat(mEncoding, mRate, mSampleSize, mChannels, (mSampleSize / 8) * mChannels, mRate, mIsBigEndian);
@@ -93,6 +109,8 @@ public class AudioCapture implements Runnable {
 
 	public void run() {
 		
+		System.out.println("audio capture run called");
+		
 		if ((mNumBytesRead = mLine.read(mData, 0, mBufferLengthInBytes)) == -1) {
 			System.out.println("Breaking from while ntz");
 			return;
@@ -100,6 +118,11 @@ public class AudioCapture implements Runnable {
 	
 		mOut.write(mData, 0, mNumBytesRead);
 		mOut1.write(mData, 0, mNumBytesRead);
+		
+		if(mCapture.getState() == SynchronousAudioVideoCapture.States.PAUSED) {
+			System.out.println("audio capture pausing");
+			mCapture.getAudioCaptureScheduler().cancel(true);
+		}
 	}
 	
 	public void stop() throws IOException {
@@ -121,10 +144,32 @@ public class AudioCapture implements Runnable {
 		ByteArrayInputStream bais = new ByteArrayInputStream(audioBytes);
 		mAudioInputStream = new AudioInputStream(bais, mFormat, audioBytes.length / mFrameSizeInBytes);
 
-		System.out.println("Saving audio file at " + mAudioFilePath);
-
 		AudioSystem.write(mAudioInputStream, AudioFileFormat.Type.WAVE, new File(mAudioFilePath));
 		mAudioInputStream.reset();
+
+		// convert the .wav file to .mp3 file (which is much much smaller in size than the .wav file)
+		
+		FFMPEGWrapper wrapper = new FFMPEGWrapper();
+		// generate random string of 20 numbers
+		String randomString = "";
+		for(int i=0; i<20; i++) {
+			randomString += RandomUtils.nextInt();
+		}
+		String newAudioFilePath = FilenameUtils.removeExtension(mAudioFilePath) + RandomUtils.nextInt() + randomString + ".wav";
+		String[] command = new String[] {
+				wrapper.pathExecutable,
+				"-i",
+				mAudioFilePath,
+				"-codec:a",
+				"libmp3lame",
+				"-qscale:a",
+				"2",
+				newAudioFilePath
+		};
+		GeneralUtils.runProcess(command);
+		
+		new File(mAudioFilePath).delete();
+		new File(newAudioFilePath).renameTo(new File(mAudioFilePath));
 	}
 	
 }

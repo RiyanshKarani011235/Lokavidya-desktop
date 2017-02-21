@@ -93,6 +93,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
+
+import CustomComponents.LagJButton;
 import instructions.GhostScriptInstructions;
 import libreoffice.LibreDesktop;
 
@@ -151,7 +153,20 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 	public JCheckBoxMenuItem mntmDecideRecordingArea;
 	private JPanel panel, StitchToolbarpanel, innerPanel;
 	private JTabbedPane tabbedPane;
-	public JButton btnRecord, btnDelete, btnRefresh;
+	
+	public LagJButton btnRecord;
+	public LagJButton btnScreenRec;
+	public LagJButton stopbtn;
+	public LagJButton btnNext;
+	public LagJButton btnDiscard;
+	public LagJButton btnRefresh;
+	public LagJButton btnStitch;
+	public LagJButton btnAdd;
+	public LagJButton btnDelete;
+	public LagJButton btnSelectAll;
+	public LagJButton btnUnselectAll;
+	
+	
 	public String path, location, name;
 	public ArrayList<CustomPanel> customPanelList;
 	public XMLSlideShow currentPptx;
@@ -170,20 +185,14 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 	public static JLabel lblSlideDisplay;
 	int currentSlideNumber = 0;
 	public static LibSlide currentSlide = null;
-	public JButton stopbtn;
-	public JButton btnNext;
 	private JScrollPane scrollPane;
 	private JScrollPane timelineScroll;
 	public JButton btnSaveOrder;
-	public JButton btnStitch, btnSelectAll, btnUnselectAll;
 	public JButton btnInsert;
-	public JButton btnDiscard;
-	public JButton btnAdd;
 	public static Project currentProject;
 	public static Segment currentSegment;
 	public List<Segment> refreshList;
 	private static ProjectOperations po;
-	public JButton btnScreenRec;
 	public JTextArea notesArea;
 	public JLabel notesLabel_1, notesLabel_2;
 	public JButton btnNewButton;
@@ -1398,7 +1407,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		SpringLayout sl_panel = new SpringLayout();
 		panel.setLayout(sl_panel);
 
-		btnRecord = new JButton("");
+		btnRecord = new LagJButton("");
 		sl_panel.putConstraint(SpringLayout.NORTH, btnRecord, 10, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, btnRecord, 10, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.SOUTH, btnRecord, -7, SpringLayout.SOUTH, panel);
@@ -1411,21 +1420,18 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		btnRecord.setToolTipText("Start Audio Recording");
 		btnRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Gif.main(null);
 				if (playing && (!paused)) {
+					// PAUSED - NOW START RECORDING
 					paused = true;
 					btnRecord.setIcon(createImageIcon("resources/record.png"));
 					btnRecord.setToolTipText("Resume Audio Recording");
-					// playing=false;
 				} else if (playing && paused) {
-					System.out.println("playing and paused");
-					// recFrame.showFrame();
+					// RECORDING - NOW PAUSE RECORDING
 					paused = false;
-					btnRecord.setEnabled(true);
 					btnRecord.setIcon(createImageIcon("resources/pause.png"));
 					btnRecord.setToolTipText("Pause Audio Recording");
 				} else {
-					btnRecord.setToolTipText("Pause Audio Recording");
+					// NOT PLAYING - NOW START PLAYING
 					playing = true;
 					if (currentSlide == null)
 						setPreview(Integer.toString(currentSlideNumber));
@@ -1435,11 +1441,10 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 					ProjectOperations.startAudioRecording(currentProject, currentSegment);
 					WorkspaceUIHelper.disableRecord();
 
-					System.out.println("outside thread,,,");
-
 				}
 			}
 		});
+		
 		btnRecord.setIcon(createImageIcon("resources/record.png"));
 		btnRecord.setBackground(new Color(176, 196, 222));
 		panel.add(btnRecord);
@@ -1454,7 +1459,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		springLayout_1.putConstraint(SpringLayout.EAST, panel, 0, SpringLayout.EAST, lblSlideDisplay);
 		lblSlideDisplay.setHorizontalAlignment(SwingConstants.CENTER);
 
-		stopbtn = new JButton("");
+		stopbtn = new LagJButton("");
 		sl_panel.putConstraint(SpringLayout.NORTH, stopbtn, 0, SpringLayout.NORTH, btnRecord);
 		sl_panel.putConstraint(SpringLayout.SOUTH, stopbtn, -7, SpringLayout.SOUTH, panel);
 		stopbtn.setSelectedIcon(createImageIcon("resources/stop.png"));
@@ -1491,7 +1496,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		stopbtn.setBackground(new Color(176, 196, 222));
 		panel.add(stopbtn);
 
-		btnNext = new JButton("");
+		btnNext = new LagJButton("");
 		sl_panel.putConstraint(SpringLayout.EAST, stopbtn, -333, SpringLayout.WEST, btnNext);
 		sl_panel.putConstraint(SpringLayout.WEST, btnNext, -156, SpringLayout.EAST, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, btnNext, -111, SpringLayout.EAST, panel);
@@ -1528,7 +1533,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		btnNext.setBackground(new Color(176, 196, 222));
 		panel.add(btnNext);
 
-		btnDiscard = new JButton("");
+		btnDiscard = new LagJButton("");
 		sl_panel.putConstraint(SpringLayout.NORTH, btnDiscard, 10, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.SOUTH, btnDiscard, -7, SpringLayout.SOUTH, panel);
 		btnDiscard.setToolTipText("Delete");
@@ -1545,7 +1550,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		btnDiscard.setBackground(new Color(176, 196, 222));
 		panel.add(btnDiscard);
 
-		btnScreenRec = new JButton("");
+		btnScreenRec = new LagJButton("");
 		sl_panel.putConstraint(SpringLayout.WEST, stopbtn, 14, SpringLayout.EAST, btnScreenRec);
 		sl_panel.putConstraint(SpringLayout.NORTH, btnScreenRec, 0, SpringLayout.NORTH, btnRecord);
 		sl_panel.putConstraint(SpringLayout.WEST, btnScreenRec, 13, SpringLayout.EAST, btnRecord);
@@ -1555,16 +1560,19 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		btnScreenRec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (screenRecordingFlag && (!paused)) {
+					// CURRENTLY RECORDING --> PAUSE
 					paused = true;
 					btnScreenRec.setIcon(createImageIcon("resources/videocam.png"));
 					btnScreenRec.setToolTipText("Resume Screen Recording");
 					// playing=false;
 				} else if (screenRecordingFlag && paused) {
+					// CURRENTLY PAUSED --> RESUME
 					paused = false;
 					btnScreenRec.setEnabled(true);
 					btnScreenRec.setIcon(createImageIcon("resources/pause.png"));
 					btnScreenRec.setToolTipText("Pause Screen Recording");
 				} else {
+					// NOT RECORDING --> START
 					btnScreenRec.setToolTipText("Pause Screen Recording");
 					if (currentSlide == null)
 						setPreview(Integer.toString(currentSlideNumber));
@@ -1572,11 +1580,13 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 					// disable button so that it can not be clicked during
 					// countdown
 					btnScreenRec.setEnabled(false);
+					// start countdown
 					JTimer.main(null);
 
 					/* TODO pass selected segment */
-					/* Place holder Segment */// currentSegment = new
-												// Segment(currentProject.getProjectURL());
+					/* Place holder Segment */
+					// currentSegment = new
+					// Segment(currentProject.getProjectURL());
 				}
 			}
 
@@ -1688,7 +1698,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		StitchToolbarpanel.setBackground(SystemColor.control);
 		timelineFrame.getContentPane().add(StitchToolbarpanel);
 
-		btnRefresh = new JButton("Refresh");
+		btnRefresh = new LagJButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				progressBarFlag = 1;
@@ -1713,7 +1723,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		btnInsert.setFont(new Font("Dialog", Font.BOLD, 10));
 		btnInsert.setBackground(new Color(245, 245, 245));
 
-		btnDelete = new JButton("Delete");
+		btnDelete = new LagJButton("Delete");
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.NORTH, btnDelete, 74, SpringLayout.NORTH, StitchToolbarpanel);
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.SOUTH, btnDelete, 95, SpringLayout.NORTH, StitchToolbarpanel);
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.WEST, btnDelete, 2, SpringLayout.WEST, StitchToolbarpanel);
@@ -1751,7 +1761,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		innerPanel.add(lblNewLabel1, BorderLayout.SOUTH);
 		StitchToolbarpanel.add(innerPanel);
 
-		btnStitch = new JButton("Create");
+		btnStitch = new LagJButton("Create");
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.NORTH, btnStitch, 28, SpringLayout.NORTH, StitchToolbarpanel);
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.WEST, btnStitch, 2, SpringLayout.WEST, StitchToolbarpanel);
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.SOUTH, btnStitch, 49, SpringLayout.NORTH, StitchToolbarpanel);
@@ -1781,7 +1791,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		btnSaveOrder.setBackground(new Color(245, 245, 245));
 		// StitchToolbarpanel.add(btnSaveOrder);
 
-		btnAdd = new JButton("Add");
+		btnAdd = new LagJButton("Add");
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.NORTH, btnAdd, 51, SpringLayout.NORTH, StitchToolbarpanel);
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.WEST, btnAdd, 2, SpringLayout.WEST, StitchToolbarpanel);
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.SOUTH, btnAdd, 72, SpringLayout.NORTH, StitchToolbarpanel);
@@ -1797,7 +1807,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		btnAdd.setBackground(new Color(245, 245, 245));
 		StitchToolbarpanel.add(btnAdd);
 
-		btnSelectAll = new JButton("Select All");
+		btnSelectAll = new LagJButton("Select All");
 		btnSelectAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < customPanelList.size(); i++) {
@@ -1819,7 +1829,7 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.WEST, btnSelectAll, 2, SpringLayout.WEST, StitchToolbarpanel);
 		sl_StitchToolbarpanel.putConstraint(SpringLayout.EAST, btnSelectAll, 98, SpringLayout.WEST, StitchToolbarpanel);
 
-		btnUnselectAll = new JButton("Unselect All");
+		btnUnselectAll = new LagJButton("Unselect All");
 		btnUnselectAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < customPanelList.size(); i++) {

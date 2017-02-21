@@ -11,7 +11,6 @@ import java.util.List;
 import org.apache.commons.lang.RandomStringUtils;
 
 import Xuggler.DecodeAndSaveAudioVideo;
-import Xuggler.VideoCapture;
 
 import com.iitb.lokavidya.core.data.Audio;
 import com.iitb.lokavidya.core.data.Project;
@@ -22,12 +21,17 @@ import com.iitb.lokavidya.core.utils.GeneralUtils;
 import com.iitb.lokavidya.core.utils.SoundCapture;
 import com.sun.star.setup.CopyFileAction;
 
+import SynchronousAudioVideoCapture.AudioCapture;
+import SynchronousAudioVideoCapture.SynchronousAudioVideoCapture;
+import SynchronousAudioVideoCapture.VideoCapture;
+
 public class ProjectOperations {
 	static SoundCapture currentSound = null;
 	static VideoCapture currentMuteVideo=null;
+	static AudioCapture currentAudio=null;
+	static SynchronousAudioVideoCapture currentCapture = null;
 	static String tempAudioURL;
 	static String tempVideoURL;
-	static SoundCapture currentAudio=null;
 
 	public static void stitch(Project project) {
 		FFMPEGWrapper ffmpegWrapper = new FFMPEGWrapper();
@@ -141,11 +145,22 @@ public class ProjectOperations {
 		segment=segmentA;
 		tempAudioURL=new File(project.getProjectURL(),(RandomStringUtils.randomAlphanumeric(10).toLowerCase()+".wav")).getAbsolutePath();
 		tempVideoURL=new File((RandomStringUtils.randomAlphanumeric(10).toLowerCase()+".flv")).getAbsolutePath();
-		currentAudio = new SoundCapture(tempAudioURL);		
-		currentMuteVideo=new VideoCapture();
-		currentMuteVideo.addFile(tempVideoURL);
-		currentMuteVideo.start();
-		currentAudio.startRecording();
+
+		try {
+			currentCapture = new SynchronousAudioVideoCapture(tempAudioURL, tempVideoURL);
+//			currentAudio = new SoundCapture(tempAudioURL);
+			currentAudio = currentCapture.getAudioCapture();
+			currentMuteVideo = currentCapture.getVideoCapture();
+//			currentMuteVideo=new VideoCapture();
+//			currentMuteVideo.addFile(tempVideoURL);
+//			currentMuteVideo.start();
+//			currentAudio.startRecording();
+			currentCapture.startRecording();
+		} catch (java.lang.Exception e) {
+			// TODO show dialogue (could not start recording)
+			e.printStackTrace();
+		}
+
 	}
 
 	public static void playSlideRecording() {
@@ -184,16 +199,18 @@ public class ProjectOperations {
 	}
 
 	public void discardToggleSlideRecording(Project project) {
-		currentAudio.stopRecording();
-        currentMuteVideo.stop();
+//		currentAudio.stopRecording();
+//        currentMuteVideo.stop();
+		currentCapture.stopRecording();
 		SegmentService.deleteVideo(project,segment );
 		SegmentService.deleteAudio(project, segment);
 //        Call.workspace.cancelOperation();
 	}
 
 	public void stopToggleSlideRecording(Project project) {
-		currentAudio.stopRecording();
-        currentMuteVideo.stop();
+//		currentAudio.stopRecording();
+//        currentMuteVideo.stop();
+		currentCapture.stopRecording();
         segment.getSlide().setTempAudioURL(tempAudioURL);
         segment.getSlide().setTempMuteVideoURL(tempVideoURL);
         
