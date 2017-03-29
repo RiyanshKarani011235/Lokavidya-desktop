@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"displayInstructions":{"readInstructions":"n","openPresentation":"n","openVideo":"n","openAndroidProject":"n","openPdf":"n"},"paths":{"ghostScript":null,"OpenOffice":"/Applications/LibreOffice.app/Contents/MacOs/soffice"}}
+=======
+{"displayInstructions":{"readInstructions":"n","openPresentation":"n","openVideo":"n","openAndroidProject":"n","openPdf":"n"},"paths":{"OpenOffice":null,"ghostScript":null}}
+>>>>>>> bugFixes

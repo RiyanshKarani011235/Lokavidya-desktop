@@ -11,8 +11,6 @@ import java.util.List;
 import org.apache.commons.lang.RandomStringUtils;
 
 import Xuggler.DecodeAndSaveAudioVideo;
-import Xuggler.VidCapture;
-import Xuggler.VideoCapture;
 
 import com.iitb.lokavidya.core.data.Audio;
 import com.iitb.lokavidya.core.data.Project;
@@ -23,12 +21,17 @@ import com.iitb.lokavidya.core.utils.GeneralUtils;
 import com.iitb.lokavidya.core.utils.SoundCapture;
 import com.sun.star.setup.CopyFileAction;
 
+import SynchronousAudioVideoCapture.AudioCapture;
+import SynchronousAudioVideoCapture.SynchronousAudioVideoCapture;
+import SynchronousAudioVideoCapture.VideoCapture;
+
 public class ProjectOperations {
 	static SoundCapture currentSound = null;
 	static VideoCapture currentMuteVideo=null;
+	static AudioCapture currentAudio=null;
+	static SynchronousAudioVideoCapture currentCapture = null;
 	static String tempAudioURL;
 	static String tempVideoURL;
-	static SoundCapture currentAudio=null;
 
 	public static void stitch(Project project) {
 		FFMPEGWrapper ffmpegWrapper = new FFMPEGWrapper();
@@ -142,11 +145,22 @@ public class ProjectOperations {
 		segment=segmentA;
 		tempAudioURL=new File(project.getProjectURL(),(RandomStringUtils.randomAlphanumeric(10).toLowerCase()+".wav")).getAbsolutePath();
 		tempVideoURL=new File((RandomStringUtils.randomAlphanumeric(10).toLowerCase()+".flv")).getAbsolutePath();
-		currentAudio = new SoundCapture(tempAudioURL);		
-		currentMuteVideo=new VideoCapture();
-		currentMuteVideo.addFile(tempVideoURL);
-		currentMuteVideo.start();
-		currentAudio.startRecording();
+
+		try {
+			currentCapture = new SynchronousAudioVideoCapture(tempAudioURL, tempVideoURL);
+//			currentAudio = new SoundCapture(tempAudioURL);
+			currentAudio = currentCapture.getAudioCapture();
+			currentMuteVideo = currentCapture.getVideoCapture();
+//			currentMuteVideo=new VideoCapture();
+//			currentMuteVideo.addFile(tempVideoURL);
+//			currentMuteVideo.start();
+//			currentAudio.startRecording();
+			currentCapture.startRecording();
+		} catch (java.lang.Exception e) {
+			// TODO show dialogue (could not start recording)
+			e.printStackTrace();
+		}
+
 	}
 
 	public static void playSlideRecording() {
@@ -181,20 +195,22 @@ public class ProjectOperations {
 	public static void discardSlideRecording(Project p) {
 		currentSound.stopRecording();
 		SegmentService.deleteAudio(p, segment);
-		Call.workspace.cancelOperation();
+//		Call.workspace.cancelOperation();
 	}
 
 	public void discardToggleSlideRecording(Project project) {
-		currentAudio.stopRecording();
-        currentMuteVideo.stop();
+//		currentAudio.stopRecording();
+//        currentMuteVideo.stop();
+		currentCapture.stopRecording();
 		SegmentService.deleteVideo(project,segment );
 		SegmentService.deleteAudio(project, segment);
-        Call.workspace.cancelOperation();
+//        Call.workspace.cancelOperation();
 	}
 
 	public void stopToggleSlideRecording(Project project) {
-		currentAudio.stopRecording();
-        currentMuteVideo.stop();
+//		currentAudio.stopRecording();
+//        currentMuteVideo.stop();
+		currentCapture.stopRecording();
         segment.getSlide().setTempAudioURL(tempAudioURL);
         segment.getSlide().setTempMuteVideoURL(tempVideoURL);
         
@@ -240,56 +256,79 @@ public class ProjectOperations {
 					globalVideo = new Video(project.getProjectURL());
 					System.out.println("converting " + tempVideo.getAbsolutePath() + " to " + globalVideo.getVideoURL());
 					FFMPEGWrapper wrapper = new FFMPEGWrapper();
+					String tmpVideoPath = new File(System.getProperty("java.io.tmpdir"), "tempVideoBeforeSaving.mp4").getAbsolutePath();
 					
 					String[] command;
-					if(System.getProperty("os.name").toLowerCase().contains("mac")) {
-						command = new String[] {
-							wrapper.pathExecutable, 
-							"-i", 
-							tempVideo.getAbsolutePath(),
-							"-y",
-							"-c:v",
-							"libx264",
-							"-c:a",
-							"aac",
-							"-strict",
-							"experimental",
-							globalVideo.getVideoURL()
-						};
-					} else {
-						command = new String[] {
-							wrapper.pathExecutable, 
-							"-i", 
-							tempVideo.getAbsolutePath(),
-							"-y",
-							"-c:v",
-							"libxvid",
-							"-c:a",
-							"aac",
-							"-strict",
-							"experimental",
-							globalVideo.getVideoURL()
-						};
-					}
-					GeneralUtils.runProcess(command);
 					
-					// convert globalVideo encoding to libx264
-					if(!System.getProperty("os.name").toLowerCase().contains("mac")) {
-						command = new String[] {
-								wrapper.pathExecutable, 
-								"-i", 
-								globalVideo.getVideoURL(),
-								"-y",
-								"-c:v",
-								"libx264",
-								"-c:a",
-								"aac",
-								"-strict",
-								"experimental",
-								globalVideo.getVideoURL()
-							};
-						GeneralUtils.runProcess(command);
-					}
+					command = new String[] {
+						wrapper.pathExecutable, 
+						"-i", 
+						tempVideo.getAbsolutePath(),
+						"-y",
+						"-c:v",
+						wrapper.encoding,
+						"-c:a",
+						"aac",
+//						"-crf",
+//						"22",
+						"-strict",
+						"experimental",
+						globalVideo.getVideoURL()
+					};
+					GeneralUtils.runProcess(command);
+							
+//					if(System.getProperty("os.name").toLowerCase().contains("mac")) {
+//						command = new String[] {
+//							wrapper.pathExecutable, 
+//							"-i", 
+//							tempVideo.getAbsolutePath(),
+//							"-y",
+//							"-c:v",
+//							"libx264",
+//							"-c:a",
+//							"aac",
+//							"-strict",
+//							"experimental",
+//							globalVideo.getVideoURL()
+//						};
+//					} else {
+//						command = new String[] {
+//							wrapper.pathExecutable, 
+//							"-i", 
+//							tempVideo.getAbsolutePath(),
+//							"-y",
+//							"-c:v",
+//							"libxvid",
+//							"-c:a",
+//							"aac",
+//							"-strict",
+//							"experimental",
+//							globalVideo.getVideoURL()
+//						};
+//					}
+//					GeneralUtils.runProcess(command);
+//					
+//					// convert globalVideo encoding to libx264
+//					if(!System.getProperty("os.name").toLowerCase().contains("mac")) {
+//						command = new String[] {
+//								wrapper.pathExecutable, 
+//								"-i", 
+//								tmpVideoPath,
+//								"-y",
+//								"-c:v",
+//								"libx264",
+//								"-preset",
+//								"slow",
+//								"-crf",
+//								"22",
+//								"-c:a",
+//								"copy",
+//								globalVideo.getVideoURL()
+//							};
+//						GeneralUtils.runProcess(command);
+//					}
+					
+//					new File(tmpVideoPath).delete();
 					
 					Video screenVideo = new Video(globalVideo.getVideoURL(), project.getProjectURL());
 

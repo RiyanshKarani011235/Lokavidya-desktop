@@ -8,8 +8,8 @@ import java.io.PrintStream;
 import com.iitb.lokavidya.core.utils.GeneralUtils;
 import com.iitb.lokavidya.core.utils.UIUtils;
 
-import Dialogs.InstallationInstructions;
 import Hotkey.Hotkey;
+import instructions.InstallationInstructions;
 
 public class Call {
 	

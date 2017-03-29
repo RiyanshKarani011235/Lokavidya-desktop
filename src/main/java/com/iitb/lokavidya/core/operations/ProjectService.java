@@ -28,6 +28,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.text.html.StyleSheet.ListPainter;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -88,6 +89,10 @@ public class ProjectService {
 
 		Segment segment = new Segment(projectURL);
 		project.addSegment(segment);
+		
+		// make the currentSegment as the first segment of the project
+		// Ironstein 28-12-16
+		Call.workspace.currentSegment = project.getSegmentsMap().get(project.getOrderingSequence().get(0));
 
 		ProjectService.persist(project);
 		GeneralUtils.stopOfficeInstance();
@@ -163,20 +168,22 @@ public class ProjectService {
 
 				if (audio != null) {
 					audioURL = audio.getAudioURL();
-				}
-
-				// checking audio file
-				if (!isFileExist(audioURL)) {
-					return null;
+					// checking audio file
+					if (!isFileExist(audioURL)) {
+						System.out.println("audio file not found : " + audioURL);
+						return null;
+					}
 				}
 
 				// checking image file
 				if (!isFileExist(imageURL)) {
+					System.out.println("image file not found : " + imageURL);
 					return null;
 				}
 
 				// checking presentation file
 				if (!isFileExist(presentationURL)) {
+					System.out.println("presentation not found : " + presentationURL);
 					return null;
 				}
 
@@ -261,138 +268,6 @@ public class ProjectService {
 		}
 	}
 
-	public static void main(String[] args) {
-		GeneralUtils.convertImageToPresentation("/home/frg/Documents/eighteen/ecezznvr5a.png",
-				"/home/frg/Desktop/abc.odp");
-
-		// System.out.println(System.getProperty("java.io.tmpdir"));
-		Project test = ProjectService.getInstance("/home/frg/Documents/seven/seven.json");
-
-		//
-		//
-		////
-		// Segment segment4 = new Segment(test.getProjectURL());
-		// Video video = new
-		// Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL());
-		// segment4.setVideo(video);
-		// test.addSegment(segment4);
-		// ProjectService.persist(test);
-		//// importAndroidProject("/home/sanket/Documents/asd/asd.json",
-		// "/home/sanket/Documents/material-required.zip");
-		// System.out.println(test);
-		// importPresentation("/home/sanket/Documents/Lokavidya_Desktop_Application
-		// using LibreOffice.pptx", test);
-		// SegmentService.deleteImage(segment);
-		// ProjectService.persist(test);
-		// ProjectService.exportAndroidProject("/home/sanket/Documents/asd",
-		// "/home/sanket/Documents");
-		// ProjectService.importAndroidProject("/home/sanket/Documents/pazx/pazx.json",
-		// "/home/sanket/Documents/material-required.zip");
-		// ProjectService.exportAndroidProject("/home/sanket/Documents/okzjxclkj",
-		// "/home/sanket/Documents");
-
-		/*
-		 * Segment segment5 = new Segment(test.getProjectURL()); video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL());
-		 * System.out.println("VideoURL"+video.getVideoURL());
-		 * segment2.setVideo(video); test.addSegment(segment5);
-		 */
-
-		/*
-		 * // System.out.println(System.getProperty("java.io.tmpdir")); Project
-		 * test= ProjectService.createNewProject("/home/sanket/Documents/asd");
-		 * // Segment segment = new Segment("/home/sanket/Documents/asd"); // //
-		 * Slide slide = new
-		 * Slide("/home/sanket/Documents/test.png",test.getProjectURL()); //
-		 * Audio audio = new
-		 * Audio("/home/sanket/Documents/testsunday/audio/testsunday.1.wav",test
-		 * .getProjectURL()); // slide.setAudio(audio); // List<Reference>
-		 * referencesList = new ArrayList<Reference> (); // Reference reference
-		 * = new Reference(); // reference.setVideoID("123"); //
-		 * referencesList.add(reference); // segment.setReferences(new
-		 * HashSet<Reference>(referencesList)); // segment.setSlide(slide); //
-		 * test.addSegment(segment); // // // // // Segment segment2 = new
-		 * Segment("/home/sanket/Documents/asd"); // Video video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * System.out.println("VideoURL"+video.getVideoURL()); //
-		 * segment2.setVideo(video); // test.addSegment(segment2); //
-		 * ProjectService.persist(test); // // slide = new
-		 * Slide("/home/sanket/Documents/test.png",test.getProjectURL()); //
-		 * audio = new
-		 * Audio("/home/sanket/Documents/testsunday/audio/testsunday.1.wav",test
-		 * .getProjectURL()); // slide.setAudio(audio); // referencesList = new
-		 * ArrayList<Reference> (); // reference = new Reference(); //
-		 * reference.setVideoID("123"); // referencesList.add(reference); //
-		 * segment2.setReferences(new HashSet<Reference>(referencesList)); //
-		 * segment2.setSlide(slide); // test.addSegment(segment2); // // Segment
-		 * segment3 = new Segment("/home/sanket/Documents/asd"); // video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * System.out.println("VideoURL"+video.getVideoURL()); //
-		 * segment2.setVideo(video); // test.addSegment(segment3); // // //
-		 * slide = new
-		 * Slide("/home/sanket/Documents/test.png",test.getProjectURL()); //
-		 * audio = new
-		 * Audio("/home/sanket/Documents/testsunday/audio/testsunday.1.wav",test
-		 * .getProjectURL()); // slide.setAudio(audio); // referencesList = new
-		 * ArrayList<Reference> (); // reference = new Reference(); //
-		 * reference.setVideoID("123"); // referencesList.add(reference); //
-		 * segment3.setReferences(new HashSet<Reference>(referencesList)); //
-		 * segment3.setSlide(slide); // test.addSegment(segment3); // // //
-		 * Segment segment4 = new Segment("/home/sanket/Documents/asd"); //
-		 * video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * System.out.println("VideoURL"+video.getVideoURL()); //
-		 * segment2.setVideo(video); // test.addSegment(segment4); // // Segment
-		 * segment5 = new Segment("/home/sanket/Documents/asd"); // video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * System.out.println("VideoURL"+video.getVideoURL()); //
-		 * segment2.setVideo(video); // test.addSegment(segment5); // //
-		 * test.swapSegment(segment, segment2); // test.swapSegment(segment3,
-		 * segment2); //
-		 * test=ProjectService.getInstance("/home/sanket/Documents/asd/asd.json"
-		 * ); // // // video = new
-		 * Video("/home/sanket/Desktop/sample.mp4",test.getProjectURL()); //
-		 * segment4.setVideo(video); // test.addSegment(segment4); //
-		 * importPresentation("/home/sanket/Documents/Lokavidya_Desktop_Application using LibreOffice.pptx"
-		 * , test); //SegmentService.deleteImage(segment);
-		 * //ProjectService.persist(test);
-		 * //ProjectService.exportAndroidProject("/home/sanket/Documents/asd",
-		 * "/home/sanket/Documents");
-		 * //ProjectService.importAndroidProject("/home/sanket/Desktop",
-		 * "/home/sanket/Documents/asd.zip");
-		 * 
-		 * >>>>>>> e136ecc1c28748abbbb0e8fedbf5338b1c4f2b38
-		 * 
-		 * // test.swapSegment(segment, segment2); // test.swapSegment(segment3,
-		 * segment2); //test=ProjectService.getInstance(
-		 * "/home/sanket/Documents/asd/asd.json"); //
-		 * test=ProjectService.getInstance(
-		 * "/Users/SidRama/Documents/asd/asd.json");
-		 * 
-		 * 
-		 * //SegmentService.deleteImage(segment); ProjectService.persist(test);
-		 * System.out.println("Stitching now.... ");
-		 */
-		// ProjectOperations.stitch(test);
-		// System.out.println("Stitching done... ");
-		// ProjectService.exportAndroidProject("/home/sanket/Documents/asd",
-		// "/home/sanket/Documents");
-		// ProjectService.importAndroidProject("/home/sanket/Desktop",
-		// "/home/sanket/Documents/asd.zip");
-		// ProjectService.exportAndroidProject("/Users/SidRama/Documents/asd",
-		// "/Users/SidRama/Documents");
-		// ProjectService.importAndroidProject("/Users/SidRama/Desktop",
-		// "/Users/SidRama/Documents/asd.zip");
-
-		// GeneralUtils.convertImageToPresentation("/home/sanket/Downloads/aPDxmvV_700b_v1.jpg",
-		// "/home/sanket/Documents/test.odp");
-		// GeneralUtils.convertPresentationToImage("/home/sanket/Documents/test.odp",
-		// "/home/sanket/Documents/test.png");
-
-		System.exit(0);
-
-	}
-
 	public static void exportAndroidProject(String projectPath, String androidProjectPath) {
 		Project project = ProjectService
 				.getInstance(projectPath + File.separator + FilenameUtils.getName(projectPath) + ".json");
@@ -446,7 +321,6 @@ public class ProjectService {
 		if (file.exists())
 			file.delete();
 
-		// Convert all JPG files to PNG files - ironstein - 22-11-16
 		String imagesFolderPath = new File(new File(androidProjectPath,
 				Paths.get(new File(projectPath).getAbsolutePath()).getFileName().toString()), "images")
 						.getAbsolutePath();
@@ -477,22 +351,48 @@ public class ProjectService {
 		GeneralUtils.createZip(projectTmp.getAbsolutePath(), androidProjectPath);
 	}
 
-	public static void importAndroidProject(String projectjsonpath, String zipPath) {
+	public static boolean importAndroidProject(String projectjsonpath, String zipPath) {
 
-		if (!new File(zipPath).exists() || !FilenameUtils.getName(zipPath).endsWith(".zip")) {
-			JOptionPane.showMessageDialog(null,
-					"invalid project path : " + zipPath + "\nandroid project should be a valid zip file");
-			return;
-		} else {
-			System.out.println("zip file : " + zipPath);
-		}
 		Project project = getInstance(projectjsonpath);
 		String tmpPath = System.getProperty("java.io.tmpdir");
-		GeneralUtils.extractZip(zipPath, tmpPath);
+		
+		// deleting all folders with the same name as that of the zip file in tmpPath
 		String projTmpDir = FilenameUtils.getBaseName(zipPath);
 		File projectTmp = new File(tmpPath, projTmpDir);
+		System.out.println("projectTmp : " + projectTmp);
+		if(projectTmp.exists()) {
+			try {
+				FileUtils.deleteDirectory(projectTmp);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("extracting zip");
+		GeneralUtils.extractZip(zipPath, tmpPath);
+		System.out.println("extracting zip complete");
 		File projectTmpImage = new File(projectTmp.getAbsolutePath(), "images");
 		File projectTmpAudio = new File(projectTmp.getAbsolutePath(), "audio");
+
+		// check if the zip file consists of a valid project
+
+		// check if the audio and image folders exist
+		if ((!projectTmpImage.exists()) || (!projectTmpAudio.exists())) {
+			return false;
+		}
+		
+		System.out.println("projectTmpAudio.length() : " + projectTmpAudio.length());
+
+		// checking the number of files in both the folders is the same, and not zero
+		if ((!(projectTmpAudio.listFiles().length == projectTmpAudio.listFiles().length))
+				|| (projectTmpAudio.listFiles().length == 0)) {
+			return false;
+		}
+
+		List<File> audioFilesList = Arrays.asList(projectTmpAudio.listFiles());
+
+		// comparator for comparing two files
 		Comparator<File> fc = new Comparator<File>() {
 			public int compare(File o1, File o2) {
 				int i1, i2;
@@ -511,83 +411,92 @@ public class ProjectService {
 					return -1;
 			}
 		};
+		
+		// sort the filenames in increasing order
+		Collections.sort(audioFilesList, fc);
 
-		if (projectTmpAudio.listFiles().length == projectTmpAudio.listFiles().length) {
-			int i = 0;
-			String audioExtension = FilenameUtils.getExtension(projectTmpAudio.listFiles()[0].getAbsolutePath());
-			String imageExtension = FilenameUtils.getExtension(projectTmpImage.listFiles()[0].getAbsolutePath());
-			List<File> audioFilesList = Arrays.asList(projectTmpAudio.listFiles());
-			Collections.sort(audioFilesList, fc);
-			for (File f : audioFilesList) {
-				String name = FilenameUtils.getBaseName(f.getAbsolutePath()).split("\\.")[0];
-				String index = FilenameUtils.getBaseName(f.getAbsolutePath()).split("\\.")[1];
+		// check the names of the files should be same in both the folders
+		for (File f : audioFilesList) {
+			String name = FilenameUtils.getBaseName(f.getAbsolutePath()).split("\\.")[0];
+			String index = FilenameUtils.getBaseName(f.getAbsolutePath()).split("\\.")[1];
 
-				// changed on 20-10-16 by ironstein
-				// use both jpg and png files to create a new project
+			File imageFilePng = new File(projectTmpImage, name + "." + index + ".png");
+			File imageFileJpg = new File(projectTmpImage, name + "." + index + ".jpg");
+			if (imageFilePng.exists()) {
+				Segment segment = new Segment(imageFilePng.getAbsolutePath(), f.getAbsolutePath(),
+						project.getProjectURL());
+				System.out.println("URL of the presentation:" + segment.getSlide().getPptURL());
+				project.addSegment(segment);
 
-				File imageFilePng = new File(projectTmpImage, name + "." + index + ".png");
-				File imageFileJpg = new File(projectTmpImage, name + "." + index + ".jpg");
-				if (imageFilePng.exists()) {
-					Segment segment = new Segment(imageFilePng.getAbsolutePath(), f.getAbsolutePath(),
-							project.getProjectURL());
-					System.out.println("URL of the presentation:" + segment.getSlide().getPptURL());
-					project.addSegment(segment);
-
-				} else if (imageFileJpg.exists()) {
-					Segment segment = new Segment(imageFileJpg.getAbsolutePath(), f.getAbsolutePath(),
-							project.getProjectURL());
-					System.out.println("URL of the presentation:" + segment.getSlide().getPptURL());
-					project.addSegment(segment);
-				}
-				if (Call.workspace.cancelled)
-					break;
+			} else if (imageFileJpg.exists()) {
+				Segment segment = new Segment(imageFileJpg.getAbsolutePath(), f.getAbsolutePath(),
+						project.getProjectURL());
+				System.out.println("URL of the presentation:" + segment.getSlide().getPptURL());
+				project.addSegment(segment);
+			} else {
+				return false;
 			}
 		}
+
 		GeneralUtils.stopOfficeInstance();
-		if (Call.workspace.cancelled)
-			return;
 		ProjectService.persist(project);
+		return true;
 	}
 
-	public static void importPresentation(String presentationURL, Project project, OpenPresentation window) {
-		BufferedWriter bw = null;
-		// String tempPath = System.getProperty("java.io.tmpdir");
-		try {
-			bw = new BufferedWriter(new FileWriter("timelog.txt", true));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		String tempPath = project.getProjectURL();
+	public static int importPresentationGenerateImages(String presentationURL, Project project, OpenPresentation window) {
+		// returns -1 if anything went wrong, else returns the size of the presentation
+		
 		File file = new File(presentationURL);
 		try {
-			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
-
 			int size = 0;
-			System.out.println("Calling Create presentation");
-			Future<String> res = createPresentations(presentationURL, tempPath, file, window);
-			System.out.println("Exiting Create presentation");
 			if (presentationURL.endsWith(".pptx")) {
+				
+				// generate images
+				if(!new PptxToImages(presentationURL, project.getProjectURL()).run()) {
+					return -1;
+				}
+				
 				XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(file));
-
-				new PptxToImages(presentationURL, project.getProjectURL());
 				List<XSLFSlide> slides = ppt.getSlides();
 				size = slides.size();
 				window.setprogressvalue(50);
 			} else if (presentationURL.endsWith(".ppt")) {
-				System.out.println("Entering for ppt");
 				FileInputStream out = new FileInputStream(file);
+				
+				// generate images
+				if(!new PptToImages(presentationURL, project.getProjectURL()).run()) {
+					out.close();
+					return -1;
+				}
+				
 				HSLFSlideShow ppt = new HSLFSlideShow(out);
-				System.out.println("Created ppt instance");
-				new PptToImages(presentationURL, project.getProjectURL());
-				System.out.println("Converted to Images");
 				List<HSLFSlide> slides = ppt.getSlides();
 				size = slides.size();
-				System.out.println("Size of slide is: " + size);
 				window.setprogressvalue(50);
 			}
 			// System.out.println("It created ppt");
-
+			return size;
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} return -1;
+	}
+	
+	public static void importPresentationAddPresentationsToProject(String presentationURL, Project project, OpenPresentation window, int size) {
+		
+		BufferedWriter bw = null;
+		// String tempPath = System.getProperty("java.io.tmpdir");
+		try {
+			bw = new BufferedWriter(new FileWriter("timelog.txt", true));
+			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
+			String tempPath = project.getProjectURL();
+			File file = new File(presentationURL);
+			Future<String> res = createPresentations(presentationURL, tempPath, file, window);
+			
 			// int size=slides.size();
 			List<Segment> newSegments = new ArrayList<Segment>();
 			double divider = (double) 20 / (double) size;
@@ -640,108 +549,262 @@ public class ProjectService {
 			current_time = new_time;
 			bw.write("Total time: " + (current_time - first_time));
 			bw.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ExecutionException e2) {
+			e2.printStackTrace();
+		} catch (InterruptedException e3) {
+			e3.printStackTrace();
+		}
+		
+		
+	}
+
+	public static ArrayList<String> importPdfGenerateImages(String pdfUrl, Project project, OpenPdf window) {
+		
+		try {
+			// create tmpImages directory
+			File tmpImagesDirectory = new File("resources", "tmpImages");
+			tmpImagesDirectory.mkdir();
+
+			ArrayList<String> outputFilenamesList = new ArrayList<String>();
+
+			// check if directory is created
+			if (!(tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory())) {
+				// could not create tmpImages directory
+				JOptionPane.showMessageDialog(null,
+						"Could not access the directory : " + tmpImagesDirectory.getAbsolutePath() + "\n"
+								+ "make sure that you have read and write access to this directory",
+						"", JOptionPane.INFORMATION_MESSAGE);
+				return null;
+			}
+			
+			// convert PDF to individual images
+			PDDocument document;
+			document = PDDocument.loadNonSeq(new File(pdfUrl), null);
+			List<PDPage> pdPages = document.getDocumentCatalog().getAllPages();
+			int page = 0;
+			for (PDPage pdPage : pdPages) {
+				++page;
+				BufferedImage bim = pdPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
+				String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(),
+						new File(pdfUrl).getName() + "-" + page + ".jpg").getAbsolutePath();
+				ImageIOUtil.writeImage(bim, outputFileName, 300);
+				outputFilenamesList.add(outputFileName);
+				
+				// check if import is cancelled
+				if(Call.workspace.cancelled) {
+					document.close();
+					System.out.println("cancelled");
+					return null;
+				}
+			}
+			document.close();
+			return outputFilenamesList;
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (Exception e) {
+		}
+		return null;
+	}
+	
+	public static ArrayList<String> importPdfGenerateImagesUsingGhostscript(String pdfUrl) {
+		// create tmpImages directory
+		File tmpImagesDirectory = new File(System.getProperty("java.io.tmpdir"), "tmpImages1");
+		File tmpImagesDirectory2 = new File(System.getProperty("java.io.tmpdir"), "tmpImages2");
+
+		System.out.println("tmpImagesDirectory : " + tmpImagesDirectory.getAbsolutePath());
+		System.out.println("tmpImagesDirectory2 : " + tmpImagesDirectory2.getAbsolutePath());
+		
+		// creating tmpImagesDirectory
+		tmpImagesDirectory.mkdir();
+		tmpImagesDirectory2.mkdir();
+		
+		// cleaning tmpImagesDirectory
+		try {
+			FileUtils.cleanDirectory(tmpImagesDirectory);
+			FileUtils.cleanDirectory(tmpImagesDirectory2);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		ArrayList<String> outputImagesList = new ArrayList<String>();
 
+		// check if directory is created
+		if (!(tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory())) {
+			// could not create tmpImages directory
+			JOptionPane.showMessageDialog(null,
+					"Could not access the directory : " + tmpImagesDirectory.getAbsolutePath() + "\n"
+							+ "make sure that you have read and write access to this directory",
+					"", JOptionPane.INFORMATION_MESSAGE);
+			return null;
+		}
+		
+		// cleaning tmpImagesDirectory
+		try {
+			FileUtils.cleanDirectory(tmpImagesDirectory);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// convert PDF to individual images
+		String ghostScriptPath = GeneralUtils.findGhostScriptPath();
+		if(ghostScriptPath == null) {
+			// ghostScript path not found
+			return null;
+		}
+		
+		String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(),
+				FilenameUtils.getBaseName(new File(pdfUrl).getName()) + "-%03d.png").getAbsolutePath();
+		String[] command = {
+				ghostScriptPath,
+				"-sDEVICE=png16m", 
+				"-dTextAlphaBits=4", 
+				"-r300", 
+				"-o",
+				outputFileName,
+				pdfUrl
+		};
+		
+		boolean b = GeneralUtils.runProcess(command);
+		if((!b) || Call.workspace.cancelled) {
+			return null;
+		}
+		
+		// scale the image to fit the window width and window height
+		String[] list = tmpImagesDirectory.list();
+		Arrays.sort(list);
+		System.out.println("sorted list : ");
+		for(int i=0; i<list.length; i++) {
+			System.out.println(list[i]);
+		}
+		System.out.println("the end .........");
+		FFMPEGWrapper wrapper = new FFMPEGWrapper();
+		for(int i=0; i<list.length; i++) {
+			System.out.println("tmpImage : " + list[i]);
+			BufferedImage rawShot;
+			try {
+				String inputImageName = new File(tmpImagesDirectory, list[i]).getAbsolutePath(); 
+				rawShot = ImageIO.read(new File(inputImageName));
+				int hVideo = Call.workspace.videoHeight;
+				int wVideo = Call.workspace.videoWidth;
+				int hShot = rawShot.getHeight();
+				int wShot = rawShot.getWidth();
+
+				int newImageHeight;
+				int newImageWidth;
+				
+				if((hShot > hVideo) || (wShot > wVideo)) {
+					// scale the image down
+					if((hShot > hVideo) && (wShot <= wVideo)) {
+						// scale down the height
+						newImageHeight = hVideo;
+						newImageWidth = (int) Math.ceil(hVideo * wShot / hShot);
+					} else if((hShot <= hVideo) && (wShot > wVideo)) {
+						// scale down the width
+						newImageWidth = wVideo;
+						newImageHeight = (int) Math.ceil(wVideo * hShot / wShot);
+					} else {
+						// scale down both
+						if((int) Math.ceil(hVideo * wShot / hShot) > wVideo) {
+							// the shot width should be the same as window width
+							newImageWidth = wVideo;
+							newImageHeight = (int) Math.ceil(wVideo * hShot / wShot);
+						} else {
+							// the shot height should be the same as window height
+							newImageHeight = hVideo;
+							newImageWidth = (int) Math.ceil(hVideo * wShot / hShot);
+						}
+					}
+				} else {
+					// scale the image up
+					if(((int) Math.ceil(hVideo * wShot / hShot)) > wVideo) {
+						// scale height to the maximum
+						newImageHeight = hVideo;
+						newImageWidth = (int) Math.ceil(hVideo * wShot / hShot);
+					} else {
+						// scale width to maximum
+						newImageWidth = wVideo;
+						newImageHeight = (int) Math.ceil(wVideo * hShot / wShot);
+					}
+				}
+				
+				String resizedImage = new File(tmpImagesDirectory2, new File(list[i]).getName()).getAbsolutePath();
+				String[] command_ = {
+						wrapper.pathExecutable,
+						"-i",
+						inputImageName,
+						"-vf",
+						"scale=" + newImageWidth + ":" + newImageHeight,
+						resizedImage
+				};
+				
+				b = GeneralUtils.runProcess(command_);
+				if((!b) || Call.workspace.cancelled) {
+					return null;
+				}
+				outputImagesList.add(resizedImage);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("outpuImagesList : ");
+		for(int i=0; i<outputImagesList.size(); i++) {
+			System.out.println(outputImagesList.get(i));
+		}
+		return outputImagesList;
 	}
-
-	public static void importPdf(String pdfUrl, Project project, OpenPdf window) {
+	
+	public static void importPdfAddImagesToProject(Project project, OpenPdf window, ArrayList<String> outputFilenamesList) {
+		
 		BufferedWriter bw = null;
 		// String tempPath = System.getProperty("java.io.tmpdir");
 		try {
 			bw = new BufferedWriter(new FileWriter("timelog.txt", true));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		String tempPath = project.getProjectURL();
-		File file = new File(pdfUrl);
-		try {
 			long current_time = System.currentTimeMillis(), new_time, first_time = System.currentTimeMillis();
-			int size = 0;
 			
-			// create tmpImages directory
-		    File tmpImagesDirectory = new File("resources", "tmpImages");
-		    try {
-		    	tmpImagesDirectory.mkdir();
-		    } catch (SecurityException e) {
-		    	// could not create the tmpImages Directory
-		    }
-		    
-		    ArrayList<String> outputFilenamesList = new ArrayList<String>();
-		    
-		    // check if directory is created
-		    if(tmpImagesDirectory.exists() && tmpImagesDirectory.isDirectory()) {
-		    	// convert PDF to individual images
-				PDDocument document;
-				document = PDDocument.loadNonSeq(new File(pdfUrl), null);
-				List<PDPage> pdPages = document.getDocumentCatalog().getAllPages();
-				int page = 0;
-				for (PDPage pdPage : pdPages) { 
-				    ++page;
-				    BufferedImage bim = pdPage.convertToImage(BufferedImage.TYPE_INT_RGB, 300);
-				    String outputFileName = new File(tmpImagesDirectory.getAbsolutePath(), new File(pdfUrl).getName() + "-" + page + ".jpg").getAbsolutePath();
-				    ImageIOUtil.writeImage(bim, outputFileName, 300);
-				    outputFilenamesList.add(outputFileName);
-				}
-				document.close();
-		    } else {
-		    	// could not create tmpImages directory
-		    	JOptionPane.showMessageDialog(
-	    			null,
-	    			"Could not access the directory : " + tmpImagesDirectory.getAbsolutePath() + "\n" + 
-			    			"make sure that you have read and write access to this directory", 
-			    	"", 
-			    	JOptionPane.INFORMATION_MESSAGE
-				);
-		    }
-		    
-		    ArrayList<Segment> newSegments = new ArrayList<Segment>();
-		    for(String outputFilename : outputFilenamesList) {
-		    	Segment segment = new Segment(project.getProjectURL(), false);
-		    	Slide slide = new Slide(outputFilename, project.getProjectURL(), false);
-		    	new_time = System.currentTimeMillis();
-		    	bw.write("\nTime taken for image creation is: " + (new_time - current_time));
-		    	current_time = new_time;
-		    	segment.setSlide(slide);
-		    	newSegments.add(segment);
-		    	project.addSegment(segment);
-		    	ProjectService.persist(project);
-		    	new_time = System.currentTimeMillis();
+			for (String outputFilename : outputFilenamesList) {
+				Segment segment = new Segment(project.getProjectURL(), false);
+				Slide slide = new Slide(outputFilename, project.getProjectURL(), false);
+				new_time = System.currentTimeMillis();
+				bw.write("\nTime taken for image creation is: " + (new_time - current_time));
+				current_time = new_time;
+				segment.setSlide(slide);
+				project.addSegment(segment);
+				ProjectService.persist(project);
+				new_time = System.currentTimeMillis();
 				bw.write("\nTime taken for persistance is: " + (new_time - current_time));
 				current_time = new_time;
-		    }
-
-//		    GeneralUtils.stopOfficeInstance();
-//			String pdfName = FilenameUtils.getBaseName(pdfUrl);
-//			int i = 0;
-//			for (Segment s : newSegments) {
-//				String pptPath = new File(tempPath,
-//						pdfName + "." + i + ".ppt").getAbsolutePath();
-//
-//				System.out.println("pptPath : " + pptPath);
-//				SegmentService.addPresentation(project, s, pptPath);
-////				value = (int) (70 + (double) (i + 1) * (divider));
-////				window.setprogressvalue(value);
-//				i++;
-//			}
-
+			}
+			
 			new_time = System.currentTimeMillis();
 			bw.write("\nTime taken for updating segments: " + (new_time - current_time));
 			current_time = new_time;
 			bw.write("Total time: " + (current_time - first_time));
 			bw.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			return;
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			FileUtils.copyFile(
+				new File("/var/folders/xr/_c3wy9_9429gxpfbpbt0xybc0000gn/T/tmpImages2/mias-1.png"), 
+				new File("/users/ironstein/desktop/doesnt_work.jpg")
+			);
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

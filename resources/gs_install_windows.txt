@@ -1,0 +1,7 @@
+You can check if you already have GhostScript installed by 
+searching for executables namely gswin32.exe or gswin64.exe. 
+If one of the following files exists in your system 
+(for example C:\Program Files\gs\gs9.20\bin\gswin32.exe), 
+you will need to install GhostScript by following in the
+instruction manual (https://goo.gl/4wfQSJ). Look for the 
+section named “Installing GhostScript”.

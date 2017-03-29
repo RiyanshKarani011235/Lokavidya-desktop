@@ -45,6 +45,28 @@ public class VideoFormat extends JFrame {
 			}
 		});
 	}
+	
+	public static boolean validateIsInteger(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean validateIntegerInRange(int num, int min, int max) {
+		if (num < min || num > max) {
+			return false;
+		} return true;
+	}
+	
+	public static boolean validateIntegerEntryInTextField(String s, int min, int max) {
+		if(!validateIsInteger(s)) {
+			return false;
+		}
+		return validateIntegerInRange(Integer.parseInt(s), min, max);
+	}
 
 	/**
 	 * Create the frame.
@@ -106,31 +128,27 @@ public class VideoFormat extends JFrame {
 		txtFramerate.setColumns(10);
 		contentPane.add(txtFramerate);
 		
+		
+		
 		buttonApply = new JButton("OK");
 		buttonApply.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(txtWidth.getText().equals(""))
-				{
-					JOptionPane.showMessageDialog(null, "Width Blank", "", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else if(txtHeight.getText().equals(""))
-				{
-					JOptionPane.showMessageDialog(null, "Height Blank", "", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else if(txtFramerate.getText().equals(""))
-				{
-					JOptionPane.showMessageDialog(null, "Framerate Blank", "", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
+				
+				if(!validateIntegerEntryInTextField(txtWidth.getText(), 0, 1000000000)) {
+					JOptionPane.showMessageDialog(null, "Width should be a positive integer", "", JOptionPane.INFORMATION_MESSAGE);
+				} else if(!validateIntegerEntryInTextField(txtHeight.getText(), 0, 1000000000)) {
+					JOptionPane.showMessageDialog(null, "Height should be a positive integer", "", JOptionPane.INFORMATION_MESSAGE);
+				} else if(!validateIntegerEntryInTextField(txtFramerate.getText(), 3, 30)) {
+					JOptionPane.showMessageDialog(null, "frame rate should be an integer between 3 and 30", "", JOptionPane.INFORMATION_MESSAGE);
+				} else {
 					int width=Integer.parseInt(txtWidth.getText());
 					int height=Integer.parseInt(txtHeight.getText());
-					int framerate=Integer.parseInt(txtFramerate.getText());
+					int frameRate=Integer.parseInt(txtFramerate.getText());
 					Call.workspace.videoHeight=height;
 					Call.workspace.videoWidth=width;
-					Call.workspace.framerate=framerate;
+					Call.workspace.framerate=frameRate;
+					dispose();
 				}
-				dispose();
 			}
 		});
 		buttonApply.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -149,5 +167,4 @@ public class VideoFormat extends JFrame {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(btnCancel);
 	}
-
 }

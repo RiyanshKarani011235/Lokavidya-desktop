@@ -82,7 +82,7 @@ public class OpenProject {
 	private JProgressBar progressBar;
 	private JLabel lblNewLabel1;
 	
-	class ProgressDialog extends JPanel
+	public class ProgressDialog extends JPanel
 	implements ActionListener, 
 	PropertyChangeListener{
 		private static final long serialVersionUID = 1L;
@@ -96,8 +96,6 @@ public class OpenProject {
 				String fileName = radioButton[index].getText();
 				Call.workspace.name=fileName;
 				System.out.println(fileName);
-				//Project p = new Project(fileName, path);
-				//ProjectCommunicationInstance.launchInstance(p);
 				
 				// if filename is entered
 				if(path.endsWith(fileName)) {
@@ -135,6 +133,17 @@ public class OpenProject {
 						setProgress(50);
 						progressBar.setValue(50);
 						Call.workspace.repopulateProject();
+						
+						if(!(Call.workspace.currentProject.getOrderingSequence().size() == 0)) {
+							// project not empty
+							Call.workspace.currentSegment = Call.workspace.currentProject.getSegmentsMap().get(
+									Call.workspace.currentProject.getOrderingSequence().get(0));
+						}
+						
+						// refresh the screen to show black screen
+						Call.workspace.lblSlideDisplay.setIcon(Call.workspace.createImageIcon("resources/start.jpg"));
+						Call.workspace.setTitle(Call.workspace.path);		
+						
 						setProgress(100);
 						progressBar.setValue(100);
 						Thread.sleep(1000);

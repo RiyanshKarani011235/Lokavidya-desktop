@@ -6,11 +6,14 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -38,9 +41,10 @@ public class OpenPdf {
 	public JFrame frame;
 	public String pathDef;
 	public String path;
-	public ProgressDialog  dialog;
+	public ProgressDialog  dialog = null;
 	private JButton btnNewButton_1;
 	private JTextField textField_2;
+	private JButton btnCancel;
 
 	private JPanel innerPanel;
 	private JProgressBar progressBar;
@@ -57,6 +61,7 @@ public class OpenPdf {
 		
 		
 		 public Task task;
+		 public boolean isTaskCancellable = true;
 		
 		 
 		 class Task extends SwingWorker<Void, Void> {
@@ -64,67 +69,93 @@ public class OpenPdf {
 			@Override
 			protected Void doInBackground() throws Exception {
 				int progress=0;
-				 setProgress(0);
-				 System.out.println("calling creation");
+				setProgress(0);
+				System.out.println("calling creation");
 				// CreateProject.projectCreationMethod();	
-				 try {
-				 	Call.workspace.startOperation();
-				 	setProgress(10);
-				 	int displayIndex=Call.workspace.presentationInnerPanel.getComponentCount();
-				 	
-				 	ProjectService.importPdf(path, Call.workspace.currentProject, OpenPdf.this);
-				 	System.out.println("Returning here");
-				 	setProgress(75);
-				 	
-				 	if (!Call.workspace.cancelled) {
-						Call.workspace.repopulateProject();
-						
-						Call.workspace.revalidate();
-						Call.workspace.repaint();
-						Call.workspace.endOperation();
-						setProgress(100);
-						Thread.sleep(1000);
-						frame.setCursor(Cursor
-								.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-						frame.dispose();
-						
-					} else {
-				 		lblNewLabel1.setText("Cancelling import");
-				 		Call.workspace.cancelOperation();
-				 		setProgress(50);
-				 		Thread.sleep(1000);
-						frame.setCursor(Cursor
-								.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-						frame.dispose();
-				 	}
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}	
-			
+			 	Call.workspace.startOperation();
+			 	setProgress(10);
+			 	int displayIndex=Call.workspace.presentationInnerPanel.getComponentCount();
+			 	
+			 	ArrayList<String> outputFilenamesList = ProjectService.importPdfGenerateImagesUsingGhostscript(path);
+	
+			 	if(Call.workspace.cancelled) {
+			 		lblNewLabel1.setText("Cancelling import");
+			 		frame.setCursor(Cursor
+							.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			 		JOptionPane.showMessageDialog(null,
+							"Import Cancelled",
+							"", 
+							JOptionPane.INFORMATION_MESSAGE);
+			 		frame.dispose();
+			 		return null;
+			 	}
+			 	
+			 	if((outputFilenamesList == null))  {
+		 			// could not generate output files
+		 			JOptionPane.showMessageDialog(null,
+						"Could not import PDF",
+						"", 
+						JOptionPane.INFORMATION_MESSAGE);
+		 			frame.dispose();
+			 		return null;
+			 	}
+			 	
+			 	System.out.println("openPdf list printing : " );
+			 	for(int i=0; i<outputFilenamesList.size(); i++) {
+			 		System.out.println(outputFilenamesList.get(i));
+			 	}
+			 	
+			 	isTaskCancellable = false;
+			 	setProgress(50);
+			 	ProjectService.importPdfAddImagesToProject(Call.workspace.currentProject, OpenPdf.this, outputFilenamesList);
+			 	
+			 	setProgress(75);
+				Call.workspace.repopulateProject();
+				System.out.println("done repopulating project");
+				setProgress(80);
+				Call.workspace.revalidate();
+				System.out.println("done revalidating project");
+				setProgress(85);
+				Call.workspace.repaint();
+				System.out.println("done repainting project");
+				setProgress(90);
+				Call.workspace.endOperation();
+				System.out.println("done");
+				setProgress(100);
+				Thread.sleep(1000);
+				frame.setCursor(Cursor
+						.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				frame.dispose();
+				System.out.println("done disposing");
+					
 				return null;
 			}
-		 
 
-
-		public void propertyChange(PropertyChangeEvent evt) {
-			
-			if ("progress" == evt.getPropertyName()) {
-	            int progress = (Integer) evt.getNewValue();
-	            progressBar.setIndeterminate(false);
-	            progressBar.setValue(progress);
+			public void propertyChange(PropertyChangeEvent evt) {
+				
+				if ("progress" == evt.getPropertyName()) {
+		            int progress = (Integer) evt.getNewValue();
+		            progressBar.setIndeterminate(false);
+		            progressBar.setValue(progress);
+				}	
 			}
-			
+		
+		
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub	
+			}
+
 		}
-
-
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		 }
 		ProgressDialog() {
+			
+			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+			frame.addWindowListener(new WindowAdapter() {
+
+			    @Override
+			    public void windowClosing(WindowEvent e) {
+			    	cancelImport();
+			    }
+			});
 			
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 			UserPreferences u = new UserPreferences();
@@ -151,15 +182,56 @@ public class OpenPdf {
 	        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 	        task.execute();
 		}
+		
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
-			// TODO Auto-generated method stub
+			if ("progress" == evt.getPropertyName()) {
+				int progress = (Integer) evt.getNewValue();
+				progressBar.setIndeterminate(false);
+				progressBar.setValue(progress);
+			}
 			
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
+			// TODO Auto-generated method stub	
+		}
+		
+		public void cancelImport() {
+			if(isTaskCancellable) {
+	    		int confirm = JOptionPane.showOptionDialog(
+	    			null, "Are You Sure to cancel the import?", 
+		            "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+		            JOptionPane.QUESTION_MESSAGE, null, null, null);
+			        if (confirm == 0) {
+			        	if (task != null) {
+			        		System.out.println("cancelling task");
+			        		if(task.cancel(true)) {
+			        			Call.workspace.cancelled = true;
+				        		Call.workspace.endOperation();
+								frame.dispose();
+			        		} else {
+			        			// could not cancel
+			        			JOptionPane.showMessageDialog(
+			        				null,
+									"Could not cancel",
+									"", 
+									JOptionPane.INFORMATION_MESSAGE
+								);
+			        		}
+
+			        	}
+			        }
+	    	} else {
+	    		String message = 
+	    				"Sorry, the import cannot be cancelled at this time because\n" +
+	    				"the project has already been modified and cancelling import at\n" + 
+	    				"this time might corrupt the project. If you do not want to\n" + 
+	    				"include the following slides in this project, you can delete\n" + 
+	    				"the imported slides after import is complete.\n\n" + 
+	    				"The import will complete soon.";
+        		JOptionPane.showMessageDialog(null, message);
+        	}
 		}
 }
 	public static void copyFile( File from, File to ){
@@ -240,7 +312,7 @@ public class OpenPdf {
         innerPanel.setVisible(false);
         innerPanel.setOpaque(true);
         
-        lblNewLabel1 = new JLabel("Importing presentation..Please wait.");
+        lblNewLabel1 = new JLabel("Importing PDF..Please wait.");
         innerPanel.add(lblNewLabel1, BorderLayout.SOUTH);
         //innerPanel.setVisible(false);
 		frame.getContentPane().add(innerPanel);
@@ -259,8 +331,23 @@ public class OpenPdf {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
 		frame.getContentPane().add(btnNewButton_1);
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Call.workspace.cancelled=true;
+				if(dialog != null) {
+					dialog.cancelImport();
+				} else {
+					frame.dispose();
+				}
+			}
+		});
+		springLayout.putConstraint(SpringLayout.NORTH, btnCancel, 0, SpringLayout.NORTH, btnNewButton_1);
+		springLayout.putConstraint(SpringLayout.WEST, btnCancel, 17, SpringLayout.EAST, btnNewButton_1);
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		frame.getContentPane().add(btnCancel);
 	}
 
 }

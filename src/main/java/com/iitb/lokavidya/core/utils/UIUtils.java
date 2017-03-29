@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -110,16 +111,23 @@ public class UIUtils {
 	}
 
 	public static BufferedImage createBufferedImage(String imgPath) {
-		File img = new File(imgPath);
-		BufferedImage image = new BufferedImage(800, 600, BufferedImage.TYPE_3BYTE_BGR);
-
+//		File img = new File(imgPath);
+//		BufferedImage image = new BufferedImage(800, 600, BufferedImage.TYPE_3BYTE_BGR);
+//		
+//		try {
+//			image = ImageIO.read(img);
+//			image = resize(image, 800, 600);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return image;
 		try {
-			image = ImageIO.read(img);
-			image = resize(image, 800, 600);
-		} catch (Exception e) {
+			return ImageIO.read(new File(imgPath));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return new BufferedImage(800, 600, BufferedImage.TYPE_3BYTE_BGR);
 		}
-		return image;
 
 	}
 
