@@ -269,6 +269,8 @@ public class ProjectOperations {
 						wrapper.encoding,
 						"-c:a",
 						"aac",
+//						"-crf",
+//						"22",
 						"-strict",
 						"experimental",
 						globalVideo.getVideoURL()
