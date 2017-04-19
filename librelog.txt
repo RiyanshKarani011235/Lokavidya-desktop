@@ -1,3 +1,5 @@
 
-Acquired mutex lock for /Users/ironstein/Documents/0020003/tamil_0.pptx
-Acquired mutex lock for /Users/ironstein/Documents/0020003/tamil_0.pptx
+Acquired mutex lock for /Users/ironstein/Documents/asdfasdf/test_presentation_0.pptx
+Released mutex lock for /Users/ironstein/Documents/asdfasdf/img_1.jpg
+Acquired mutex lock for /Users/ironstein/Documents/asdfasdf/test_presentation.0.pptx
+Released mutex lock for /Users/ironstein/Documents/asdfasdf/faz7xpyzso.odp

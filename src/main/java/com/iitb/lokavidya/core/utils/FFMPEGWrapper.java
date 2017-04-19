@@ -17,6 +17,8 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FilenameUtils;
 
+import com.google.common.io.Files;
+
 class StreamGobbler extends Thread {
 	InputStream is;
 	String type;
@@ -77,7 +79,8 @@ public class FFMPEGWrapper {
 				.getAbsolutePath();
 		pathExecutableffprobe = pathExecutable;
 		encoding = "libxvid";
-
+//		encoding = "libx264";
+		
 		String osPathString;
 
 		if (osname.contains("Windows")) {
@@ -268,7 +271,7 @@ public class FFMPEGWrapper {
 				"-i",
 				concatFilesString,
 				"-c:v",
-				encoding,
+				"libx264",
 				"-bsf:a",
 				"aac_adtstoasc",
 				"-qscale",
@@ -279,6 +282,31 @@ public class FFMPEGWrapper {
 			System.out.print(command[j] + " ");
 		}
 		GeneralUtils.runProcess(command);
+		
+		if(encoding.equals("libxvid")) {
+			String oldFinalPath = finalPath;
+			finalPath = new File(FilenameUtils.getFullPath(oldFinalPath), FilenameUtils.getBaseName(oldFinalPath)).getAbsolutePath() + "_final." + FilenameUtils.getExtension(oldFinalPath);
+			command = new String[] {
+					pathExecutable,
+					"-y",
+					"-i",
+					oldFinalPath,
+					"-c:v",
+					"libxvid",
+					finalPath
+			};
+			GeneralUtils.runProcess(command);
+			
+			try {
+				new File(oldFinalPath).delete();
+				Files.move(new File(finalPath), new File(oldFinalPath));
+				new File(finalPath).delete();
+				finalPath = oldFinalPath;	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 		
 		// delete intermediate files
 		for(int i=0; i<libx264_filenames.size(); i++) {
