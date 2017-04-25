@@ -89,7 +89,7 @@ public class SelectArea {
 					.createScreenCapture(screenToCapture);
 
 			frame.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-					new ImageIcon("resources/drag.png").getImage(), new Point(0, 0), "custom cursor"));
+					new ImageIcon("resources/drag_16x16.png").getImage(), new Point(0, 0), "custom cursor"));
 
 			Insets insets = frame.getInsets();
 			System.out.println(insets.top);

@@ -1567,12 +1567,14 @@ public class Workspace extends JFrame implements WindowListener, WindowFocusList
 					// playing=false;
 				} else if (screenRecordingFlag && paused) {
 					// CURRENTLY PAUSED --> RESUME
+					setState(Frame.ICONIFIED);
 					paused = false;
 					btnScreenRec.setEnabled(true);
 					btnScreenRec.setIcon(createImageIcon("resources/pause.png"));
 					btnScreenRec.setToolTipText("Pause Screen Recording");
 				} else {
 					// NOT RECORDING --> START
+					setState(Frame.ICONIFIED);
 					btnScreenRec.setToolTipText("Pause Screen Recording");
 					if (currentSlide == null)
 						setPreview(Integer.toString(currentSlideNumber));

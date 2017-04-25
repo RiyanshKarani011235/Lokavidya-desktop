@@ -115,10 +115,8 @@ public class LibSlide {
                  image=resize(image,800, 600); 
             }  
             catch (Exception e) {
-            e.printStackTrace();
+            	e.printStackTrace();
             }
-
-           
     }
     public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
     Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);

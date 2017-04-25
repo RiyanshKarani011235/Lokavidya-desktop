@@ -1,6 +1,0 @@
-
-Time taken for copying the ppt: 6
-Time taken for poi to seperate the prsentation is: 293
-Time taken for image creation is: 397
-Time taken for persistance is: 85
-Time taken for updating segments: 2721Total time: 3203

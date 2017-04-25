@@ -235,7 +235,7 @@ public class CaptureScreenToFile {
 					rect = new Rectangle(this.screenBounds);
 				}
 				rawShot = robot.createScreenCapture(rect);
-				Image cursor = ImageIO.read(new File("resources/drag.png"));
+				Image cursor = ImageIO.read(new File("resources/drag_16x16.png"));
 				int x = MouseInfo.getPointerInfo().getLocation().x;
 				int y = MouseInfo.getPointerInfo().getLocation().y;
 
