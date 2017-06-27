@@ -130,7 +130,7 @@ public class SynchronousAudioVideoCapture {
 		setState(States.STOPPED);
 		
 		mAudioCapture = new AudioCapture(audioFilePath, DEFAULT_AUDIO_FRAME_RATE, SynchronousAudioVideoCapture.this);
-		mVideoCapture = new VideoCapture(videoFilePath, DEFAULT_VIDEO_FRAME_RATE, SynchronousAudioVideoCapture.this);
+		mVideoCapture = VideoCaptureFactory.getVideoCapture(videoFilePath, DEFAULT_VIDEO_FRAME_RATE, SynchronousAudioVideoCapture.this);
 		mOtherTasks = new OtherTasks();
 		mStateobserver = new StateObserver();
 	}
@@ -182,6 +182,7 @@ public class SynchronousAudioVideoCapture {
 			setState(States.STOPPED);
 		}
 		cancelScheduler(mPauseObserverScheduler);
+		
 		// call the stop methods of the Capture classes
 		try {
 			mAudioCapture.stop();
@@ -190,14 +191,12 @@ public class SynchronousAudioVideoCapture {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public AudioCapture getAudioCapture() {
-		return mAudioCapture;
-	}
-	
-	public VideoCapture getVideoCapture() {
-		return mVideoCapture;
+		
+		// wait for video capture stack to be empty
+		System.out.println("wait for video capture stack to be empty");
+		System.out.println(mVideoCapture.isBusy());
+		while(mVideoCapture.isBusy());
+		System.out.println("video capture stack is empty now");
 	}
 
 }

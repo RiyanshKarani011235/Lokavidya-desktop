@@ -153,7 +153,6 @@ public class CaptureScreenToFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void setPauseTime(long pauseTime) {
@@ -238,11 +237,17 @@ public class CaptureScreenToFile {
 				Image cursor = ImageIO.read(new File("resources/drag_16x16.png"));
 				int x = MouseInfo.getPointerInfo().getLocation().x;
 				int y = MouseInfo.getPointerInfo().getLocation().y;
+				
+				// TODO
+				// AFTER THIS, EVERYTHING ELSE SHOULD BE DONE IN A BACKGROUND THREAD
 
 				// draw a cool tooltip
 				Graphics2D graphics2D = rawShot.createGraphics();
 				graphics2D.drawImage(cursor, x - Call.workspace.x, y - Call.workspace.y, 48, 48, null); // cursor.gif is 48x48 size.
 			}
+			
+			// TODO
+			// AFTER THIS, EVERYTHING ELSE SHOULD BE DONE IN A BACKGROUND THREAD
 
 			// scale the image to fit the window width and window height
 			int hVideo = Call.workspace.videoHeight;

@@ -27,8 +27,6 @@ import SynchronousAudioVideoCapture.VideoCapture;
 
 public class ProjectOperations {
 	static SoundCapture currentSound = null;
-	static VideoCapture currentMuteVideo=null;
-	static AudioCapture currentAudio=null;
 	static SynchronousAudioVideoCapture currentCapture = null;
 	static String tempAudioURL;
 	static String tempVideoURL;
@@ -105,18 +103,9 @@ public class ProjectOperations {
 		}
 		
 		// Begin concatenation
-		String finalPath = new File(project.getProjectURL(),
-				project.getProjectName() + ".mp4").getAbsolutePath();
-		try {
-			ffmpegWrapper.stitchVideo(videoPaths, new File(
-					"concat.txt").getAbsolutePath(), finalPath);
-			Call.workspace.progressBar.setValue(80);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
+		String finalPath = new File(project.getProjectURL(), project.getProjectName() + ".mp4").getAbsolutePath();
+		ffmpegWrapper.stitchVideo(videoPaths, new File("concat.txt").getAbsolutePath(), finalPath);
+		Call.workspace.progressBar.setValue(80);
 		for(int j=0; j<videoPaths.size(); j++) {
 			if(j == 0) {
 				
@@ -148,13 +137,6 @@ public class ProjectOperations {
 
 		try {
 			currentCapture = new SynchronousAudioVideoCapture(tempAudioURL, tempVideoURL);
-//			currentAudio = new SoundCapture(tempAudioURL);
-			currentAudio = currentCapture.getAudioCapture();
-			currentMuteVideo = currentCapture.getVideoCapture();
-//			currentMuteVideo=new VideoCapture();
-//			currentMuteVideo.addFile(tempVideoURL);
-//			currentMuteVideo.start();
-//			currentAudio.startRecording();
 			currentCapture.startRecording();
 		} catch (java.lang.Exception e) {
 			// TODO show dialogue (could not start recording)
@@ -208,29 +190,12 @@ public class ProjectOperations {
 	}
 
 	public void stopToggleSlideRecording(Project project) {
-//		currentAudio.stopRecording();
-//        currentMuteVideo.stop();
+		// TODO show some dialog here saying something like "Please Wait"
+		// Since the "currentCapture.stopRecording()" method will take a lot of time
+		// After the stack thingy is implemented
 		currentCapture.stopRecording();
         segment.getSlide().setTempAudioURL(tempAudioURL);
-        segment.getSlide().setTempMuteVideoURL(tempVideoURL);
-        
-       /* File f=new File(tempVideoURL);
-        File tempVideo=new File(project.getProjectURL(),RandomStringUtils.randomAlphanumeric(10).toLowerCase()+".flv");
-		System.out.println("Saving at "+f.getAbsolutePath());
-		DecodeAndSaveAudioVideo.stitch(f.getAbsolutePath(),tempAudioURL,tempVideo.getAbsolutePath());
-		
-		DecodeAndSaveAudioVideo.convertFormat(tempVideo.getAbsolutePath(),globalVideo.getVideoURL());
-		Video screenVideo = new Video(globalVideo.getVideoURL(), project.getProjectURL());
-		
-		SegmentService.addVideo(project, segment,screenVideo);
-		FFMPEGWrapper ffmpegwrapper = new FFMPEGWrapper();
-		long duration = ffmpegwrapper.getDuration(segment.getVideo().getVideoURL());
-		segment.setTime(duration);
-		
-		//Call.workspace.deleteList.add(f);
-		Call.workspace.deleteList.add(new File(tempAudioURL));
-		Call.workspace.deleteList.add(tempVideo);
-		Call.workspace.endOperation(); */
+        segment.getSlide().setTempMuteVideoURL(tempVideoURL); 
 	}
 
 	public static void stopSlideRecording(Project project) {
@@ -239,9 +204,7 @@ public class ProjectOperations {
 		for(Segment s:slist){
 			if(s.getSlide()!=null) {
 				// consider only the silde that has been altered (slide recording)
-				System.out.println("ironstein - I am iron man");
 				if(s.getSlide().getTempAudioURL()!=null && s.getSlide().getTempMuteVideoURL()!=null){
-					
 					// saving temp video as an flv file in lokavidya folder
 					File originalTempVideo = new File(s.getSlide().getTempMuteVideoURL());
 					System.out.println("originalTempVideo : Saving at : " + originalTempVideo.getAbsolutePath());

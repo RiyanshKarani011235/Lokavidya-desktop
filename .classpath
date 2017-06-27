@@ -22,22 +22,28 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/apache-commons-lang.jar"/>
-	<classpathentry kind="lib" path="lib/bootstrapconnector.jar"/>
-	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="lib/forms-1.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/jmf-2.1.1e.jar"/>
-	<classpathentry kind="lib" path="lib/jna-3.2.5.jar"/>
-	<classpathentry kind="lib" path="lib/poi-3.13.jar"/>
-	<classpathentry kind="lib" path="lib/poi-ooxml-3.13.jar"/>
-	<classpathentry kind="lib" path="lib/poi-ooxml-schemas-3.13.jar"/>
-	<classpathentry kind="lib" path="lib/stax-api-1.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="lib/okhttp-3.2.0.jar"/>
-	<classpathentry kind="lib" path="lib/okio-1.7.0.jar"/>
-	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
-	<classpathentry kind="lib" path="lib/poi-scratchpad-3.13.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.7.21.jar"/>
-	<classpathentry kind="lib" path="lib/xuggle-xuggler-5.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/apache-commons-lang.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/bootstrapconnector.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-codec-1.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/forms-1.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jmf-2.1.1e.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jna-3.2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-3.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-ooxml-3.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-ooxml-schemas-3.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/stax-api-1.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/okhttp-3.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/okio-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-scratchpad-3.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.7.21.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xuggle-xuggler-5.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Volumes/jarvis/Documents/projects_working_directory/iitb_internship_working_directory/Riyansh_Karani-Lokavidya/Lokavidya/lib/jxcapture-3.4-cross-desktop-win_mac_linux/jniwrap-3.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Volumes/jarvis/Documents/projects_working_directory/iitb_internship_working_directory/Riyansh_Karani-Lokavidya/Lokavidya/lib/jxcapture-3.4-cross-desktop-win_mac_linux/jxcapture-3.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Volumes/jarvis/Documents/projects_working_directory/iitb_internship_working_directory/Riyansh_Karani-Lokavidya/Lokavidya/lib/jxcapture-3.4-cross-desktop-win_mac_linux/jxcapture-samples.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Volumes/jarvis/Documents/projects_working_directory/iitb_internship_working_directory/Riyansh_Karani-Lokavidya/Lokavidya/lib/jxcapture-3.4-cross-desktop-win_mac_linux/jxcapturedemo.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Volumes/jarvis/Documents/projects_working_directory/iitb_internship_working_directory/Riyansh_Karani-Lokavidya/Lokavidya/lib/jxcapture-3.4-cross-desktop-win_mac_linux/slf4j-api-1.5.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Volumes/jarvis/Documents/projects_working_directory/iitb_internship_working_directory/Riyansh_Karani-Lokavidya/Lokavidya/lib/jxcapture-3.4-cross-desktop-win_mac_linux/slf4j-simple-1.5.8.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

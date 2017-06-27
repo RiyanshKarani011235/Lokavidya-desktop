@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -21,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,6 +34,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
@@ -204,6 +207,39 @@ public class GeneralUtils {
 			System.out.println("Cannot find folder");
 		return null;
 	}
+	
+	public static ArrayList<String> findPathsMatchingRegex(String directoryToStartFrom, String regex) {
+		ArrayList<String> matchingPaths = new ArrayList<String>();
+		
+		// TODO implement the logic
+		File rootDirectory = new File(directoryToStartFrom);
+		if(!rootDirectory.exists()) {
+			return matchingPaths;
+		}
+		
+		Iterator<File> iterator = FileUtils.iterateFiles(rootDirectory, new RegexMatchingFileFilter(regex), TrueFileFilter.INSTANCE);
+		while(iterator.hasNext()) {
+			matchingPaths.add(iterator.next().getAbsolutePath());
+		}
+		return matchingPaths;
+	}
+	
+	public static class RegexMatchingFileFilter implements IOFileFilter {
+		
+		private String mRegex;
+		
+		public RegexMatchingFileFilter(String regex) {
+			mRegex = regex;
+		}
+		
+		public boolean accept(File directory, String fileName) {
+			return new File(directory, fileName).getAbsolutePath().matches(mRegex);
+		}
+		
+		public boolean accept(File file) {
+			return file.getAbsolutePath().matches(mRegex);
+		}
+	}
 
 	public static String findOooPath() {
 
@@ -216,7 +252,7 @@ public class GeneralUtils {
 			openOfficePath = "C:\\Program Files (x86)\\LibreOffice 5\\program\\simpress.exe";
 			execName = "simpress.exe";
 		} else if (System.getProperty("os.name").startsWith("Mac")) {
-			openOfficePath = "/Applications/LibreOffice.app/Contents/MacOS/soffice";
+			openOfficePath = "/Applications/LibreOffice.app/Contents/MacOs/soffice";
 			execName = "soffice";
 		}
 
@@ -224,6 +260,14 @@ public class GeneralUtils {
 		if ((openOfficePath != "") && (new File(openOfficePath).exists())) {
 			System.out.println("OpenOffice path found" + openOfficePath);
 			return openOfficePath;
+		}
+		
+		// for ubuntu only, check if /opt/libreoffice*/program/simpress exists
+		if(System.getProperty("os.name").contains("Linux")) {
+			ArrayList<String> f = findPathsMatchingRegex("/opt", new File(new File(new File("/opt", "libreoffice.*").getAbsolutePath(), "program").getAbsolutePath(), "simpress").getAbsolutePath());
+			if(f.size() != 0) {
+				return f.get(0);
+			}
 		}
 		
 		// if default values not correct, check in userPreferences.json
@@ -264,6 +308,74 @@ public class GeneralUtils {
 					openOfficePath = found.getAbsolutePath();
 					System.out.println("Path found: " + openOfficePath);
 					return openOfficePath;
+				}
+			}
+		}
+		JOptionPane.showMessageDialog(null, 
+				"Sorry, Lokavidya cannot find Libreoffice.\n" + 
+				"Lokavidya cannot work without installing LibreOffice,\n" + 
+				"so install LibreOffice and then try again later.", "",
+			JOptionPane.INFORMATION_MESSAGE);
+		Call.workspace.cancelOperation();
+		return null;
+	}
+	
+	public static String findAvconvPath() {
+		String avconvPath = null;	
+		if (System.getProperty("os.name").contains("Linux")) {
+			// Linux
+			avconvPath = "/usr/bin/avconv";
+		} else if (System.getProperty("os.name").contains("Windows")) {
+			// Windows
+			
+		} else if (System.getProperty("os.name").startsWith("Mac")) {
+			// MacOS
+			avconvPath = "/usr/local/bin/avconv";
+		}
+		
+		// default path works
+		if(avconvPath != null && new File(avconvPath).exists()) {
+			return avconvPath;
+		}
+		
+		// if default values not correct, check in userPreferences.json
+		UserPreferences u = new UserPreferences();
+		avconvPath = u.getPath("avconvPath");
+		if(avconvPath != null) {
+			if(new File(avconvPath).exists()) {
+				return avconvPath;
+			} else {
+				// write null to openOffice path if the currently 
+				// written path does not exist or incorrect
+				u.updatePath("OpenOffice", "");
+			}
+		}
+		
+		// if not in userPreferences.json, ask the user
+		if((avconvPath = getAvconvPathFromUser("avconv")) != null) {
+			u.updatePath("avconvPath", avconvPath);
+		}
+		return avconvPath;	
+	}
+	
+	public static String getAvconvPathFromUser(String execName) {
+		String avconvPath;
+		String vidName = (String) JEnhancedOptionPane.showInputDialog(
+				"Lokavidya could not find your installed location of Libreoffice. Please enter the location\n" + 
+				"You need to enter the name of the folder that contains the executable named " + execName + "\n" +
+				"An example location would be \"C:\\Program Files (x86)\\LibreOffice 5\\program\\\" for Windows \n" + 
+				"or /usr/lib/libreoffice/program/ for Linux or /Applications/LibreOffice.app/Contents/MacOs for Mac OS" + 
+				"\n\nFor further help, click on Help > LibreOffice help",
+				new Object[] { "Run", "Discard" });
+		if (vidName != null) {
+			System.out.println(vidName);
+			File f = new File(vidName), found = null;
+			if (f.exists()) {
+				found = search(f, execName);
+				if ((found != null) && (found.exists())) {
+					avconvPath = found.getAbsolutePath();
+					System.out.println("Path found: " + avconvPath);
+					return avconvPath;
 				}
 			}
 		}
@@ -585,7 +697,11 @@ public class GeneralUtils {
 		return duration;
 	}
 
-	public static void main(String args[]) {
-
-	}
+//	
+//	public static void main(String[] args) {
+//		System.out.println(new File(new File("/opt", "libreoffice.*").getAbsolutePath(), "simpress").getAbsolutePath());
+//		System.out.println(findPathsMatchingRegex("/opt", new File(new File("/opt", "libreoffice.*").getAbsolutePath(), ".*simpress").getAbsolutePath()));
+//		System.out.println(findOooPath());
+//	}
+	
 }

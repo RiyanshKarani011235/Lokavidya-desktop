@@ -63,12 +63,7 @@ public class FFMPEGWrapper {
 
 		wrapper.standardizeResolution(vList);
 		wrapper.standardizeFps(vList);
-		try {
-			wrapper.stitchVideo(vList, "C:\\Users\\hp\\Documents\\temp.txt", "C:\\Users\\hp\\Documents\\join.wav");
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		wrapper.stitchVideo(vList, "C:\\Users\\hp\\Documents\\temp.txt", "C:\\Users\\hp\\Documents\\join.wav");
 	}
 
 	public FFMPEGWrapper() {
@@ -165,8 +160,7 @@ public class FFMPEGWrapper {
 		return GeneralUtils.runProcess(command);
 	}
 
-	public boolean stitchVideo(List<String> videoPaths, String listfilePath, String finalPath)
-			throws IOException, InterruptedException {
+	public boolean stitchVideo(List<String> videoPaths, String listfilePath, String finalPath) {
 		
 		System.out.println("its starting");
 		for(int i=0; i<videoPaths.size(); i++) {
@@ -305,7 +299,6 @@ public class FFMPEGWrapper {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 		}
 		
 		// delete intermediate files

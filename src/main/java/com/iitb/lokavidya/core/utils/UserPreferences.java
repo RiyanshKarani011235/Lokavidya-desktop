@@ -93,6 +93,7 @@ public class UserPreferences {
 		JsonObject paths = new JsonObject();
 		paths.add("OpenOffice", p.parse(""));
 		paths.add("ghostScript", p.parse(""));
+		paths.add("avconvPath", p.parse(""));
 		defaultObject.add("paths", paths);
 		
 		return defaultObject;
