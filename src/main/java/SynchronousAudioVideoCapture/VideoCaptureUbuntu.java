@@ -20,6 +20,7 @@ public class VideoCaptureUbuntu extends VideoCapture {
 	private FFMPEGWrapper mFfmpegWrapper;
 	
 	public VideoCaptureUbuntu(String videoPath, int videoFrameRate, SynchronousAudioVideoCapture capture) {
+		System.out.println("videoCaptureUbuntu : called");
 		mVideoPath = videoPath;
 		mFrameRate = videoFrameRate;
 		mCapture = capture;
@@ -30,7 +31,9 @@ public class VideoCaptureUbuntu extends VideoCapture {
 	}
 	
 	public String getNewTempFile(String extension) {
-		return (new File(System.getProperty("java.io.tmpdir"), RandomStringUtils.getSystemTimeString() + "." + extension)).getAbsolutePath();
+		String f = (new File(System.getProperty("java.io.tmpdir"), RandomStringUtils.getSystemTimeString() + "." + extension)).getAbsolutePath();
+		System.out.println("getNewTempFile : " + f);
+		return f;
 	}
 
 	@Override
@@ -52,6 +55,8 @@ public class VideoCaptureUbuntu extends VideoCapture {
 
 	@Override
 	public void run() {
+		System.out.println("VideoCaptureUbuntu : run : called");
+		
 		if(mCapture.getState() == SynchronousAudioVideoCapture.States.PAUSED) {
 			// PAUSED
 			System.out.println("videoCapture pausing");
@@ -65,10 +70,18 @@ public class VideoCaptureUbuntu extends VideoCapture {
 			mCurrentTempFile = getNewTempFile("mp4");
 			System.out.println("new temp file : " + mCurrentTempFile);
 		} else {
+			System.out.println("videoCapture not pausing");
+			System.out.println("-------------------------------------------");
+			System.out.println("-------------------------------------------");
+			System.out.println("is recording already : " + mAvconvWrapper.isRecording());
+			System.out.println("-------------------------------------------");
 			if(!mAvconvWrapper.isRecording()) {
 				// not recording currently, so start recording
+				System.out.println("videoCapture starting");
 				mAvconvWrapper = new AvconvWrapper(new File(mCurrentTempFile).getPath(), Call.workspace.framerate, Call.workspace.x, Call.workspace.y, Call.workspace.recordingWidth, Call.workspace.recordingHeight);
-				mAvconvWrapper.startRecordingScreen();
+				System.out.println(mAvconvWrapper.startRecordingScreen());
+			} else {
+				System.out.println("videoCapture not starting");
 			}
 		}
 	}
